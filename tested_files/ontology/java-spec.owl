@@ -1,0 +1,1328 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.pku.edu.cn/ontologies/2013/3/java6-spec.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://www.pku.edu.cn/ontologies/2013/3/java6-spec.owl">
+    <Prefix name="" IRI="http://www.pku.edu.cn/ontologies/2013/3/java6-spec.owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#BooleanLiteral"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CONDITION_ALWAYS_SAME_VALUE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DIVIDED_BY_ZERO"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EmptyBlock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Empty_CatchBlock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Error"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FILE_CONTENT_INJECTION"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#False"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#FinallyBlock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaAssignExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaBinaryExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaBlock"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaBlockStatement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaClassDeclaration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaComment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaCompilationUnit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaConditionExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaDeclaration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaEnumeration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaException"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaExpressionStatement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaIfStatement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaInterface"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaInterfaceDeclaration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaKeyword"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaLiteral"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaMethod"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaMethodCallExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaNameExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaObjectType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaOperator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaOperatorPlus"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaPrimitiveType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaSeparator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaStatement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaStringLiteralExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaTryStatemnt"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaVariableDeclarationExpression"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaVariableDeclaratiorID"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#JavaWhileStatement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MethodDeclaration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OUT_OF_BOUNDARY"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#REMOVE_IN_ITERATION"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Return"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SENSITIVE_DATA_EXPOSURE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#STREAM_NOT_CLOSED"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#True"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UNUSED_VARIABLE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#USE_NULL_POINTER"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Vulnerability"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Warning"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#equals"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#hashcode"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Always"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Has"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#In"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaAssignExpression_hasTarget"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaAssignExpression_hasValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasComponent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasLeft"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasOperator"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasRight"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaClass_OverridingEquals"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaClass_hasMethod"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaElement_hasWarning"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaExpressionStatement_hasExpression"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaIfStatement_hasBlock"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasArgument"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasScope"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaMethod_hasStatement"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaMethod_returnFromFinallyBlock"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaStatement_hasConcequent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaStatement_hasConsequent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaTryStatement_hasCatchBlock"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaTryStatement_hasTryBlock"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaVarabileDeclarationExpression_hasVariableDeclaratorID"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaVariableDeclarationExpression_hasInitialValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaVariableDeclaratorID_hasType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#JavaWhileStatement_hasBlock"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#override"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaBlockStatement_isNull"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaClass_overridesEquals"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaClass_overridesHashCode"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaDeclaratorID_hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaElement_hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaMethodCallExpression_hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaNameExpression_hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#JavaVariableDeclaratorID_hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#has_value"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#is_used"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#used_as_divisor"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#value_assigned"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Divided_by_zero"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Override_method_equals_but_hashcode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Use_NULL_pointer"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#BooleanLiteral"/>
+        <Class IRI="#JavaLiteral"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CONDITION_ALWAYS_SAME_VALUE"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DIVIDED_BY_ZERO"/>
+        <Class IRI="#Error"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EmptyBlock"/>
+        <Class IRI="#JavaBlock"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Empty_CatchBlock"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FILE_CONTENT_INJECTION"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#False"/>
+        <Class IRI="#BooleanLiteral"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#FinallyBlock"/>
+        <Class IRI="#JavaBlock"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaAssignExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaBinaryExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaBlockStatement"/>
+        <Class IRI="#JavaStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaClassDeclaration"/>
+        <Class IRI="#JavaDeclaration"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaCompilationUnit"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaConditionExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaException"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaExpressionStatement"/>
+        <Class IRI="#JavaStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaIfStatement"/>
+        <Class IRI="#JavaStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaInterface"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaInterfaceDeclaration"/>
+        <Class IRI="#JavaDeclaration"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaLiteral"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaMethodCallExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaNameExpression"/>
+        <Class IRI="#JavaStringLiteralExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaObjectType"/>
+        <Class IRI="#JavaType"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaOperatorPlus"/>
+        <Class IRI="#JavaOperator"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaPrimitiveType"/>
+        <Class IRI="#JavaType"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaStringLiteralExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaTryStatemnt"/>
+        <Class IRI="#JavaStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaVariableDeclarationExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#JavaWhileStatement"/>
+        <Class IRI="#JavaStatement"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MethodDeclaration"/>
+        <Class IRI="#JavaDeclaration"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OUT_OF_BOUNDARY"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#REMOVE_IN_ITERATION"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Return"/>
+        <Class IRI="#JavaKeyword"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SENSITIVE_DATA_EXPOSURE"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#STREAM_NOT_CLOSED"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#True"/>
+        <Class IRI="#BooleanLiteral"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UNUSED_VARIABLE"/>
+        <Class IRI="#Warning"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#USE_NULL_POINTER"/>
+        <Class IRI="#Error"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#equals"/>
+        <Class IRI="#JavaMethod"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#hashcode"/>
+        <Class IRI="#JavaMethod"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#JavaPrimitiveType"/>
+        <NamedIndividual IRI="#Divided_by_zero"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#JavaClass"/>
+        <NamedIndividual IRI="#Override_method_equals_but_hashcode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#JavaObjectType"/>
+        <NamedIndividual IRI="#Use_NULL_pointer"/>
+    </ClassAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#has_value"/>
+        <NamedIndividual IRI="#Divided_by_zero"/>
+        <Literal datatypeIRI="&xsd;long">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#used_as_divisor"/>
+        <NamedIndividual IRI="#Divided_by_zero"/>
+        <Literal datatypeIRI="&xsd;boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#JavaClass_overridesEquals"/>
+        <NamedIndividual IRI="#Override_method_equals_but_hashcode"/>
+        <Literal datatypeIRI="&xsd;boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#JavaClass_overridesHashCode"/>
+        <NamedIndividual IRI="#Override_method_equals_but_hashcode"/>
+        <Literal datatypeIRI="&xsd;boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#is_used"/>
+        <NamedIndividual IRI="#Use_NULL_pointer"/>
+        <Literal datatypeIRI="&xsd;boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#value_assigned"/>
+        <NamedIndividual IRI="#Use_NULL_pointer"/>
+        <Literal datatypeIRI="&xsd;boolean">false</Literal>
+    </DataPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#In"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasArgument"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#JavaMethod_returnFromFinallyBlock"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#JavaTryStatement_hasTryBlock"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#override"/>
+    </FunctionalObjectProperty>
+    <AsymmetricObjectProperty>
+        <ObjectProperty IRI="#JavaClass_hasMethod"/>
+    </AsymmetricObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#JavaClass_hasMethod"/>
+    </IrreflexiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaAssignExpression_hasTarget"/>
+        <Class IRI="#JavaAssignExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaAssignExpression_hasValue"/>
+        <Class IRI="#JavaAssignExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasComponent"/>
+        <Class IRI="#JavaBinaryExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasLeft"/>
+        <Class IRI="#JavaBinaryExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasOperator"/>
+        <Class IRI="#JavaBinaryExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasRight"/>
+        <Class IRI="#JavaBinaryExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaClass_hasMethod"/>
+        <Class IRI="#JavaClass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaElement_hasWarning"/>
+        <Class IRI="#JavaClass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaElement_hasWarning"/>
+        <Class IRI="#JavaCompilationUnit"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaExpressionStatement_hasExpression"/>
+        <Class IRI="#JavaExpressionStatement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaIfStatement_hasBlock"/>
+        <Class IRI="#JavaIfStatement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasArgument"/>
+        <Class IRI="#JavaMethodCallExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasScope"/>
+        <Class IRI="#JavaMethodCallExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaMethod_hasStatement"/>
+        <Class IRI="#JavaMethod"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaStatement_hasConcequent"/>
+        <Class IRI="#JavaStatement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaStatement_hasConsequent"/>
+        <Class IRI="#JavaStatement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaTryStatement_hasCatchBlock"/>
+        <Class IRI="#JavaTryStatemnt"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaTryStatement_hasTryBlock"/>
+        <Class IRI="#JavaTryStatemnt"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaVarabileDeclarationExpression_hasVariableDeclaratorID"/>
+        <Class IRI="#JavaVariableDeclarationExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaVariableDeclarationExpression_hasInitialValue"/>
+        <Class IRI="#JavaVariableDeclarationExpression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaVariableDeclaratorID_hasType"/>
+        <Class IRI="#JavaVariableDeclaratiorID"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#JavaWhileStatement_hasBlock"/>
+        <Class IRI="#JavaWhileStatement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#Has"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaAssignExpression_hasTarget"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaAssignExpression_hasValue"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasComponent"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasLeft"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasOperator"/>
+        <Class IRI="#JavaOperator"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaBinaryExpression_hasRight"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaClass_hasMethod"/>
+        <Class IRI="#JavaMethod"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaElement_hasWarning"/>
+        <Class IRI="#Warning"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaExpressionStatement_hasExpression"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaIfStatement_hasBlock"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasArgument"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaMethodCallExpression_hasScope"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaMethod_hasStatement"/>
+        <Class IRI="#JavaStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaStatement_hasConcequent"/>
+        <Class IRI="#JavaStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaStatement_hasConsequent"/>
+        <Class IRI="#JavaStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaTryStatement_hasCatchBlock"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaTryStatement_hasTryBlock"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaVarabileDeclarationExpression_hasVariableDeclaratorID"/>
+        <Class IRI="#JavaVariableDeclaratiorID"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaVariableDeclarationExpression_hasInitialValue"/>
+        <Class IRI="#JavaExpression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaVariableDeclaratorID_hasType"/>
+        <Class IRI="#JavaType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#JavaWhileStatement_hasBlock"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </ObjectPropertyRange>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#JavaElement_hasName"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaBlockStatement_isNull"/>
+        <Class IRI="#JavaBlockStatement"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaClass_overridesEquals"/>
+        <Class IRI="#JavaClass"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaClass_overridesHashCode"/>
+        <Class IRI="#JavaClass"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaDeclaratorID_hasName"/>
+        <Class IRI="#JavaVariableDeclaratiorID"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaElement_hasName"/>
+        <Class IRI="#JavaClass"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaElement_hasName"/>
+        <Class IRI="#JavaMethod"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaMethodCallExpression_hasName"/>
+        <Class IRI="#JavaMethodCallExpression"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaNameExpression_hasName"/>
+        <Class IRI="#JavaNameExpression"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#JavaVariableDeclaratorID_hasName"/>
+        <Class IRI="#JavaVariableDeclaratiorID"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaBlockStatement_isNull"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaClass_overridesEquals"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaClass_overridesHashCode"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaDeclaratorID_hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaElement_hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaMethodCallExpression_hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaNameExpression_hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#JavaVariableDeclaratorID_hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DLSafeRule>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#JavaClass"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#JavaClass_overridesEquals"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;boolean">true</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#JavaClass_overridesHashCode"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;boolean">false</Literal>
+            </DataPropertyAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#JavaObjectType"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#is_used"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;boolean">true</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#value_assigned"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;boolean">false</Literal>
+            </DataPropertyAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#USE_NULL_POINTER"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#JavaPrimitiveType"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#has_value"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;integer">0</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#used_as_divisor"/>
+                <Variable IRI="urn:swrl#x"/>
+                <Literal datatypeIRI="&xsd;boolean">true</Literal>
+            </DataPropertyAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#DIVIDED_BY_ZERO"/>
+                <Variable IRI="urn:swrl#x"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CONDITION_ALWAYS_SAME_VALUE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CONDITION_ALWAYS_SAME_VALUE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则检测程序中总是判定值不变的条件语句。这样的条件语句会降低代码的效率和产生dead code。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CONDITION_ALWAYS_SAME_VALUE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+void fillArray(int array[], int size)
+{
+	for (int i = 0; i &lt;= size; i++) { // iterate from 0 to 100
+		array[i] = 0; // VIOLATION (accessing array out of bounds: &quot;array[i]&quot; where (i == 100))
+	}
+}
+
+void example()
+{
+	int[] array = new int[100];
+	fillArray(array, 100);
+	// ...
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DIVIDED_BY_ZERO</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别： Error</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DIVIDED_BY_ZERO</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这一规则检测程序路径中可能导致分母为0的算术表达式。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DIVIDED_BY_ZERO</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+int test(int value)
+{
+     return value / zeroMethod(); // VIOLATION
+}
+
+int zeroMethod()
+{
+     return 0;
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#FILE_CONTENT_INJECTION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别: Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#FILE_CONTENT_INJECTION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则主要检测直接将从用户处获得的数据写入文件的情况。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#FILE_CONTENT_INJECTION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public void save(HttpServletRequest req) throws IOException {
+	String sData = req.getParameter(&quot;user_params&quot;);
+	//sData = validate(sData);
+	
+	String fileName = &quot;user_data&quot;;
+	FileOutputStream fOut = new FileOutputStream(fileName);
+	fOut.write(sData.getBytes());  // file content injection
+	fOut.close();
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaClass_hasMethod</IRI>
+        <Literal xml:lang="ch" datatypeIRI="&rdf;PlainLiteral">java类包含有各种method，此属性用来描述这种关系</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaClass_overridesEquals</IRI>
+        <Literal xml:lang="ch" datatypeIRI="&rdf;PlainLiteral">类是否覆盖了Object类的equals(Object obj)方法？</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaClass_overridesHashCode</IRI>
+        <Literal xml:lang="ch" datatypeIRI="&rdf;PlainLiteral">类是否覆盖了Object类对象的HashCode方法？</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaComment</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">There are two kinds of comments:
+
+/* text */               A traditional comment: all the 
+                        text from the ASCII characters /* 
+                        to the ASCII characters */ is ignored
+                        (as in C and C++).
+
+// text                  A end-of-line comment: all the text 
+                        from the ASCII characters // to 
+                        the end of the line is ignored (as in C++).
+
+These comments are formally specified by the following productions:
+
+Comment:
+        TraditionalComment
+        EndOfLineComment
+
+TraditionalComment:
+        / * CommentTail
+
+EndOfLineComment:
+        / / CharactersInLineopt 
+
+CommentTail:
+        * CommentTailStar
+        NotStar CommentTail
+
+CommentTailStar:
+        /
+        * CommentTailStar
+        NotStarNotSlash CommentTail
+
+NotStar:
+        InputCharacter but not *
+        LineTerminator
+
+NotStarNotSlash:
+        InputCharacter but not * or /
+        LineTerminator
+
+CharactersInLine:
+        InputCharacter
+        CharactersInLine InputCharacter
+        
+
+These productions imply all of the following properties:
+
+Comments do not nest. 
+/* and */ have no special meaning in comments that begin with //. 
+// has no special meaning in comments that begin with /* or /**. 
+As a result, the text:
+
+/* this comment /* // /** ends here: */
+
+is a single complete comment.
+
+The lexical grammar implies that comments do not occur within character literals (§3.10.4) or string literals (§3.10.5).
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaCompilationUnit</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">CompilationUnit is the goal symbol (§2.1) for the syntactic grammar (§2.3) of Java programs. It is defined by the following productions:
+
+CompilationUnit:
+        PackageDeclarationopt ImportDeclarationsopt TypeDeclarationsopt
+ImportDeclarations:
+        ImportDeclaration
+        ImportDeclarations ImportDeclaration
+
+TypeDeclarations:
+        TypeDeclaration
+        TypeDeclarations TypeDeclaration
+        
+
+Types declared in different compilation units can depend on each other, circularly. A Java compiler must arrange to compile all such types at the same time.
+A compilation unit consists of three parts, each of which is optional:
+
+
+A package declaration (§7.4), giving the fully qualified name (§6.7) of the package to which the compilation unit belongs. A compilation unit that has no package declaration is part of an unnamed package (§7.4.2). 
+import declarations (§7.5) that allow types from other packages and static members of types to be referred to using their simple names 
+Top level type declarations (§7.6) of class and interface types 
+Which compilation units are observable is determined by the host system. However, all the compilation units of the package java and its subpackages lang and io must always be observable. The observability of a compilation unit influences the observability of its package (§7.4.3).
+Every compilation unit automatically and implicitly imports every public type name declared by the predefined package java.lang, so that the names of all those types are available as simple names, as described in §7.5.5.
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaEnumeration</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">An enum declaration has the form: 
+
+
+EnumDeclaration:
+	ClassModifiersopt enum Identifier Interfacesopt EnumBody
+
+EnumBody:
+	{ EnumConstantsopt ,opt EnumBodyDeclarationsopt }
+
+The body of an enum type may contain enum constants. An enum constant defines an instance of the enum type. An enum type has no instances other than those defined by its enum constants.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaLiteral</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">A literal is the source code representation of a value of a primitive type (§4.2), the String type (§4.3.3), or the null type (§4.1):
+
+Literal:
+        IntegerLiteral
+        FloatingPointLiteral
+        BooleanLiteral
+        CharacterLiteral
+        StringLiteral
+        NullLiteral
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaOperator</IRI>
+        <Literal datatypeIRI="&xsd;string">The following 37 tokens are the operators, formed from ASCII characters:
+
+Operator: one of
+        =       &gt;    &lt;    !       ~       ?       :
+        ==      &lt;=   &gt;=   !=      &amp;&amp;      ||      ++      --
+        +       -       *       /       &amp;   |       ^       %       &lt;&lt;        &gt;&gt;        &gt;&gt;&gt;
+        +=      -=      *=      /=      &amp;=  |=      ^=      %=      &lt;&lt;=       &gt;&gt;=       &gt;&gt;&gt;=
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#JavaSeparator</IRI>
+        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">The following nine ASCII characters are the separators (punctuators):
+
+
+Separator: one of
+        (       )       {       }       [       ]       ;       ,       .
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OUT_OF_BOUNDARY</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别： Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OUT_OF_BOUNDARY</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则检测可能导致越界的数组操作。当index值为负、大于或等于数组大小时会导致这一缺陷。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OUT_OF_BOUNDARY</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+void fillArray(int array[], int size)
+{
+	for (int i = 0; i &lt;= size; i++) { // iterate from 0 to 100
+		array[i] = 0; // VIOLATION (accessing array out of bounds: &quot;array[i]&quot; where (i == 100))
+	}
+}
+
+void example()
+{
+	int[] array = new int[100];
+	fillArray(array, 100);
+	// ...
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则检测程序中覆盖了equals方法，但没有覆盖hashcode方法的类。这类问题通常会导致类在集合中不正常地保存。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#OVERRIDE_METHOD_EQUALS_BUT_HASHCODE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public class People {
+	public int ID;
+	public String name;
+	public Date birthday;
+	public String address;
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj == null){
+			return false;
+		}
+		if(this == obj){
+			return true;
+		}
+		if(obj instanceof People){
+			People another = (People)obj;
+			return this.ID == another.ID;
+		}
+		return false;
+	}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#REMOVE_IN_ITERATION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#REMOVE_IN_ITERATION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则检测在迭代器结束工作前对原集合进行修改的缺陷。通常这种缺陷会导致ConcurrentModification Exception被抛出。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#REMOVE_IN_ITERATION</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public abstract class TestIterator
+{
+    private HashSet _hConsoles = new HashSet();
+
+    void disposeAll()
+    {
+        Iterator iterator = _hConsoles.iterator();
+        while (iterator.hasNext()) {
+            IConsole console = (IConsole)iterator.next();
+            if (console == null) {
+                continue;
+            }
+            console.done();
+            _hConsoles.remove(console); // VIOLATION
+        }
+    }
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SENSITIVE_DATA_EXPOSURE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别: Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SENSITIVE_DATA_EXPOSURE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则主要检测程序内部的敏感数据向外界用户暴露的情况。通常这种安全问题会让攻击者获得程序信息用于破坏正常的程序流程，并且可能赋予他不应有的高权限。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SENSITIVE_DATA_EXPOSURE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    try {
+        Class.forName(&quot;someClass&quot;);
+    } catch(Exception e) {
+        try {
+            resp.getWriter().write(e.getMessage()); //VIOLATION
+        } catch (IOException e1) {
+        }
+    }
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#STREAM_NOT_CLOSED</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#STREAM_NOT_CLOSED</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则识别文件流被打开后未能关闭的缺陷。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#STREAM_NOT_CLOSED</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public void readFileByBytes(String fileName) {
+        File file = new File(fileName);
+        try {
+            System.out.println(&quot;以字节为单位读取文件内容，一次读一个字节：&quot;);
+            // 一次读一个字节
+            InputStream in = new FileInputStream(file);
+            int tempbyte;
+            while ((tempbyte = in.read()) != -1) {
+                System.out.write(tempbyte);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#UNUSED_VARIABLE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Warning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#UNUSED_VARIABLE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则识别并报告程序中被定义过、但未被使用的变量。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#UNUSED_VARIABLE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+static class User {
+        String name;
+        String password;
+        User(String name, String password) {
+            this.name = name;
+            this.password = password;
+            checkData();
+        }
+        void checkData() {
+            // empty implementation
+        }
+    }
+    static class RestrictedUser extends User {
+        int minLoginLength = 7;
+        RestrictedUser(String name, String password) {
+            super(name, password);
+        }
+        @Override
+        void checkData() {
+            // BUG: minLoginLength is not yet initialized when checkData() is called from base class constructor
+            if (super.name.length() &lt; this.minLoginLength) {
+                throw new IllegalArgumentException(&quot;length of name should be greater than 7&quot;);
+            }
+            // ..
+        }
+    }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#USE_NULL_POINTER</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">1. 级别：Error</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#USE_NULL_POINTER</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">2. 描述：这条规则检测程序中使用空指针的错误。</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#USE_NULL_POINTER</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">3. 示例：
+public void foo(String arg)
+{
+    arg.length();  // VIOLATION !!!
+}
+
+public void goo()
+{
+    foo(null);
+}
+
+</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

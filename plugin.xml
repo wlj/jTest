@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective	
+			name="Jtester"
+      		id="plugin.ui.perspective.JtesterPerspective"
+      		class="plugin.ui.perspective.JtesterPerspective">
+      </perspective>
+	</extension>
+	
+	<extension point="org.eclipse.ui.views">
+		<category
+			name="Jtester"
+			id="ui.views">
+		</category>
+
+		<view
+			name="Data FLow Analysis"
+			id="plugin.ui.view.data_flow.DataFlowView"
+			category="ui.views"
+			class="plugin.ui.view.data_flow.DataFlowView">
+		</view>	
+	</extension>
+	
+	 <extension point="org.eclipse.ui.actionSets">
+	 	<actionSet 
+	 		label="SA Action Set"
+	 		visible="true"
+	 		id="plugin.ui.actionset">
+	 		<menu
+	 			label="Jtester"
+	 			id="plugin.ui.actionset.entry">
+	 			<separator
+	 				name="entry">
+	 			</separator>
+	 		</menu>
+	 		<menu
+            	path="plugin.ui.actionset.entry/select"
+            	label="Semantic Test"
+            	id="plugin.ui.actionset.select">
+            	<separator
+            		name="select">
+            	</separator>
+            </menu>
+            <menu
+            	path="plugin.ui.actionset.entry/plugin.ui.actionset.select/entry"
+            	label="Data Flow Analysis"
+            	id="plugin.ui.actionset.data_flow">
+            	<separator
+            		name="data_flow">
+            	</separator>
+            </menu>
+            <menu
+            	path="plugin.ui.actionset.entry/plugin.ui.actionset.select/entry"
+            	label="Type Inference Analysis"
+            	id="plugin.ui.actionset.type_inference">
+            	<separator
+            		name="type_inference">
+            	</separator>
+            </menu>
+            <menu
+            	path="plugin.ui.actionset.entry/plugin.ui.actionset.select/entry"
+            	label="Var Interval Analysis"
+            	id="plugin.ui.actionset.var_interval">
+            	<separator
+            		name="var_interval">
+            	</separator>
+            </menu>
+            
+            <action
+            	label="Test Configuration"
+            	class="plugin.run.Jtester"
+            	id="plugin.run.configuration"
+            	path="plugin.ui.actionset.entry/entry"
+            	menubarPath="plugin.ui.actionset.entry/entry">
+            </action>
+            
+             <action
+               label="Ontology Reasoning"
+               class="plugin.run.Jtester"
+               id="plugin.run.ontology"
+               enablesFor="1"
+               path="plugin.ui.actionset.entry/entry"
+               menubarPath="plugin.ui.actionset.entry/select" >
+         	</action>
+            
+            <action
+               label="all..."
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/select"
+               enablesFor="1"
+               id="plugin.run.all">
+               <separator
+            		name="all">
+            	</separator>
+         	</action>
+         	
+         	<action
+               label="Available Exp"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.available_exp.AvbExpCalculator">
+         	</action>
+         	
+         	<action
+               label="Very Busy Exp"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.verybusy_exp.VeyBsyExpCalculator">
+         	</action>
+         	
+         	<action
+               label="Live Variable"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.live_variable.LivVarCalculator">
+         	</action>
+         	
+         	<action
+               label="Reaching Definition"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.reaching_def.RchDefCalculator"
+               >
+         	</action>
+         	
+         	<action
+               label="Const Propagation"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.const_propagation.ConProCalculator">
+         	</action>
+         	
+         	<action
+               label="Shape Analyisis"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.data_flow/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.shape_analysis.ShapeCalculator">
+         	</action>
+         	
+         	<action
+               label="Const Problem Analysis"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.type_inference/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.const_problem.ConstProblemAnalyzer">
+         	</action>
+         	
+         	<action
+               label="Data Detained Analysis"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.type_inference/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.data_detained.DataDetainedAnalyzer">
+         	</action>
+         	
+         	<action
+               label="Var Interval Analysis"
+               class="plugin.run.Jtester"
+               menubarPath="plugin.ui.actionset.entry/plugin.ui.actionset.select/plugin.ui.actionset.var_interval/select"
+               enablesFor="1"
+               id="core.jtester.staticanalysis.var_interval.EquationCalculator">
+         	</action>
+            
+	 	</actionSet>
+	 </extension>
+</plugin>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="icons/dtool16"/>
+	<classpathentry kind="src" path="icons/dlcl16"/>
+	<classpathentry kind="src" path="icons/etool16"/>
+	<classpathentry kind="src" path="icons/ovr16"/>
+	<classpathentry kind="src" path="icons/ctool16"/>
+	<classpathentry kind="src" path="icons/wizban"/>
+	<classpathentry kind="src" path="icons/eview16"/>
+	<classpathentry kind="src" path="icons/cview16"/>
+	<classpathentry kind="src" path="icons/prgss"/>
+	<classpathentry kind="src" path="icons/diy"/>
+	<classpathentry kind="src" path="icons/obj16"/>
+	<classpathentry kind="src" path="icons/elcl16"/>
+	<classpathentry kind="lib" path="lib/axiom-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jautomata-core-2.0-alpha-1.jar"/>
+	<classpathentry kind="lib" path="lib/choco-solver-2.1.5-with-sources.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-core.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-owlapiv3.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-rules.jar"/>
+	<classpathentry kind="lib" path="lib/aterm-java-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-cli.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-datatypes.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-el.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-explanation.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-jena.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-modularity.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-pellint.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-query.jar"/>
+	<classpathentry kind="lib" path="lib/pellet-test.jar"/>
+	<classpathentry kind="lib" path="lib/owlapi-3.2.2.jar" sourcepath="lib/owlapi-3.2.2-src.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
