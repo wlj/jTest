@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,13 +17,16 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TreeEditor;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
@@ -29,6 +34,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
@@ -46,32 +53,78 @@ public class ConfigTree {
 	public static TreeItem selectedItem = null;
 	
 	private Action duplicateAction, newAction, deleteAction, exportAction, setAsDefaultAction;// 作用于树节点上的actions
+	//can edit tree
+	private TreeEditor  editor;
+	private Text text;
 	
-	//public TreeEditor  editor;
+	final String userDefined="User-defined";
+	final String builtin="Builtin";
+	final String team="Team";
 	// todo: duplicate, New child, Delete, export, set as default
 	private static String defaultConfigName = "N";
 
 	public ConfigTree(Composite parent, int style) {
 		// TODO Auto-generated constructor stub
 		tree = new Tree(parent, style);
+		//initialize editor tree
+		editor=new TreeEditor(tree);
+		editor.grabHorizontal = true;  
+        editor.grabVertical = true;  
+		text=new Text(tree, SWT.SINGLE | SWT.BORDER);
+		text.setVisible(false);
+		editor.setEditor(text);
+		
+		final FocusListener focusListener =new  FocusListener(){
+			@Override
+			public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				text.setText(editor.getItem().getText(1));  
+		        text.selectAll();  
+		        text.setVisible(true);  
+			}
+
+			@Override
+			public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		text.addFocusListener(focusListener);
+		
 		trtmUser = new TreeItem(tree, SWT.NONE);
 		trtmUser.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-		trtmUser.setText("User-defined");
+		trtmUser.setText(userDefined);
 		trtmUser.setExpanded(true);
 
 		trtmBuiltin = new TreeItem(tree, SWT.NONE);
 		trtmBuiltin.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-		trtmBuiltin.setText("Builtin");
+		trtmBuiltin.setText(builtin);
 		trtmBuiltin.setExpanded(true);
-
 		
-	}
-
-	protected void contentCreate(){
 		trtmTeam = new TreeItem(tree, SWT.NONE);
 		trtmTeam.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-		trtmTeam.setText("Team");
+		trtmTeam.setText(team);
 		trtmTeam.setExpanded(true);
+		
+	}
+	
+	private boolean canEdit(TreeItem item){
+		TreeItem parentItem=item.getParentItem();
+		//根节点不能编辑
+		if(parentItem==null){
+			return false;
+		}
+		//系统内置的名称不能编辑
+		if(parentItem.getText().equals(builtin)){
+			return false;
+		}
+	    boolean isLeaf=item.getItemCount()==0;
+		return isLeaf;
+	}
+	
+
+	protected void contentCreate(){
+		
 //
 		TreeItem trtmCodeReview = new TreeItem(trtmBuiltin, SWT.NONE);
 		trtmCodeReview.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
@@ -325,8 +378,21 @@ public class ConfigTree {
 		// add event listener to tree
 		tree.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent evt) {
-				System.err.print(evt.getSource().getClass());
-				//treeMouseDoubleClick(evt);
+				Point point=new Point(evt.x,evt.y);
+				TreeItem selectedItem = tree.getItem(point);
+				if(selectedItem==null){
+					System.err.print("没有获取选中的树节点");
+					return;
+				}
+				//只有user和team下的叶子节点节点才可以编辑
+				if(canEdit(selectedItem)){
+					editor.setEditor(text, selectedItem);  
+                    text.setText(selectedItem.getText());  
+                    text.selectAll();  
+                    text.forceFocus(); 
+                    
+				}
+				
 			}
 
 			public void mouseDown(MouseEvent evt) {
@@ -339,6 +405,7 @@ public class ConfigTree {
 			}
 
 		});
+		
 		
 		
 	/*	// 懒加载
