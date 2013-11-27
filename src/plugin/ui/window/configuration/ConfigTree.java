@@ -1,18 +1,5 @@
 package plugin.ui.window.configuration;
 
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
@@ -20,25 +7,15 @@ import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
-
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
+
 
 public class ConfigTree {
 	// configTreeFilePath point to the xml file which describe the configTree's
@@ -52,17 +29,43 @@ public class ConfigTree {
 	
 	public static TreeItem selectedItem = null;
 	
-	private Action duplicateAction, newAction, deleteAction, exportAction, setAsDefaultAction;// ×÷ÓÃÓÚÊ÷½ÚµãÉÏµÄactions
+	private Action duplicateAction, newAction, deleteAction, exportAction, setAsDefaultAction;// å®šä¹‰èœå•actions
 	//can edit tree
 	private TreeEditor  editor;
-	private Text text;
 	
 	final String userDefined="User-defined";
 	final String builtin="Builtin";
 	final String team="Team";
 	// todo: duplicate, New child, Delete, export, set as default
 	private static String defaultConfigName = "N";
+	private boolean isEditing;
+	private void ConfirmEdit(){
+		if(!isEditing){
+			return;
+		}
+		isEditing=false;
+		Text text = (Text) editor.getEditor();
+		TreeItem editingItem=editor.getItem();
+		editingItem.setText(text.getText().trim());
+		text.setText("");
+		text.clearSelection();
+		text.setVisible(false);
+		text.dispose();
+	}
+	final FocusListener focusListener =new  FocusListener(){
+		@Override
+		public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
+			// TODO Auto-generated method stub
+//	        text.selectAll();
+			
+		}
 
+		@Override
+		public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
+			// TODO Auto-generated method stub
+			ConfirmEdit();
+		}
+	};
 	public ConfigTree(Composite parent, int style) {
 		// TODO Auto-generated constructor stub
 		tree = new Tree(parent, style);
@@ -70,26 +73,9 @@ public class ConfigTree {
 		editor=new TreeEditor(tree);
 		editor.grabHorizontal = true;  
         editor.grabVertical = true;  
-		text=new Text(tree, SWT.SINGLE | SWT.BORDER);
-		text.setVisible(false);
-		editor.setEditor(text);
 		
-		final FocusListener focusListener =new  FocusListener(){
-			@Override
-			public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
-				// TODO Auto-generated method stub
-				text.setText(editor.getItem().getText(1));  
-		        text.selectAll();  
-		        text.setVisible(true);  
-			}
-
-			@Override
-			public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
-		text.addFocusListener(focusListener);
+		
+		
 		
 		trtmUser = new TreeItem(tree, SWT.NONE);
 		trtmUser.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
@@ -108,13 +94,19 @@ public class ConfigTree {
 		
 	}
 	
+	/**
+	 * åˆ¤æ–­æ ‘èŠ‚ç‚¹æ˜¯å¦å¯ç¼–è¾‘
+	 * åªæœ‰Userå’ŒTeamçš„å¶å­èŠ‚ç‚¹æ‰å¯ç¼–è¾‘
+	 * @param item 
+	 * @return
+	 */
 	private boolean canEdit(TreeItem item){
 		TreeItem parentItem=item.getParentItem();
-		//¸ù½Úµã²»ÄÜ±à¼­
+		
 		if(parentItem==null){
 			return false;
 		}
-		//ÏµÍ³ÄÚÖÃµÄÃû³Æ²»ÄÜ±à¼­
+		
 		if(parentItem.getText().equals(builtin)){
 			return false;
 		}
@@ -376,20 +368,24 @@ public class ConfigTree {
 //		trtmUnitTesting.setExpanded(true);
 
 		// add event listener to tree
+		
 		tree.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent evt) {
-				Point point=new Point(evt.x,evt.y);
-				TreeItem selectedItem = tree.getItem(point);
+				TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 				if(selectedItem==null){
-					System.err.print("Ã»ÓĞ»ñÈ¡Ñ¡ÖĞµÄÊ÷½Úµã");
+					System.err.print("è·å–é€‰ä¸­èŠ‚ç‚¹é”™è¯¯");
 					return;
 				}
-				//Ö»ÓĞuserºÍteamÏÂµÄÒ¶×Ó½Úµã½Úµã²Å¿ÉÒÔ±à¼­
+				
 				if(canEdit(selectedItem)){
+					System.out.println(selectedItem.getText());
+					Text text=ConfigTreeEditorText.CreateText(tree, focusListener);
 					editor.setEditor(text, selectedItem);  
                     text.setText(selectedItem.getText());  
                     text.selectAll();  
                     text.forceFocus(); 
+                    isEditing=true;
+    		        text.setVisible(true);  
                     
 				}
 				
@@ -398,7 +394,7 @@ public class ConfigTree {
 			public void mouseDown(MouseEvent evt) {
 				boolean isTreeitem = evt.getSource() instanceof Tree;
 				selectedItem = ((Tree)(evt.getSource())).getSelection()[0];
-				System.out.println(selectedItem.getText());
+				///System.out.println(selectedItem.getText());
 				if (isTreeitem) {
 					initMenu(evt);
 				}
@@ -408,7 +404,7 @@ public class ConfigTree {
 		
 		
 		
-	/*	// ÀÁ¼ÓÔØ
+	/*	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	   tree.addListener(SWT.Expand, new Listener () {  
             public void handleEvent (final Event event) {  
                 final TreeItem root = (TreeItem) event.item;  
@@ -468,20 +464,20 @@ public class ConfigTree {
 	}
 
 	/*
-	 * ÊÂ¼ş´¦Àí·½·¨
+	 * ï¿½Â¼ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½
 	 */
 	private void createActions() {
-		newAction = new Action("ĞÂ½¨") {
+		newAction = new Action("ï¿½Â½ï¿½") {
 			public void run() {
 				// .........
-				System.err.print("ĞÂ½¨ start");
+				System.err.print("ï¿½Â½ï¿½ start");
 				TreeItem item = new TreeItem(trtmUser, SWT.None);
 				
-				System.err.print("ĞÂ½¨ end");
+				System.err.print("ï¿½Â½ï¿½ end");
 				
 			}
 		};
-		duplicateAction = new Action("¸´ÖÆ") {
+		duplicateAction = new Action("ï¿½ï¿½ï¿½ï¿½") {
 			public void run() {
 				// .........
 				TreeItem item = new TreeItem(trtmUser, SWT.None);
@@ -489,18 +485,18 @@ public class ConfigTree {
 				item.setText(selectedItem.getText());
 			}
 		};
-		deleteAction = new Action("É¾³ı") {
+		deleteAction = new Action("É¾ï¿½ï¿½") {
 			public void run() {
 				// .........
 			}
 		};
 
-		exportAction = new Action("µ¼³ö") {
+		exportAction = new Action("ï¿½ï¿½ï¿½ï¿½") {
 			public void run() {
 				// .........
 			}
 		};
-		setAsDefaultAction = new Action("ÉèÎªÄ¬ÈÏ") {
+		setAsDefaultAction = new Action("ï¿½ï¿½ÎªÄ¬ï¿½ï¿½") {
 			public void run() {
 				// .........
 			}
@@ -514,7 +510,7 @@ public class ConfigTree {
 	 * @param filePath
 	 */
 	private void constructTreeFromConfigFile(String filePath) {
-		// ÖğÌõ¶ÁÈ¡config£¬²¢ÊµÀı»¯¡£Ìí¼ÓÏàÓ¦µÄÍ¼±ê£¬ÉèÖÃÏàÓ¦µÄ²Ëµ¥£¬×¢²áÊÂ¼ş¡£
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡configï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Í¼ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä²Ëµï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 
 	}
 
@@ -541,17 +537,17 @@ public class ConfigTree {
 	}
 
 	private boolean removeConfig(String configName) {
-		// É¾³ı¶ÔÓ¦µÄÅäÖÃÎÄ¼ş
+		// É¾ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 
-		// É¾³ıconfig treeµÄ¶ÔÓ¦Ïî
+		// É¾ï¿½ï¿½config treeï¿½Ä¶ï¿½Ó¦ï¿½ï¿½
 
 		return true;
 	}
 
 	private boolean createConfig(String configName) {
-		// ´´½¨¶ÔÓ¦µÄÅäÖÃÎÄ¼ş
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 
-		// ´´½¨config treeµÄ¶ÔÓ¦Ïî
+		// ï¿½ï¿½ï¿½ï¿½config treeï¿½Ä¶ï¿½Ó¦ï¿½ï¿½
 
 		return true;
 	}
