@@ -1,4 +1,4 @@
-package plugin.ui.window.configuration;
+package plugin.ui.window.configuration.configtree;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
+
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -74,9 +75,6 @@ public class ConfigTree {
 		editor.grabHorizontal = true;  
         editor.grabVertical = true;  
 		
-		
-		
-		
 		trtmUser = new TreeItem(tree, SWT.NONE);
 		trtmUser.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
 		trtmUser.setText(userDefined);
@@ -91,7 +89,28 @@ public class ConfigTree {
 		trtmTeam.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
 		trtmTeam.setText(team);
 		trtmTeam.setExpanded(true);
-		
+		tree.addMouseListener(new MouseAdapter() {
+			public void mouseDoubleClick(MouseEvent evt) {
+				TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
+				try {
+					beginEdit(selectedItem);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+			public void mouseDown(MouseEvent evt) {
+				boolean isTreeitem = evt.getSource() instanceof Tree;
+				selectedItem = ((Tree)(evt.getSource())).getSelection()[0];
+				///System.out.println(selectedItem.getText());
+				if (isTreeitem) {
+					initMenu(evt);
+				}
+			}
+
+		});
 	}
 	
 	/**
@@ -113,9 +132,30 @@ public class ConfigTree {
 	    boolean isLeaf=item.getItemCount()==0;
 		return isLeaf;
 	}
+	/**
+	 * 开始编辑
+	 * @param item
+	 * @throws Exception
+	 */
+	private void beginEdit(TreeItem item) throws Exception{
+		if(item==null){
+			throw new Exception("item not be null");
+		}
+		if(canEdit(item)){
+			System.out.println(selectedItem.getText());
+			Text text=ConfigTreeEditorText.CreateText(tree, focusListener);
+			editor.setEditor(text, item);  
+            text.setText(selectedItem.getText());  
+            text.selectAll();  
+            text.forceFocus(); 
+            isEditing=true;
+	        text.setVisible(true);  
+            
+		}
+	}
 	
 
-	protected void contentCreate(){
+	public void contentCreate(){
 		
 //
 		TreeItem trtmCodeReview = new TreeItem(trtmBuiltin, SWT.NONE);
@@ -307,149 +347,12 @@ public class ConfigTree {
 		trtmRunStaticAnalysisAndTests.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 		trtmRunStaticAnalysisAndTests.setText("Run Static Analysis and Unit Tests");
 
-//		TreeItem trtmThreadFeProgramming = new TreeItem(trtmStaticAnalysis, SWT.NONE);
-//		trtmThreadFeProgramming.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmThreadFeProgramming.setText("Thread Safe Programming");
-//
-//		TreeItem trtmWritingRobustJava = new TreeItem(trtmStaticAnalysis, SWT.NONE);
-//		trtmWritingRobustJava.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmWritingRobustJava.setText("Writing Robust Java Code by AmbySoft");
-//		trtmStaticAnalysis.setExpanded(true);
-//
-//		TreeItem trtmTestDrivenDevelopment = new TreeItem(trtmBuiltin, SWT.NONE);
-//		trtmTestDrivenDevelopment.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-//		trtmTestDrivenDevelopment.setText("Test Driven Development");
-//
-//		TreeItem trtmCodeSmellstdd = new TreeItem(trtmTestDrivenDevelopment, SWT.NONE);
-//		trtmCodeSmellstdd.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmCodeSmellstdd.setText("Code Smells (TDD Standards)");
-//
-//		TreeItem trtmTdd = new TreeItem(trtmTestDrivenDevelopment, SWT.NONE);
-//		trtmTdd.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmTdd.setText("TDD");
-//
-//		TreeItem trtmTddWithDesign = new TreeItem(trtmTestDrivenDevelopment, SWT.NONE);
-//		trtmTddWithDesign.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmTddWithDesign.setText("Tdd with Design by Contract");
-//		trtmTestDrivenDevelopment.setExpanded(true);
-//
-//		TreeItem trtmUnitTesting = new TreeItem(trtmBuiltin, SWT.NONE);
-//		trtmUnitTesting.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-//		trtmUnitTesting.setText("Unit Testing");
-//
-//		TreeItem trtmBugdetectivelicenseRequired = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmBugdetectivelicenseRequired.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmBugdetectivelicenseRequired.setText("BugDetective (License Required)");
-//
-//		TreeItem trtmDemoConfiguration = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmDemoConfiguration.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmDemoConfiguration.setText("Demo Configuration");
-//
-//		TreeItem trtmGenerateAndRun = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmGenerateAndRun.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmGenerateAndRun.setText("Generate and Run Unit Tests");
-//
-//		TreeItem trtmMetrics = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmMetrics.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmMetrics.setText("Metrics");
-//
-//		TreeItem trtmRunStaticAnalysis = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmRunStaticAnalysis.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmRunStaticAnalysis.setText("Run Static Analysis");
-//
-//		TreeItem trtmRunStaticAnalysisAndTests = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmRunStaticAnalysisAndTests.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmRunStaticAnalysisAndTests.setText("Run Static Analysis and Unit Tests");
-//
-//		TreeItem trtmRunUnitTests = new TreeItem(trtmUnitTesting, SWT.NONE);
-//		trtmRunUnitTests.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-//		trtmRunUnitTests.setText("Run Unit Tests");
-//
-//		trtmUnitTesting.setExpanded(true);
-
-		// add event listener to tree
-		
-		tree.addMouseListener(new MouseAdapter() {
-			public void mouseDoubleClick(MouseEvent evt) {
-				TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
-				if(selectedItem==null){
-					System.err.print("获取选中节点错误");
-					return;
-				}
-				
-				if(canEdit(selectedItem)){
-					System.out.println(selectedItem.getText());
-					Text text=ConfigTreeEditorText.CreateText(tree, focusListener);
-					editor.setEditor(text, selectedItem);  
-                    text.setText(selectedItem.getText());  
-                    text.selectAll();  
-                    text.forceFocus(); 
-                    isEditing=true;
-    		        text.setVisible(true);  
-                    
-				}
-				
-			}
-
-			public void mouseDown(MouseEvent evt) {
-				boolean isTreeitem = evt.getSource() instanceof Tree;
-				selectedItem = ((Tree)(evt.getSource())).getSelection()[0];
-				///System.out.println(selectedItem.getText());
-				if (isTreeitem) {
-					initMenu(evt);
-				}
-			}
-
-		});
-		
-		
-		
-	/*	// ������
-	   tree.addListener(SWT.Expand, new Listener () {  
-            public void handleEvent (final Event event) {  
-                final TreeItem root = (TreeItem) event.item;  
-                TreeItem[] items = root.getItems ();  
-                for(int i= 0; i<items.length; i++) {  
-                    // if have added children for the item, just return.  
-                    if(items[i].getData() != null)  
-                        return;  
-                    items[i].dispose();  
-                }  
-                  
-                TreeItem item = (TreeItem) root.get
-                TreeItem[] childrenItems = item.getItems();
-                  
-                // disc return  
-                if(childrenItems == null) return;  
-                for(int i= 0; i<childrenItems.length; i++) {  
-                    TreeItem item = new TreeItem(root, 0);  
-                    item.setText(files[i].getName());  
-                    item.setData(files[i]);  
-                    if(files[i].isDirectory()) {  
-                        // display '+' only for directory.  
-                        new TreeItem(item, 0);  
-                    }  
-                }  
-            }  
-        });  */
 	}
 	public  void initMenu(MouseEvent event) {
 		initializeMenu();
 	}
 
 	private void initializeMenu()  {
-		// test eclipse path
-		/*File file = new File("D:\\testetet.txt");
-		PrintStream writer;
-		try {
-			writer = new PrintStream(file);
-			System.setOut(writer);
-			System.out.print(Platform.getInstallLocation());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
 		createActions();
 		MenuManager mgr = new MenuManager();
 		
@@ -464,20 +367,16 @@ public class ConfigTree {
 	}
 
 	/*
-	 * �¼����?��
+	 * 创建菜单
 	 */
 	private void createActions() {
-		newAction = new Action("�½�") {
+		newAction = new Action("New") {
 			public void run() {
 				// .........
-				System.err.print("�½� start");
 				TreeItem item = new TreeItem(trtmUser, SWT.None);
-				
-				System.err.print("�½� end");
-				
 			}
 		};
-		duplicateAction = new Action("����") {
+		duplicateAction = new Action("Copy") {
 			public void run() {
 				// .........
 				TreeItem item = new TreeItem(trtmUser, SWT.None);
@@ -485,18 +384,18 @@ public class ConfigTree {
 				item.setText(selectedItem.getText());
 			}
 		};
-		deleteAction = new Action("ɾ��") {
+		deleteAction = new Action("Delete") {
 			public void run() {
 				// .........
 			}
 		};
 
-		exportAction = new Action("����") {
+		exportAction = new Action("Export") {
 			public void run() {
 				// .........
 			}
 		};
-		setAsDefaultAction = new Action("��ΪĬ��") {
+		setAsDefaultAction = new Action("AsDefault") {
 			public void run() {
 				// .........
 			}

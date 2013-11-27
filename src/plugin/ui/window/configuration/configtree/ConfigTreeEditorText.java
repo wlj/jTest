@@ -1,4 +1,4 @@
-package plugin.ui.window.configuration;
+package plugin.ui.window.configuration.configtree;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TreeEditor;

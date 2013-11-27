@@ -9,6 +9,8 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+import plugin.ui.window.configuration.configtree.ConfigTree;
+
 public class ConfigSelectWindow {
 	public Composite configSelectComposite;
 	public Composite treeComposite;
