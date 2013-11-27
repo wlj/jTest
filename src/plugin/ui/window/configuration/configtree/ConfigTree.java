@@ -351,56 +351,20 @@ public class ConfigTree {
 	public  void initMenu(MouseEvent event) {
 		initializeMenu();
 	}
-
+	/**
+	 * 初始化菜单
+	 */
 	private void initializeMenu()  {
-		createActions();
 		MenuManager mgr = new MenuManager();
 		
-		mgr.add(newAction);
-		mgr.add(duplicateAction);
-		mgr.add(deleteAction);
-		mgr.add(exportAction);
-		mgr.add(setAsDefaultAction);
+		mgr.add(new NewAction());
+		mgr.add(new CopyAction());
+		mgr.add(new DeleteAction());
+		mgr.add(new ExportAction());
+		mgr.add(new SetAsDefaultAction());
 		
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
-	}
-
-	/*
-	 * 创建菜单
-	 */
-	private void createActions() {
-		newAction = new Action("New") {
-			public void run() {
-				// .........
-				TreeItem item = new TreeItem(trtmUser, SWT.None);
-			}
-		};
-		duplicateAction = new Action("Copy") {
-			public void run() {
-				// .........
-				TreeItem item = new TreeItem(trtmUser, SWT.None);
-				item.setImage(selectedItem.getImage());
-				item.setText(selectedItem.getText());
-			}
-		};
-		deleteAction = new Action("Delete") {
-			public void run() {
-				// .........
-			}
-		};
-
-		exportAction = new Action("Export") {
-			public void run() {
-				// .........
-			}
-		};
-		setAsDefaultAction = new Action("AsDefault") {
-			public void run() {
-				// .........
-			}
-		};
-
 	}
 
 	/**
