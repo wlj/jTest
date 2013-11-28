@@ -84,7 +84,20 @@ public class ConfigTree {
 		text.clearSelection();
 		text.setVisible(false);
 		text.dispose();
-	} 
+	}
+//	private int GetNewItemIndex(){
+//		
+//	}
+	/**
+	 * 新建配置
+	 * @return
+	 */
+	public boolean NewConfig(){
+		TreeItem userItem = this.tree.getItem(0);
+		TreeItem newItem=new TreeItem(userItem,SWT.NONE);
+		newItem.setText("New 1");
+		return false;
+	}
 	/**
 	 * 构造方法，采用构造方法注入实现右键菜单功能
 	 * @param parent
@@ -128,11 +141,12 @@ public class ConfigTree {
 
 			public void mouseDown(MouseEvent evt) {
 				boolean isTreeitem = evt.getSource() instanceof Tree;
-				selectedItem = ((Tree)(evt.getSource())).getSelection()[0];
-				///System.out.println(selectedItem.getText());
-				if (isTreeitem) {
+				if(isTreeitem){
 					initMenu(evt);
 				}
+				
+				///System.out.println(selectedItem.getText());
+				
 			}
 
 		});
@@ -373,9 +387,24 @@ public class ConfigTree {
 		trtmRunStaticAnalysisAndTests.setText("Run Static Analysis and Unit Tests");
 
 	}
-	public  void initMenu(MouseEvent event) {
-		initializeMenu();
+	public  void initMenu(MouseEvent evt) {
+		TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
+		//只有userDefined和team及其子节点才可以弹出菜单
+		boolean canShowMenu=selectedItem.getText().equals(userDefined)||
+				selectedItem.getText().equals(team)||
+				selectedItem.getParentItem()==null||
+				selectedItem.getParentItem().getText().equals(userDefined)||
+				selectedItem.getParentItem().getText().equals(team);
+		if(canShowMenu){
+			initializeMenu();
+		}
+		else{
+			if(evt.button==3){
+				tree.setMenu(null);
+			}
+		}
 	}
+	
 	/**
 	 * 初始化菜单
 	 */
