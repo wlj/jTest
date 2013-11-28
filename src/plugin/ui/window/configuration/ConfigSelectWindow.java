@@ -51,8 +51,9 @@ public class ConfigSelectWindow {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		// set the config item tree
-		Action[] actions=new Action[]{new NewAction(),new CopyAction(),new ExportAction(),new DeleteAction(),new SetAsDefaultAction()};
-		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,actions);
+		
+		configTree = new ConfigTree(scrolledComposite, SWT.BORDER);
+		configTree.addAction(new NewAction(configTree));
 		configTree.contentCreate();
 		scrolledComposite.setContent(configTree.tree);
 		scrolledComposite.setMinSize(configTree.tree.computeSize(SWT.DEFAULT, SWT.DEFAULT));

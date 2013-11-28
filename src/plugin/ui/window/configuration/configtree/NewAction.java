@@ -11,14 +11,17 @@ import org.eclipse.jface.action.Action;
  */
 public class NewAction extends Action {
 	
+	private final ConfigTree configTree;
+	
 	final static String name="New";
 	
-	public NewAction(){
+	public NewAction(ConfigTree configTree){
 		super(name);
+		this.configTree=configTree;
 	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("New");
+		configTree.NewConfig();
 	}
 }

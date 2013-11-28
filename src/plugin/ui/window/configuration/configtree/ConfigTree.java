@@ -25,7 +25,7 @@ public class ConfigTree {
 	// configTreeFilePath point to the xml file which describe the configTree's
 	// constructor
 	public static String configTreeFilePath = System.getProperty("user.dir") + "\\src\\plugin\\ui\\window\\configuration\\configuration_list.xml";
-	
+	private List<Action> actions=new ArrayList<Action>();
 	public Tree tree;
 	public static TreeItem trtmUser;
 	public static TreeItem trtmBuiltin;
@@ -35,7 +35,6 @@ public class ConfigTree {
 	//can edit tree
 	private TreeEditor  editor;
 	
-	private static Action[] actions;
 	
 	final String userDefined="User-defined";
 	final String builtin="Builtin";
@@ -43,7 +42,13 @@ public class ConfigTree {
 	// todo: duplicate, New child, Delete, export, set as default
 	private static String defaultConfigName = "N";
 	private boolean isEditing;
-	
+	/**
+	 * 添加右键命令
+	 * @param action
+	 */
+	public void addAction(Action action){
+		this.actions.add(action);
+	}
 	
 	/**
 	 * 创建文本框
@@ -85,18 +90,31 @@ public class ConfigTree {
 		text.setVisible(false);
 		text.dispose();
 	}
-//	private int GetNewItemIndex(){
-//		
-//	}
+	/**
+	 * 开始编辑
+	 * @param item
+	 */
+	private void BeginEdit(TreeItem item){
+		Text text=CreateText(tree);
+		editor.setEditor(text, item);  
+        text.setText(item.getText());  
+        text.selectAll();  
+        text.forceFocus(); 
+        isEditing=true;
+        text.setVisible(true);  
+	}
+	
 	/**
 	 * 新建配置
 	 * @return
 	 */
-	public boolean NewConfig(){
+	public void NewConfig(){
 		TreeItem userItem = this.tree.getItem(0);
 		TreeItem newItem=new TreeItem(userItem,SWT.NONE);
 		newItem.setText("New 1");
-		return false;
+		newItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+		BeginEdit(newItem);
+		
 	}
 	/**
 	 * 构造方法，采用构造方法注入实现右键菜单功能
@@ -104,9 +122,8 @@ public class ConfigTree {
 	 * @param style
 	 * @param actions
 	 */
-	public ConfigTree(Composite parent, int style,Action[] actions) {
+	public ConfigTree(Composite parent, int style) {
 		// TODO Auto-generated constructor stub
-		this.actions=actions;
 		tree = new Tree(parent, style);
 		//initialize editor tree
 		editor=new TreeEditor(tree);
@@ -181,10 +198,10 @@ public class ConfigTree {
 			throw new Exception("item not be null");
 		}
 		if(canEdit(item)){
-			System.out.println(selectedItem.getText());
+			System.out.println(item.getText());
 			Text text=CreateText(tree);
 			editor.setEditor(text, item);  
-            text.setText(selectedItem.getText());  
+            text.setText(item.getText());  
             text.selectAll();  
             text.forceFocus(); 
             isEditing=true;
@@ -410,8 +427,8 @@ public class ConfigTree {
 	 */
 	private void initializeMenu()  {
 		MenuManager mgr = new MenuManager();
-		for(int i=0;i<actions.length;i++){
-			mgr.add(actions[i]);
+		for(int i=0;i<actions.size();i++){
+			mgr.add(actions.get(i));
 		}
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
