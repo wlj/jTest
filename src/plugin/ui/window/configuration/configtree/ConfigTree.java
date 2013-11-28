@@ -1,5 +1,8 @@
 package plugin.ui.window.configuration.configtree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
@@ -29,10 +32,10 @@ public class ConfigTree {
 	public static TreeItem trtmTeam;
 	
 	public static TreeItem selectedItem = null;
-	
-	private Action duplicateAction, newAction, deleteAction, exportAction, setAsDefaultAction;// 定义菜单actions
 	//can edit tree
 	private TreeEditor  editor;
+	
+	private static Action[] actions;
 	
 	final String userDefined="User-defined";
 	final String builtin="Builtin";
@@ -40,6 +43,35 @@ public class ConfigTree {
 	// todo: duplicate, New child, Delete, export, set as default
 	private static String defaultConfigName = "N";
 	private boolean isEditing;
+	
+	
+	/**
+	 * 创建文本框
+	 * @param tree
+	 * @return
+	 */
+	private Text CreateText(Composite tree){
+		Text text=new Text(tree, SWT.SINGLE | SWT.BORDER);
+		FocusListener focusListener =new  FocusListener(){
+			@Override
+			public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
+				// TODO Auto-generated method stub
+//		        text.selectAll();
+				
+			}
+
+			@Override
+			public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				ConfirmEdit();
+			}
+		};
+		text.addFocusListener(focusListener);
+		return text;
+	}
+	/**
+	 * 确认修改
+	 */
 	private void ConfirmEdit(){
 		if(!isEditing){
 			return;
@@ -52,23 +84,16 @@ public class ConfigTree {
 		text.clearSelection();
 		text.setVisible(false);
 		text.dispose();
-	}
-	final FocusListener focusListener =new  FocusListener(){
-		@Override
-		public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
-			// TODO Auto-generated method stub
-//	        text.selectAll();
-			
-		}
-
-		@Override
-		public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
-			// TODO Auto-generated method stub
-			ConfirmEdit();
-		}
-	};
-	public ConfigTree(Composite parent, int style) {
+	} 
+	/**
+	 * 构造方法，采用构造方法注入实现右键菜单功能
+	 * @param parent
+	 * @param style
+	 * @param actions
+	 */
+	public ConfigTree(Composite parent, int style,Action[] actions) {
 		// TODO Auto-generated constructor stub
+		this.actions=actions;
 		tree = new Tree(parent, style);
 		//initialize editor tree
 		editor=new TreeEditor(tree);
@@ -143,7 +168,7 @@ public class ConfigTree {
 		}
 		if(canEdit(item)){
 			System.out.println(selectedItem.getText());
-			Text text=ConfigTreeEditorText.CreateText(tree, focusListener);
+			Text text=CreateText(tree);
 			editor.setEditor(text, item);  
             text.setText(selectedItem.getText());  
             text.selectAll();  
@@ -356,13 +381,9 @@ public class ConfigTree {
 	 */
 	private void initializeMenu()  {
 		MenuManager mgr = new MenuManager();
-		
-		mgr.add(new NewAction());
-		mgr.add(new CopyAction());
-		mgr.add(new DeleteAction());
-		mgr.add(new ExportAction());
-		mgr.add(new SetAsDefaultAction());
-		
+		for(int i=0;i<actions.length;i++){
+			mgr.add(actions[i]);
+		}
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
 	}
@@ -397,22 +418,6 @@ public class ConfigTree {
 		}
 		newItem.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
 		newItem.setText(name);
-	}
-
-	private boolean removeConfig(String configName) {
-		// ɾ���Ӧ�������ļ�
-
-		// ɾ��config tree�Ķ�Ӧ��
-
-		return true;
-	}
-
-	private boolean createConfig(String configName) {
-		// ������Ӧ�������ļ�
-
-		// ����config tree�Ķ�Ӧ��
-
-		return true;
 	}
 
 	private void addNode(Document configList, String configFileRootPath, String configName) {

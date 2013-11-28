@@ -1,5 +1,6 @@
 package plugin.ui.window.configuration;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
@@ -9,7 +10,7 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import plugin.ui.window.configuration.configtree.ConfigTree;
+import plugin.ui.window.configuration.configtree.*;
 
 public class ConfigSelectWindow {
 	public Composite configSelectComposite;
@@ -49,9 +50,9 @@ public class ConfigSelectWindow {
 		scrolledComposite.setLayoutData(fd_scrolledComposite);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
-
 		// set the config item tree
-		configTree = new ConfigTree(scrolledComposite, SWT.BORDER);
+		Action[] actions=new Action[]{new NewAction(),new CopyAction(),new ExportAction(),new DeleteAction(),new SetAsDefaultAction()};
+		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,actions);
 		configTree.contentCreate();
 		scrolledComposite.setContent(configTree.tree);
 		scrolledComposite.setMinSize(configTree.tree.computeSize(SWT.DEFAULT, SWT.DEFAULT));
