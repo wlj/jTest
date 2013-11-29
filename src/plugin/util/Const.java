@@ -51,11 +51,11 @@ public class Const {
 	public final static String ARRAY_OUT_OF_BOUNDARY = "[Array Out Of Boundary]\n";
 	
 	// added by John
-	// ¸÷ÖÖ¸ùÂ·¾¶
+	// ï¿½ï¿½ï¿½Ö¸ï¿½Â·ï¿½ï¿½
 	public static final String rootPath = System.getProperty("user.dir");
 	public static final String iconPath = rootPath + "\\icons";
 
-	// ±È½Ï¾ßÌåµÄÔªËØµÄÂ·¾¶
+	// ï¿½È½Ï¾ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Â·ï¿½ï¿½
 	public static final String FOLDER_ICON_PATH = iconPath + "\\folder_icon.gif";
 	public static final String HYPERCUBE_ICON_PATH = iconPath + "\\hypercube-16.gif";
 	public static final String USER_ICON_PATH = iconPath + "\\user.gif";
@@ -70,5 +70,7 @@ public class Const {
 	public static final String COMMON_ICON_PATH = iconPath + "\\diy\\common_DIY.gif";
 	public static final String CODEREVIEW_ICON_PATH = iconPath + "\\diy\\codereview_DIY.gif";
 	public static final String GOALS_ICON_PATH = iconPath + "\\diy\\goals_DIY.gif";
+	
+	public final static String CONFIG_PATH = rootPath+"\\jtest\\"; 
 	
 }

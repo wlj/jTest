@@ -26,16 +26,20 @@ public class ConfigTree {
 	// constructor
 	public static String configTreeFilePath = System.getProperty("user.dir") + "\\src\\plugin\\ui\\window\\configuration\\configuration_list.xml";
 	private List<Action> actions=new ArrayList<Action>();
-	public Tree tree;
+	private Tree tree;
+	public Tree getTree() {
+		return tree;
+	}
+
 	public static TreeItem trtmUser;
 	public static TreeItem trtmBuiltin;
 	public static TreeItem trtmTeam;
 	
-	public static TreeItem selectedItem = null;
+	private static TreeItem selectedItem = null;
 	//can edit tree
 	private TreeEditor  editor;
 	
-	
+	final String newPrefix = "New";
 	final String userDefined="User-defined";
 	final String builtin="Builtin";
 	final String team="Team";
@@ -56,12 +60,12 @@ public class ConfigTree {
 	 * @return
 	 */
 	private Text CreateText(Composite tree){
-		Text text=new Text(tree, SWT.SINGLE | SWT.BORDER);
+		final Text text=new Text(tree, SWT.SINGLE | SWT.BORDER);
 		FocusListener focusListener =new  FocusListener(){
 			@Override
 			public void focusGained(org.eclipse.swt.events.FocusEvent arg0) {
 				// TODO Auto-generated method stub
-//		        text.selectAll();
+		        text.selectAll();
 				
 			}
 
@@ -83,25 +87,35 @@ public class ConfigTree {
 		}
 		isEditing=false;
 		Text text = (Text) editor.getEditor();
-		TreeItem editingItem=editor.getItem();
-		editingItem.setText(text.getText().trim());
+		selectedItem=editor.getItem();
+		selectedItem.setText(text.getText().trim());
 		text.setText("");
 		text.clearSelection();
 		text.setVisible(false);
 		text.dispose();
 	}
 	/**
-	 * 开始编辑
-	 * @param item
+	 * 获取新建节点的索引号
+	 * @return
 	 */
-	private void BeginEdit(TreeItem item){
-		Text text=CreateText(tree);
-		editor.setEditor(text, item);  
-        text.setText(item.getText());  
-        text.selectAll();  
-        text.forceFocus(); 
-        isEditing=true;
-        text.setVisible(true);  
+	private int getNewConfigIndex(String prefix){
+		TreeItem userItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
+		TreeItem[] items = userItem.getItems();
+		int index=0;
+		for(int i=0;i<items.length;i++){
+			if(items[i].getText().startsWith(prefix)){
+				String indexStr=items[i].getText().substring(prefix.length()).trim();
+				try{
+					if(Integer.parseInt(indexStr)>index){
+						index=Integer.parseInt(indexStr);
+					}
+				}catch(NumberFormatException ex){
+					System.err.println("未能完成转换"+indexStr);
+				}
+				
+			}
+		}
+		return index+1;
 	}
 	
 	/**
@@ -109,11 +123,17 @@ public class ConfigTree {
 	 * @return
 	 */
 	public void NewConfig(){
-		TreeItem userItem = this.tree.getItem(0);
-		TreeItem newItem=new TreeItem(userItem,SWT.NONE);
-		newItem.setText("New 1");
-		newItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-		BeginEdit(newItem);
+		TreeItem userItem = null;
+		userItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
+		selectedItem=new TreeItem(userItem,SWT.NONE);
+		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
+		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+		try {
+			beginEdit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	/**
@@ -146,9 +166,9 @@ public class ConfigTree {
 		trtmTeam.setExpanded(true);
 		tree.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent evt) {
-				TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
+				selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 				try {
-					beginEdit(selectedItem);
+					beginEdit();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -159,6 +179,7 @@ public class ConfigTree {
 			public void mouseDown(MouseEvent evt) {
 				boolean isTreeitem = evt.getSource() instanceof Tree;
 				if(isTreeitem){
+					selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 					initMenu(evt);
 				}
 				
@@ -193,15 +214,15 @@ public class ConfigTree {
 	 * @param item
 	 * @throws Exception
 	 */
-	private void beginEdit(TreeItem item) throws Exception{
-		if(item==null){
+	private void beginEdit() throws Exception{
+		if(selectedItem==null){
 			throw new Exception("item not be null");
 		}
-		if(canEdit(item)){
-			System.out.println(item.getText());
+		if(canEdit(selectedItem)){
+			System.out.println(selectedItem.getText());
 			Text text=CreateText(tree);
-			editor.setEditor(text, item);  
-            text.setText(item.getText());  
+			editor.setEditor(text, selectedItem);  
+            text.setText(selectedItem.getText());  
             text.selectAll();  
             text.forceFocus(); 
             isEditing=true;
@@ -405,7 +426,6 @@ public class ConfigTree {
 
 	}
 	public  void initMenu(MouseEvent evt) {
-		TreeItem selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 		//只有userDefined和team及其子节点才可以弹出菜单
 		boolean canShowMenu=selectedItem.getText().equals(userDefined)||
 				selectedItem.getText().equals(team)||

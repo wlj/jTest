@@ -55,8 +55,8 @@ public class ConfigSelectWindow {
 		configTree = new ConfigTree(scrolledComposite, SWT.BORDER);
 		configTree.addAction(new NewAction(configTree));
 		configTree.contentCreate();
-		scrolledComposite.setContent(configTree.tree);
-		scrolledComposite.setMinSize(configTree.tree.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite.setContent(configTree.getTree());
+		scrolledComposite.setMinSize(configTree.getTree().computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		
 	}
 
