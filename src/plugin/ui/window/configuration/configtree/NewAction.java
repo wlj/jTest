@@ -22,6 +22,6 @@ public class NewAction extends Action {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		configTree.NewConfig();
+		//configTree.NewConfig();
 	}
 }

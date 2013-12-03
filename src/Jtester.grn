@@ -1,79 +1,44 @@
 <uml>
    <greenVersion="30500"/>
    <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{ExpressionOperator.java[ExpressionOperator"/>
-      <height="111"/>
-      <width="28"/>
-      <x="1327"/>
-      <y="284"/>
-   </type>
-   <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{SymbolExeVisitor.java[SymbolExeVisitor"/>
-      <height="481"/>
-      <width="298"/>
-      <x="332"/>
-      <y="399"/>
-   </type>
-   <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{Path.java[Path"/>
-      <height="216"/>
-      <width="225"/>
-      <x="701"/>
-      <y="247"/>
-   </type>
-   <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{UUIDGenerator.java[UUIDGenerator"/>
+      <name="=Jtester/src<plugin.ui.window.configuration.configtree{ConfigTree.java[ConfigTree"/>
       <height="-1"/>
       <width="-1"/>
-      <x="720"/>
-      <y="-13"/>
+      <x="0"/>
+      <y="0"/>
    </type>
    <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{PathGenerator.java[PathGenerator"/>
-      <height="252"/>
-      <width="284"/>
-      <x="976"/>
-      <y="108"/>
-   </type>
-   <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{ExpressionType.java[ExpressionType"/>
-      <height="109"/>
-      <width="35"/>
-      <x="1357"/>
-      <y="179"/>
-   </type>
-   <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{ProgramEnv.java[ProgramEnv"/>
+      <name="=Jtester/src<plugin.ui.window.configuration.configtree{CopyAction.java[CopyAction"/>
       <height="-1"/>
       <width="-1"/>
-      <x="683"/>
-      <y="500"/>
+      <x="477"/>
+      <y="2"/>
    </type>
    <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{ExpressionNode.java[ExpressionNode"/>
-      <height="402"/>
-      <width="88"/>
-      <x="1381"/>
-      <y="-3"/>
+      <name="=Jtester/src<plugin.ui.window.configuration.configtree{DeleteAction.java[DeleteAction"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="485"/>
+      <y="117"/>
    </type>
    <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{SymbolExecutor.java[SymbolExecutor"/>
-      <height="279"/>
-      <width="250"/>
-      <x="365"/>
-      <y="110"/>
+      <name="=Jtester/src<plugin.ui.window.configuration{ConfigurationWindow.java[ConfigurationWindow"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="309"/>
+      <y="252"/>
    </type>
    <type>
-      <name="=Jtester/src<core.jtester.staticanalysis.svd.execution{ConstraintSolver.java[ConstraintSolver"/>
-      <height="531"/>
-      <width="326"/>
-      <x="968"/>
-      <y="367"/>
+      <name="=Jtester/D:\/Program Files\/eclipse\/plugins\/org.eclipse.swt.win32.win32.x86_64_3.102.0.v20130605-1544.jar<org.eclipse.swt.layout(FormData.class[FormData"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="600"/>
+      <y="0"/>
    </type>
    <relationship>
-      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=Jtester/src<core.jtester.staticanalysis.svd.execution{SymbolExeVisitor.java[SymbolExeVisitor"/>
-      <targetType="=Jtester/src<core.jtester.staticanalysis.svd.execution{ProgramEnv.java[ProgramEnv"/>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+      <sourceType="=Jtester/src<plugin.ui.window.configuration{ConfigurationWindow.java[ConfigurationWindow"/>
+      <targetType="=Jtester/D:\/Program Files\/eclipse\/plugins\/org.eclipse.swt.win32.win32.x86_64_3.102.0.v20130605-1544.jar<org.eclipse.swt.layout(FormData.class[FormData"/>
       <bendpoints>
       </bendpoints>
    </relationship>

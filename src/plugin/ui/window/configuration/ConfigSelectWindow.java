@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import plugin.ui.window.configuration.configtree.*;
+import plugin.ui.window.configuration.interfaces.*;
 
 public class ConfigSelectWindow {
 	public Composite configSelectComposite;
@@ -51,10 +52,9 @@ public class ConfigSelectWindow {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		// set the config item tree
+		IConfig config=new Config();
+		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,config);
 		
-		configTree = new ConfigTree(scrolledComposite, SWT.BORDER);
-		configTree.addAction(new NewAction(configTree));
-		configTree.contentCreate();
 		scrolledComposite.setContent(configTree.getTree());
 		scrolledComposite.setMinSize(configTree.getTree().computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		

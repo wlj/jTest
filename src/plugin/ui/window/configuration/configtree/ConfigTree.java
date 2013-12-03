@@ -17,20 +17,19 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
 
+import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
+import plugin.ui.window.configuration.entity.ConfigEntity;
+import plugin.ui.window.configuration.interfaces.IConfig;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
 
-public class ConfigTree {
+public class ConfigTree extends ConfigTreeBase {
 	// configTreeFilePath point to the xml file which describe the configTree's
 	// constructor
 	public static String configTreeFilePath = System.getProperty("user.dir") + "\\src\\plugin\\ui\\window\\configuration\\configuration_list.xml";
-	private List<Action> actions=new ArrayList<Action>();
 	private Tree tree;
-	public Tree getTree() {
-		return tree;
-	}
-
+	
 	public static TreeItem trtmUser;
 	public static TreeItem trtmBuiltin;
 	public static TreeItem trtmTeam;
@@ -40,20 +39,15 @@ public class ConfigTree {
 	private TreeEditor  editor;
 	
 	final String newPrefix = "New";
-	final String userDefined="User-defined";
-	final String builtin="Builtin";
-	final String team="Team";
-	// todo: duplicate, New child, Delete, export, set as default
-	private static String defaultConfigName = "N";
-	private boolean isEditing;
-	/**
-	 * 添加右键命令
-	 * @param action
-	 */
-	public void addAction(Action action){
-		this.actions.add(action);
-	}
+	final String userDefined=ConfigCategoryEnum.User.toString();
+	final String builtin=ConfigCategoryEnum.Builtin.toString();
+	final String team=ConfigCategoryEnum.Team.toString();;
 	
+	private boolean isEditing;
+	
+	public Tree getTree() {
+		return tree;
+	}
 	/**
 	 * 创建文本框
 	 * @param tree
@@ -87,11 +81,14 @@ public class ConfigTree {
 		}
 		isEditing=false;
 		Text text = (Text) editor.getEditor();
+		String newConfigName=text.getText().trim();
 		selectedItem=editor.getItem();
-		selectedItem.setText(text.getText().trim());
-		text.setText("");
-		text.clearSelection();
-		text.setVisible(false);
+		selectedItem.setText(newConfigName);
+		TreeItem parentItem=selectedItem.getParentItem();
+		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.setName(newConfigName);
+		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
+		config.EditConfig(configEntity);
 		text.dispose();
 	}
 	/**
@@ -122,28 +119,42 @@ public class ConfigTree {
 	 * 新建配置
 	 * @return
 	 */
-	public void NewConfig(){
-		TreeItem userItem = null;
-		userItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
-		selectedItem=new TreeItem(userItem,SWT.NONE);
+	private void newConfig(){
+		TreeItem parentItem = null;
+		parentItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
+		selectedItem=new TreeItem(parentItem,SWT.NONE);
 		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+		String newConfigName=selectedItem.getText().trim();
+		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.setName(newConfigName);
+		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
+		config.NewConfig(configEntity);
 		try {
 			beginEdit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	/**
-	 * 构造方法，采用构造方法注入实现右键菜单功能
+	 * 复制配置项
+	 */
+	private void copyConfig(){
+		
+		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.setName("副本");
+		configEntity.setConfigCategory(ConfigCategoryEnum.Team);
+		config.CopyConfig(configEntity);
+	}
+	/**
+	 * 构造方法
 	 * @param parent
 	 * @param style
-	 * @param actions
+	 * @param config
 	 */
-	public ConfigTree(Composite parent, int style) {
-		// TODO Auto-generated constructor stub
+	public ConfigTree(Composite parent, int style,IConfig config) {
+		super(parent, style, config);
 		tree = new Tree(parent, style);
 		//initialize editor tree
 		editor=new TreeEditor(tree);
@@ -188,6 +199,7 @@ public class ConfigTree {
 			}
 
 		});
+		contentCreate();
 	}
 	
 	/**
@@ -231,8 +243,10 @@ public class ConfigTree {
 		}
 	}
 	
-
-	public void contentCreate(){
+	/**
+	 * 初始化系统内置配置树
+	 */
+	private void contentCreate(){
 		
 //
 		TreeItem trtmCodeReview = new TreeItem(trtmBuiltin, SWT.NONE);
@@ -425,7 +439,11 @@ public class ConfigTree {
 		trtmRunStaticAnalysisAndTests.setText("Run Static Analysis and Unit Tests");
 
 	}
-	public  void initMenu(MouseEvent evt) {
+	/**
+	 * 初始化菜单
+	 * @param evt
+	 */
+	private  void initMenu(MouseEvent evt) {
 		//只有userDefined和team及其子节点才可以弹出菜单
 		boolean canShowMenu=selectedItem.getText().equals(userDefined)||
 				selectedItem.getText().equals(team)||
@@ -447,47 +465,14 @@ public class ConfigTree {
 	 */
 	private void initializeMenu()  {
 		MenuManager mgr = new MenuManager();
-		for(int i=0;i<actions.size();i++){
-			mgr.add(actions.get(i));
-		}
+		mgr.add(new Action("New"){
+			@Override
+			public void run() {
+				newConfig();
+			}
+		});
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
-	}
-
-	/**
-	 * buid tree from a existing configFile
-	 * 
-	 * @param filePath
-	 */
-	private void constructTreeFromConfigFile(String filePath) {
-		// ������ȡconfig����ʵ�������Ӧ��ͼ�꣬������Ӧ�Ĳ˵���ע���¼���
-
-	}
-
-	/**
-	 * add one tree item to a specified tree item
-	 * 
-	 * @param parent
-	 *            the tree-item that new item attached
-	 * @param name
-	 *            new item's name
-	 * @param expandable
-	 *            tree:the new item can be attached by another item
-	 */
-	public void addTreeItem(TreeItem parent, String name, boolean expandable) {
-		TreeItem newItem = new TreeItem(parent, SWT.NONE);
-		String imagePath;
-		if (expandable) {
-			imagePath = "";
-		} else {
-			imagePath = "";
-		}
-		newItem.setImage(SWTResourceManager.getImage(Const.FOLDER_ICON_PATH));
-		newItem.setText(name);
-	}
-
-	private void addNode(Document configList, String configFileRootPath, String configName) {
-
 	}
 
 }
