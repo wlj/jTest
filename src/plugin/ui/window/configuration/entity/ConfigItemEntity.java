@@ -4,7 +4,7 @@ package plugin.ui.window.configuration.entity;
  * @author suntao
  *
  */
-public class ConfigEntity {
+public class ConfigItemEntity {
 	/**
 	 * 配置名称
 	 */

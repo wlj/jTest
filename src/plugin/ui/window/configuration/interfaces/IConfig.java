@@ -11,31 +11,31 @@ public interface IConfig {
 	 * 新建配置项
 	 * @param configEntity
 	 */
-	void NewConfig(ConfigEntity configEntity);
+	void NewConfig(ConfigItemEntity configEntity);
 	/**
 	 * 编辑配置项
 	 * @param configEntity
 	 */
-	void EditConfig(ConfigEntity configEntity);
+	void EditConfig(ConfigItemEntity configEntity);
 	/**
 	 * 复制
 	 * @param configEntity
 	 */
-	void CopyConfig(ConfigEntity configEntity);
+	void CopyConfig(ConfigItemEntity configEntity);
 	/**
 	 * 导出
 	 * @param configEntity
 	 */
-	void ExportConfig(ConfigEntity configEntity);
+	void ExportConfig(ConfigItemEntity configEntity);
 	/**
 	 * 删除配置项
 	 * @param configEntity
 	 */
-	void DeleteConfig(ConfigEntity configEntity);
+	void DeleteConfig(ConfigItemEntity configEntity);
 	/**
 	 * 将指定配置设置默认
 	 * @param configEntity
 	 */
-	void SetDefault(ConfigEntity configEntity);
+	void SetDefault(ConfigItemEntity configEntity);
 	
 }

@@ -15,10 +15,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.w3c.dom.Document;
 
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
-import plugin.ui.window.configuration.entity.ConfigEntity;
+import plugin.ui.window.configuration.entity.ConfigItemEntity;
 import plugin.ui.window.configuration.interfaces.IConfig;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
@@ -85,7 +84,7 @@ public class ConfigTree extends ConfigTreeBase {
 		selectedItem=editor.getItem();
 		selectedItem.setText(newConfigName);
 		TreeItem parentItem=selectedItem.getParentItem();
-		ConfigEntity configEntity=new ConfigEntity();
+		ConfigItemEntity configEntity=new ConfigItemEntity();
 		configEntity.setName(newConfigName);
 		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
 		config.EditConfig(configEntity);
@@ -126,7 +125,7 @@ public class ConfigTree extends ConfigTreeBase {
 		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 		String newConfigName=selectedItem.getText().trim();
-		ConfigEntity configEntity=new ConfigEntity();
+		ConfigItemEntity configEntity=new ConfigItemEntity();
 		configEntity.setName(newConfigName);
 		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
 		config.NewConfig(configEntity);
@@ -142,7 +141,7 @@ public class ConfigTree extends ConfigTreeBase {
 	 */
 	private void copyConfig(){
 		
-		ConfigEntity configEntity=new ConfigEntity();
+		ConfigItemEntity configEntity=new ConfigItemEntity();
 		configEntity.setName("副本");
 		configEntity.setConfigCategory(ConfigCategoryEnum.Team);
 		config.CopyConfig(configEntity);
