@@ -50,4 +50,6 @@ public class StaticGeneral {
 	 */
 	private boolean isIncludeUserTestClass;
 	
+	private boolean isIgnoreRepeat;
+	
 }

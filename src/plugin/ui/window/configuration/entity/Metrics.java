@@ -7,6 +7,6 @@ package plugin.ui.window.configuration.entity;
 public class Metrics {
 	private boolean isPublic;
 	private MetricItem[] metricItems;
-	private StaticGeneral general;
+	
 	
 }
