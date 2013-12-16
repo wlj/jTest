@@ -1,7 +1,7 @@
 package plugin.ui.window.configuration.entity;
 /**
  * 静态分析规则的基类
- * @author suntao2
+ * @author wlj
  *
  */
 public abstract class StaticRuleItemBase {
@@ -22,10 +22,4 @@ public abstract class StaticRuleItemBase {
 	 * @return
 	 */
 	public abstract String getName();
-	public Metrics getMetrics() {
-		return metrics;
-	}
-	public void setMetrics(Metrics metrics) {
-		this.metrics = metrics;
-	}
 }

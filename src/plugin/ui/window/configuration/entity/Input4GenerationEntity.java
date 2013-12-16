@@ -6,12 +6,4 @@ package plugin.ui.window.configuration.entity;
  */
 public class Input4GenerationEntity {
 	private int unitTestType;
-
-	public int getUnitTestType() {
-		return unitTestType;
-	}
-
-	public void setUnitTestType(int unitTestType) {
-		this.unitTestType = unitTestType;
-	}
 }

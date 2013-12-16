@@ -9,16 +9,4 @@ public class UncaughtExceptionSeverityLevelEntity {
 	private String name;
 	//严重等级
 	private SeverityLevelEnum severityLevel;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public SeverityLevelEnum getSeverityLevel() {
-		return severityLevel;
-	}
-	public void setSeverityLevel(SeverityLevelEnum severityLevel) {
-		this.severityLevel = severityLevel;
-	}
 }

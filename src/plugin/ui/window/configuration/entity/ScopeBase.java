@@ -1,6 +1,6 @@
 package plugin.ui.window.configuration.entity;
 /**
- * Scope积累
+ * Scope
  * @author wlj
  *
  */

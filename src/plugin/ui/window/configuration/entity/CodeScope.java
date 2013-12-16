@@ -1,5 +1,9 @@
 package plugin.ui.window.configuration.entity;
-
+/**
+ * 代码过滤
+ * @author wlj
+ *
+ */
 public class CodeScope extends ScopeBase {
 	
 	private TimeFilter timeFilter;
