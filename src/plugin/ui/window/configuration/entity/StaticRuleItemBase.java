@@ -22,4 +22,10 @@ public abstract class StaticRuleItemBase {
 	 * @return
 	 */
 	public abstract String getName();
+	public Metrics getMetrics() {
+		return metrics;
+	}
+	public void setMetrics(Metrics metrics) {
+		this.metrics = metrics;
+	}
 }

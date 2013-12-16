@@ -1,7 +1,7 @@
 package plugin.ui.window.configuration.entity;
 /**
  * 配置实体类
- * @author suntao
+ * @author wlj
  *
  */
 public class ConfigItemEntity {

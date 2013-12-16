@@ -51,5 +51,101 @@ public class StaticGeneral {
 	private boolean isIncludeUserTestClass;
 	
 	private boolean isIgnoreRepeat;
+
+	public boolean isSkipJSP() {
+		return isSkipJSP;
+	}
+
+	public void setSkipJSP(boolean isSkipJSP) {
+		this.isSkipJSP = isSkipJSP;
+	}
+
+	public boolean isExcludeLargeFile() {
+		return isExcludeLargeFile;
+	}
+
+	public void setExcludeLargeFile(boolean isExcludeLargeFile) {
+		this.isExcludeLargeFile = isExcludeLargeFile;
+	}
+
+	public int getLargeFileSize() {
+		return largeFileSize;
+	}
+
+	public void setLargeFileSize(int largeFileSize) {
+		this.largeFileSize = largeFileSize;
+	}
+
+	public boolean isCheckFileWithCompileError() {
+		return isCheckFileWithCompileError;
+	}
+
+	public void setCheckFileWithCompileError(boolean isCheckFileWithCompileError) {
+		this.isCheckFileWithCompileError = isCheckFileWithCompileError;
+	}
+
+	public boolean isOnlyReportError() {
+		return isOnlyReportError;
+	}
+
+	public void setOnlyReportError(boolean isOnlyReportError) {
+		this.isOnlyReportError = isOnlyReportError;
+	}
+
+	public boolean isUseCustomBeginEnd() {
+		return isUseCustomBeginEnd;
+	}
+
+	public void setUseCustomBeginEnd(boolean isUseCustomBeginEnd) {
+		this.isUseCustomBeginEnd = isUseCustomBeginEnd;
+	}
+
+	public String getCustomBegin() {
+		return customBegin;
+	}
+
+	public void setCustomBegin(String customBegin) {
+		this.customBegin = customBegin;
+	}
+
+	public String getCustomEnd() {
+		return customEnd;
+	}
+
+	public void setCustomEnd(String customEnd) {
+		this.customEnd = customEnd;
+	}
+
+	public boolean isIgnoreGlobalRules() {
+		return isIgnoreGlobalRules;
+	}
+
+	public void setIgnoreGlobalRules(boolean isIgnoreGlobalRules) {
+		this.isIgnoreGlobalRules = isIgnoreGlobalRules;
+	}
+
+	public boolean isAllowCompileError() {
+		return isAllowCompileError;
+	}
+
+	public void setAllowCompileError(boolean isAllowCompileError) {
+		this.isAllowCompileError = isAllowCompileError;
+	}
+
+	public boolean isIncludeUserTestClass() {
+		return isIncludeUserTestClass;
+	}
+
+	public void setIncludeUserTestClass(boolean isIncludeUserTestClass) {
+		this.isIncludeUserTestClass = isIncludeUserTestClass;
+	}
+
+	public boolean isIgnoreRepeat() {
+		return isIgnoreRepeat;
+	}
+
+	public void setIgnoreRepeat(boolean isIgnoreRepeat) {
+		this.isIgnoreRepeat = isIgnoreRepeat;
+	}
 	
 }

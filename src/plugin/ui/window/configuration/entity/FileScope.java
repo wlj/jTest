@@ -45,7 +45,7 @@ public class FileScope extends ScopeBase {
 	 * 判断是否已过虑
 	 */
 	@Override
-	public boolean isFilter() {
+	public boolean isFilter(String path) {
 		// TODO Auto-generated method stub
 		return false;
 	}

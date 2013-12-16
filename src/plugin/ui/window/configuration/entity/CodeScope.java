@@ -35,7 +35,7 @@ public class CodeScope extends ScopeBase {
 	}
 
 	@Override
-	public boolean isFilter() {
+	public boolean isFilter(String path) {
 		// TODO Auto-generated method stub
 		return false;
 	}
