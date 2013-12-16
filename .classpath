@@ -14,6 +14,7 @@
 	<classpathentry kind="src" path="icons/diy"/>
 	<classpathentry kind="src" path="icons/obj16"/>
 	<classpathentry kind="src" path="icons/elcl16"/>
+	<classpathentry excluding="src/|icons/dtool16/|icons/dlcl16/|icons/etool16/|icons/ovr16/|icons/ctool16/|icons/wizban/|icons/eview16/|icons/cview16/|icons/prgss/|icons/diy/|icons/obj16/|icons/elcl16/|icons/|lib/|tested_files/data_flow/|tested_files/ontology/|tested_files/ontology/bad_practice/|tested_files/type_inference/config/const_problem/|tested_files/type_inference/config/data_detained/|tested_files/type_inference/const_problem/|tested_files/type_inference/data_detained/|tested_files/var_interval/|tested_files/type_inference/|tested_files/" kind="src" path=""/>
 	<classpathentry kind="lib" path="lib/axiom-1.2.8.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jautomata-core-2.0-alpha-1.jar"/>
