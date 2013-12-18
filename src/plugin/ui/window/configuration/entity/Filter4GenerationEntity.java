@@ -14,7 +14,7 @@ public class Filter4GenerationEntity {
 	//是否处理异常
 	private boolean isHandlingExceptions;
 	//处理异常的方式1=抛出和报告，2=捕获和断言已检查的，3=捕获和断言全部
-	private int handlingExceptionType;
+	private HandlingExceptionTypeEnum handlingExceptionType;
 	//是否生成可以引发超时的测试用例
 	private boolean isGenerateTimeOutTestCase;
 	//生成测试用例的访问级别-公开
