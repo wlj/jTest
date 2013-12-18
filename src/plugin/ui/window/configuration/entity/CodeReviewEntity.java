@@ -11,4 +11,10 @@ public class CodeReviewEntity {
 	private boolean isGenerateAllReprot;
 	//是否自动发布审查
 	private boolean isAutoPublishReview;
+	//作者
+	private Author4CodeReviewEntity[] authors;
+	//审查者
+	private Reviewer4CodeReviewEntity[] reviewers;
+	//监视者
+	private Monitor4CodeReview[] monitors;
 }
