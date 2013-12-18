@@ -8,7 +8,7 @@ public class Filter4GenerationEntity {
 	//只生成可以提高覆盖率的测试用例
 	private boolean isOnlyTestCase4HighCoverage;
 	//覆盖率方式，分支Or行
-	private byte coverageType;
+	private CoverageTypeEnum coverageType;
 	//生成传递null到方法的测试用例
 	private boolean isGenerateNullArgument;
 	//是否处理异常
