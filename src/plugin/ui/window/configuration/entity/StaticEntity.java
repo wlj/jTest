@@ -5,12 +5,23 @@ package plugin.ui.window.configuration.entity;
  *
  */
 public class StaticEntity {
+	//Enable Static Analysis
 	private boolean isEnabled;
+	//每个规则报告的最大任务数
 	private int maxCount;
+	//是否限制最大数
+	private boolean isLimitTasks;
+	//是否自动产生测试类
 	private boolean skipTestClass;
+	//是否应用抑制
+	private boolean isApplySuppressions;
+	//Rules Tree
 	private StaticRuleItemBase[] staticRuleItemBases;
+	//Options/General
 	private StaticGeneral general;
+	//Metrics
 	private Metrics metrics;
+	//BugDetection
 	private BugDetectionEntity bugDetection;
 	/**
 	 * 获取启用状态

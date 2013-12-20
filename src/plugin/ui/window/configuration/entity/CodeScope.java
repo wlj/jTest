@@ -38,10 +38,10 @@ public class CodeScope extends ScopeBase {
 		this.authorFilter = authorFilter;
 	}
 
-	@Override
-	public boolean isFilter(String path) {
+	//@Override
+	//public boolean isFilter(String path) {
 		// TODO Auto-generated method stub
-		return false;
-	}
+		//return false;
+	//}
 
 }

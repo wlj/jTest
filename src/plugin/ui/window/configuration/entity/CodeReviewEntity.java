@@ -17,4 +17,6 @@ public class CodeReviewEntity {
 	private Reviewer4CodeReviewEntity[] reviewers;
 	//监视者
 	private Monitor4CodeReview[] monitors;
+	//过滤器
+	private Filter4CodeReviewEntity filters;
 }
