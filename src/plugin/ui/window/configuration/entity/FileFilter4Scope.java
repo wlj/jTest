@@ -7,7 +7,7 @@ import java.util.Date;
  * @author wlj
  *
  */
-public class FileScope extends ScopeBase {
+public class FileFilter4Scope extends ScopeBase {
 	
 	private TimeFilter timeFilter;
 	private AuthorFilter authorFilter;

@@ -4,7 +4,7 @@ package plugin.ui.window.configuration.entity;
  * @author wlj
  *
  */
-public class CodeScope extends ScopeBase {
+public class CodeFilter4Scope extends ScopeBase {
 	
 	private TimeFilter timeFilter;
 	private AuthorFilter authorFilter;
