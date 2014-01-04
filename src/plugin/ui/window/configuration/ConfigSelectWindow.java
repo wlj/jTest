@@ -1,6 +1,5 @@
 package plugin.ui.window.configuration;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
@@ -12,6 +11,9 @@ import org.eclipse.swt.widgets.Composite;
 
 import plugin.ui.window.configuration.configtree.*;
 import plugin.ui.window.configuration.interfaces.*;
+import plugin.ui.window.configuration.persistence.IConfigPersistence;
+import plugin.ui.window.configuration.persistence.PersistenceContext;
+import plugin.ui.window.configuration.persistence.XmlConfigPersistence;
 
 public class ConfigSelectWindow {
 	public Composite configSelectComposite;
@@ -19,7 +21,7 @@ public class ConfigSelectWindow {
 	public Composite actionComposite;
 	ScrolledComposite scrolledComposite;
 	Button btnNew, btnDelete;
-	ConfigTree configTree;
+	ConfigTreeBase configTree;
 
 	public ConfigSelectWindow(Composite parent, int style) {
 		int tempValue = ConstantcLayoutData.botton_margin;
@@ -53,7 +55,9 @@ public class ConfigSelectWindow {
 		scrolledComposite.setExpandVertical(true);
 		// set the config item tree
 		IConfig config=new Config();
-		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,config);
+		IConfigPersistence configPersistence=new XmlConfigPersistence();
+		PersistenceContext persistenceContext=new PersistenceContext(configPersistence);
+		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,config,persistenceContext);
 		
 		scrolledComposite.setContent(configTree.getTree());
 		scrolledComposite.setMinSize(configTree.getTree().computeSize(SWT.DEFAULT, SWT.DEFAULT));

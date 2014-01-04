@@ -1,6 +1,5 @@
 package plugin.ui.window.configuration.persistence;
 
-import com.sun.org.apache.regexp.internal.recompile;
 
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
 import plugin.ui.window.configuration.entity.ConfigEntity;

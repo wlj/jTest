@@ -1,8 +1,5 @@
 package plugin.ui.window.configuration.configtree;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
@@ -19,6 +16,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
 import plugin.ui.window.configuration.entity.ConfigItemEntity;
 import plugin.ui.window.configuration.interfaces.IConfig;
+import plugin.ui.window.configuration.persistence.PersistenceContext;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -27,7 +25,7 @@ public class ConfigTree extends ConfigTreeBase {
 	// configTreeFilePath point to the xml file which describe the configTree's
 	// constructor
 	public static String configTreeFilePath = System.getProperty("user.dir") + "\\src\\plugin\\ui\\window\\configuration\\configuration_list.xml";
-	private Tree tree;
+	
 	
 	public static TreeItem trtmUser;
 	public static TreeItem trtmBuiltin;
@@ -44,9 +42,7 @@ public class ConfigTree extends ConfigTreeBase {
 	
 	private boolean isEditing;
 	
-	public Tree getTree() {
-		return tree;
-	}
+	
 	/**
 	 * 创建文本框
 	 * @param tree
@@ -119,8 +115,8 @@ public class ConfigTree extends ConfigTreeBase {
 	 * @return
 	 */
 	private void newConfig(){
-		TreeItem parentItem = null;
-		parentItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
+		TreeItem parentItem = tree.getItem(0);
+		//parentItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
 		selectedItem=new TreeItem(parentItem,SWT.NONE);
 		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
@@ -152,8 +148,8 @@ public class ConfigTree extends ConfigTreeBase {
 	 * @param style
 	 * @param config
 	 */
-	public ConfigTree(Composite parent, int style,IConfig config) {
-		super(parent, style, config);
+	public ConfigTree(Composite parent, int style,IConfig config,PersistenceContext persistenceContext) {
+		super(parent, style, config,persistenceContext);
 		tree = new Tree(parent, style);
 		//initialize editor tree
 		editor=new TreeEditor(tree);
