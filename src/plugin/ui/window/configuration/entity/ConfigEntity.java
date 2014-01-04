@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ConfigEntity {
 	public String name;
+	public ConfigCategoryEnum configCategory;
 	public ScopeEntity scope;
 	public StaticEntity staticEntity;
 	public GenerationEntity generation;

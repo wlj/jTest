@@ -16,7 +16,6 @@ public abstract class ConfigTreeBase {
 	 * 配置接口
 	 */
 	protected IConfig config;
-	protected PersistenceContext persistenceContext;
 	protected Tree tree;
 	/**
 	 * 构造函数
@@ -24,7 +23,7 @@ public abstract class ConfigTreeBase {
 	 * @param style
 	 * @param config
 	 */
-	public ConfigTreeBase(Composite parent, int style,IConfig config,PersistenceContext persistenceContext){
+	public ConfigTreeBase(Composite parent, int style,IConfig config){
 		if(config==null){
 			throw new  NullPointerException("config cannot be null");
 		}
@@ -33,16 +32,24 @@ public abstract class ConfigTreeBase {
 	public Tree getTree() {
 		return tree;
 	}
-//	/**
-//	 * 添加配置项
-//	 * @return
-//	 */
-//	public abstract boolean Add();
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public abstract boolean Delete();
-//	public abstract boolean Copy();
-//	public abstract boolean SetAsDefault();
+	/**
+	 * 添加配置项
+	 * @return
+	 */
+	public abstract boolean Add();
+	/**
+	 * 删除配置项
+	 * @return
+	 */
+	public abstract boolean Delete();
+	/**
+	 * 复制配置项
+	 * @return
+	 */
+	public abstract boolean Copy();
+	/**
+	 * 设为默认项
+	 * @return
+	 */
+	public abstract boolean SetAsDefault();
 }

@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
+import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.ui.window.configuration.entity.ConfigItemEntity;
 import plugin.ui.window.configuration.interfaces.IConfig;
 import plugin.ui.window.configuration.persistence.PersistenceContext;
@@ -61,7 +62,7 @@ public class ConfigTree extends ConfigTreeBase {
 			@Override
 			public void focusLost(org.eclipse.swt.events.FocusEvent arg0) {
 				// TODO Auto-generated method stub
-				ConfirmEdit();
+				confirmEdit();
 			}
 		};
 		text.addFocusListener(focusListener);
@@ -70,7 +71,7 @@ public class ConfigTree extends ConfigTreeBase {
 	/**
 	 * 确认修改
 	 */
-	private void ConfirmEdit(){
+	private void confirmEdit(){
 		if(!isEditing){
 			return;
 		}
@@ -80,9 +81,9 @@ public class ConfigTree extends ConfigTreeBase {
 		selectedItem=editor.getItem();
 		selectedItem.setText(newConfigName);
 		TreeItem parentItem=selectedItem.getParentItem();
-		ConfigItemEntity configEntity=new ConfigItemEntity();
-		configEntity.setName(newConfigName);
-		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
+		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.name=newConfigName;
+		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		config.EditConfig(configEntity);
 		text.dispose();
 	}
@@ -114,33 +115,35 @@ public class ConfigTree extends ConfigTreeBase {
 	 * 新建配置
 	 * @return
 	 */
-	private void newConfig(){
+	private boolean newConfig(){
 		TreeItem parentItem = tree.getItem(0);
 		//parentItem=selectedItem.getParentItem()==null?selectedItem:selectedItem.getParentItem();
 		selectedItem=new TreeItem(parentItem,SWT.NONE);
 		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 		String newConfigName=selectedItem.getText().trim();
-		ConfigItemEntity configEntity=new ConfigItemEntity();
-		configEntity.setName(newConfigName);
-		configEntity.setConfigCategory(Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText()));
+		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.name=newConfigName;
+		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		config.NewConfig(configEntity);
 		try {
 			beginEdit();
+			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 	/**
 	 * 复制配置项
 	 */
 	private void copyConfig(){
 		
-		ConfigItemEntity configEntity=new ConfigItemEntity();
-		configEntity.setName("副本");
-		configEntity.setConfigCategory(ConfigCategoryEnum.Team);
-		config.CopyConfig(configEntity);
+//		ConfigItemEntity configEntity=new ConfigItemEntity();
+//		configEntity.setName("副本");
+//		configEntity.setConfigCategory(ConfigCategoryEnum.Team);
+//		config.CopyConfig(configEntity);
 	}
 	/**
 	 * 构造方法
@@ -148,8 +151,8 @@ public class ConfigTree extends ConfigTreeBase {
 	 * @param style
 	 * @param config
 	 */
-	public ConfigTree(Composite parent, int style,IConfig config,PersistenceContext persistenceContext) {
-		super(parent, style, config,persistenceContext);
+	public ConfigTree(Composite parent, int style,IConfig config) {
+		super(parent, style, config);
 		tree = new Tree(parent, style);
 		//initialize editor tree
 		editor=new TreeEditor(tree);
@@ -440,19 +443,7 @@ public class ConfigTree extends ConfigTreeBase {
 	 */
 	private  void initMenu(MouseEvent evt) {
 		//只有userDefined和team及其子节点才可以弹出菜单
-		boolean canShowMenu=selectedItem.getText().equals(userDefined)||
-				selectedItem.getText().equals(team)||
-				selectedItem.getParentItem()==null||
-				selectedItem.getParentItem().getText().equals(userDefined)||
-				selectedItem.getParentItem().getText().equals(team);
-		if(canShowMenu){
-			initializeMenu();
-		}
-		else{
-			if(evt.button==3){
-				tree.setMenu(null);
-			}
-		}
+		initializeMenu();
 	}
 	
 	/**
@@ -463,11 +454,31 @@ public class ConfigTree extends ConfigTreeBase {
 		mgr.add(new Action("New"){
 			@Override
 			public void run() {
-				newConfig();
+				Add();
 			}
 		});
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
+	}
+	@Override
+	public boolean Add() {
+		// TODO Auto-generated method stub
+		return newConfig();
+	}
+	@Override
+	public boolean Delete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean Copy() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean SetAsDefault() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

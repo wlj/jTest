@@ -54,10 +54,11 @@ public class ConfigSelectWindow {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		// set the config item tree
-		IConfig config=new Config();
+		
 		IConfigPersistence configPersistence=new XmlConfigPersistence();
 		PersistenceContext persistenceContext=new PersistenceContext(configPersistence);
-		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,config,persistenceContext);
+		IConfig config=new Config(persistenceContext);
+		configTree = new ConfigTree(scrolledComposite, SWT.BORDER,config);
 		
 		scrolledComposite.setContent(configTree.getTree());
 		scrolledComposite.setMinSize(configTree.getTree().computeSize(SWT.DEFAULT, SWT.DEFAULT));
