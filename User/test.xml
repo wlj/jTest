@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configEntity>
+    <name>test</name>
+    <scope>
+        <testMethodsCyclomatic>false</testMethodsCyclomatic>
+        <cyclomaticComplexity>5</cyclomaticComplexity>
+        <deprecatedClassesOrMethods>false</deprecatedClassesOrMethods>
+    </scope>
+</configEntity>
