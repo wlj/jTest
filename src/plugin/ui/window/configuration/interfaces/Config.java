@@ -1,5 +1,8 @@
 package plugin.ui.window.configuration.interfaces;
 
+import java.util.UUID;
+
+import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
 import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.ui.window.configuration.entity.ConfigItemEntity;
 import plugin.ui.window.configuration.persistence.PersistenceContext;
@@ -65,6 +68,12 @@ public class Config implements IConfig {
 		System.out.println("SetDefault");
 		System.out.println(configEntity.configCategory);
 		System.out.println(configEntity.name);
+	}
+
+	@Override
+	public ConfigEntity getConfig(ConfigCategoryEnum categoryEnum,UUID configID) {
+		// TODO Auto-generated method stub
+		return persistenceContext.getConfigEntity(categoryEnum, configID);
 	}
 
 }

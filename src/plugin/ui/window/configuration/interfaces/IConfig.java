@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration.interfaces;
 
+import java.util.UUID;
+
 import plugin.ui.window.configuration.entity.*;
 /**
  * 配置树
@@ -12,6 +14,8 @@ public interface IConfig {
 	 * @param configEntity
 	 */
 	void NewConfig(ConfigEntity configEntity);
+	
+	ConfigEntity getConfig(ConfigCategoryEnum categoryEnum,UUID configID);
 	/**
 	 * 编辑配置项
 	 * @param configEntity

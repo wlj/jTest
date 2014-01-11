@@ -1,5 +1,6 @@
 package plugin.ui.window.configuration.configtree;
 
+import java.io.File;
 import java.util.UUID;
 
 import org.eclipse.jface.action.Action;
@@ -74,8 +75,23 @@ public class ConfigTree extends ConfigTreeBase {
 	 * 初始化树
 	 */
 	private void initTree(){
-		String fileRoot=Const.rootPath+"\\"+ConfigCategoryEnum.User.toString();
 		TreeItem parentItem = tree.getItem(0);
+		String fileRoot=Const.rootPath+"\\"+ConfigCategoryEnum.User.toString();
+		File file = new File(fileRoot);
+		File[] files = file.listFiles();
+		if(files != null){
+			for(File f: files ){
+				String fileName = f.getName().split("\\.")[0];
+				UUID configID = UUID.fromString(fileName);
+				ConfigEntity configEntity = config.getConfig(ConfigCategoryEnum.User, configID);
+				if (configEntity != null){
+					String configName = configEntity.name;
+					TreeItem item = new TreeItem(parentItem, SWT.NONE);
+					item.setText(configName);
+					item.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+				}
+			}
+		}
 	}
 	/**
 	 * 确认修改
@@ -208,6 +224,7 @@ public class ConfigTree extends ConfigTreeBase {
 
 		});
 		contentCreate();
+		initTree();
 	}
 	
 	/**
