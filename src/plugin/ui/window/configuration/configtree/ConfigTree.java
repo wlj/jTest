@@ -72,7 +72,7 @@ public class ConfigTree extends ConfigTreeBase {
 	 * 初始化树
 	 */
 	private void initTree(){
-		
+		String fileRoot=Const.rootPath+"\\"+ConfigCategoryEnum.User.toString();
 	}
 	/**
 	 * 确认修改
