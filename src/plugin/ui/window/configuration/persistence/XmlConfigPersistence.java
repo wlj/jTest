@@ -3,6 +3,7 @@ package plugin.ui.window.configuration.persistence;
 
 
 import java.io.*;
+import java.util.UUID;
 
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
 import plugin.ui.window.configuration.entity.ConfigEntity;
@@ -28,7 +29,7 @@ public class XmlConfigPersistence implements IConfigPersistence {
 		if(path.exists()==false){
 			path.mkdir();
 		}
-		String fileName=configEntity.name+".xml";
+		String fileName=configEntity.id+".xml";
 		File file=new File(path,fileName);
 		try {
 			file.createNewFile();
@@ -60,7 +61,7 @@ public class XmlConfigPersistence implements IConfigPersistence {
 		if(path.exists()==false){
 			path.mkdir();
 		}
-		String fileName=configEntity.name+".xml";
+		String fileName=configEntity.id+".xml";
 		File file=new File(path,fileName);
 		try {
 			file.createNewFile();
@@ -84,9 +85,9 @@ public class XmlConfigPersistence implements IConfigPersistence {
 
 	@Override
 	public ConfigEntity getConfigEntity(ConfigCategoryEnum categoryEnum,
-			String configName) {
+			UUID configId) {
 		// TODO Auto-generated method stub
-		String pathName=usrPath+"\\"+categoryEnum.toString()+"\\"+configName+".xml";
+		String pathName=usrPath+"\\"+categoryEnum.toString()+"\\"+configId+".xml";
 		File file=new File(pathName);
 		if(!file.exists()){
 			return null;
@@ -106,9 +107,9 @@ public class XmlConfigPersistence implements IConfigPersistence {
 	}
 
 	@Override
-	public boolean remove(ConfigCategoryEnum categoryEnum, String configName) {
+	public boolean remove(ConfigCategoryEnum categoryEnum, UUID configId) {
 		// TODO Auto-generated method stub
-		String pathName=usrPath+"\\"+categoryEnum.toString()+"\\"+configName+".xml";
+		String pathName=usrPath+"\\"+categoryEnum.toString()+"\\"+configId+".xml";
 		File file=new File(pathName);
 		if(!file.exists()){
 			return false;

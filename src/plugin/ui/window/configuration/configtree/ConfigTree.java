@@ -69,6 +69,12 @@ public class ConfigTree extends ConfigTreeBase {
 		return text;
 	}
 	/**
+	 * 初始化树
+	 */
+	private void initTree(){
+		
+	}
+	/**
 	 * 确认修改
 	 */
 	private void confirmEdit(){

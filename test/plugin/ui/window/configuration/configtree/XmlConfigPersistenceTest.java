@@ -1,6 +1,9 @@
 package plugin.ui.window.configuration.configtree;
 
 import static org.junit.Assert.*;
+
+import java.util.UUID;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -17,6 +20,7 @@ public class XmlConfigPersistenceTest {
 	public void addTest() {
 		XmlConfigPersistence xmlConfigPersistence=new XmlConfigPersistence();
 		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.id=UUID.randomUUID();
 		configEntity.name="test";
 		configEntity.scope=new ScopeEntity();
 		configEntity.scope.cyclomaticComplexity=5;
@@ -28,8 +32,8 @@ public class XmlConfigPersistenceTest {
 	public void getTest(){
 		XmlConfigPersistence xmlConfigPersistence=new XmlConfigPersistence();
 		ConfigCategoryEnum configCategory=ConfigCategoryEnum.User;
-		String name="test";
-		ConfigEntity configEntity=xmlConfigPersistence.getConfigEntity(configCategory, name);
+		UUID id=UUID.fromString("96eac4f6-63c8-4475-a8b3-67018ebab81e");
+		ConfigEntity configEntity=xmlConfigPersistence.getConfigEntity(configCategory, id);
 		assertNotNull(configEntity);
 		assertEquals("test", configEntity.name);
 	}
@@ -38,8 +42,8 @@ public class XmlConfigPersistenceTest {
 	public void updateTest(){
 		XmlConfigPersistence xmlConfigPersistence=new XmlConfigPersistence();
 		ConfigCategoryEnum configCategory=ConfigCategoryEnum.User;
-		String name="test";
-		ConfigEntity configEntity=xmlConfigPersistence.getConfigEntity(configCategory, name);
+		UUID id=UUID.fromString("96eac4f6-63c8-4475-a8b3-67018ebab81e");
+		ConfigEntity configEntity=xmlConfigPersistence.getConfigEntity(configCategory, id);
 		configEntity.name="test1";
 		boolean result = xmlConfigPersistence.update(configCategory, configEntity);
 		assertTrue(result);
@@ -49,8 +53,8 @@ public class XmlConfigPersistenceTest {
 	public void deleteTest(){
 		XmlConfigPersistence xmlConfigPersistence=new XmlConfigPersistence();
 		ConfigCategoryEnum configCategory=ConfigCategoryEnum.User;
-		String name="test1";
-		boolean result = xmlConfigPersistence.remove(configCategory, name);
+		UUID id=UUID.fromString("96eac4f6-63c8-4475-a8b3-67018ebab81e");
+		boolean result = xmlConfigPersistence.remove(configCategory, id);
 		assertTrue(result);
 	}
 

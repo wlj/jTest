@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration.persistence;
 
+import java.util.UUID;
+
 import plugin.ui.window.configuration.entity.*;
 
 /**
@@ -28,12 +30,13 @@ public interface IConfigPersistence {
 	 * @param configName 配置名称
 	 * @return
 	 */
-	ConfigEntity getConfigEntity(ConfigCategoryEnum categoryEnum,String configName);
+	ConfigEntity getConfigEntity(ConfigCategoryEnum categoryEnum,UUID configId);
 	/**
 	 * 删除配置文件
 	 * @param categoryEnum 配置分类
 	 * @param configName 配置名称
 	 * @return
 	 */
-	boolean remove(ConfigCategoryEnum categoryEnum,String configName);
+	boolean remove(ConfigCategoryEnum categoryEnum,UUID configId);
+	
 }

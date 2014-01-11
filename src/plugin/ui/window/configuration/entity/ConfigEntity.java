@@ -1,6 +1,10 @@
 package plugin.ui.window.configuration.entity;
 
+import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.eclipse.swt.internal.ole.win32.GUID;
 
 /**
  * 配置实体类
@@ -9,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class ConfigEntity {
+	public UUID id;
 	public String name;
 	public ConfigCategoryEnum configCategory;
 	public ScopeEntity scope;

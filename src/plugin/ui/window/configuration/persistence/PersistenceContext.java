@@ -1,6 +1,8 @@
 package plugin.ui.window.configuration.persistence;
 
 
+import java.util.UUID;
+
 import plugin.ui.window.configuration.entity.ConfigCategoryEnum;
 import plugin.ui.window.configuration.entity.ConfigEntity;
 
@@ -39,8 +41,8 @@ public class PersistenceContext {
 	 * @param configName 配置名称
 	 * @return
 	 */
-	public ConfigEntity getConfigEntity(ConfigCategoryEnum categoryEnum,String configName){
-		return this.configPersistence.getConfigEntity(categoryEnum, configName);
+	public ConfigEntity getConfigEntity(ConfigCategoryEnum categoryEnum,UUID configId){
+		return this.configPersistence.getConfigEntity(categoryEnum, configId);
 	}
 	/**
 	 * 删除一个配置实体
