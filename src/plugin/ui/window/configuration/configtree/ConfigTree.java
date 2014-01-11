@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration.configtree;
 
+import java.util.UUID;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
@@ -130,6 +132,7 @@ public class ConfigTree extends ConfigTreeBase {
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 		String newConfigName=selectedItem.getText().trim();
 		ConfigEntity configEntity=new ConfigEntity();
+		configEntity.id=UUID.randomUUID();
 		configEntity.name=newConfigName;
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		config.NewConfig(configEntity);
