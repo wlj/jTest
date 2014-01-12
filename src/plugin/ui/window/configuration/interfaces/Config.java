@@ -40,11 +40,10 @@ public class Config implements IConfig {
 	}
 
 	@Override
-	public void deleteConfig(ConfigEntity configEntity) {
+	public void deleteConfig(ConfigCategoryEnum categoryEnum,String configID) {
 		// TODO Auto-generated method stub
-		System.out.println("Delete");
-		System.out.println(configEntity.configCategory);
-		System.out.println(configEntity.name);
+
+		persistenceContext.remove(categoryEnum, configID);
 
 	}
 

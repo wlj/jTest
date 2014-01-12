@@ -98,6 +98,7 @@ public class XmlConfigPersistence implements IConfigPersistence {
 			JAXBContext ctx = JAXBContext.newInstance(ConfigEntity.class);
 			Unmarshaller um = ctx.createUnmarshaller();
 			ConfigEntity configEntity = (ConfigEntity) um.unmarshal(new StringReader(content));
+			is.close();
 			return configEntity;
 		} catch (IOException | JAXBException e) {
 			// TODO Auto-generated catch block

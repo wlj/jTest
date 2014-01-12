@@ -30,7 +30,6 @@ public class ConfigTree extends ConfigTreeBase {
 	// constructor
 	public static String configTreeFilePath = System.getProperty("user.dir") + "\\src\\plugin\\ui\\window\\configuration\\configuration_list.xml";
 	
-	
 	public static TreeItem trtmUser;
 	public static TreeItem trtmBuiltin;
 	public static TreeItem trtmTeam;
@@ -186,6 +185,17 @@ public class ConfigTree extends ConfigTreeBase {
 		
 		return true;	
 	}
+	
+	/**
+	 * 删除配置项
+	 */
+	private boolean deleteConfig(){
+		String sourceID = selectedItem.getData().toString();
+		config.deleteConfig(ConfigCategoryEnum.User, sourceID);
+		selectedItem.dispose();
+		return true;	
+	}
+	
 	/**
 	 * 构造方法
 	 * @param parent
@@ -505,6 +515,12 @@ public class ConfigTree extends ConfigTreeBase {
 				Copy();
 			}
 		});
+		mgr.add(new Action("Delete"){
+			@Override
+			public void run() {
+				Delete();
+			}
+		});
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
 	}
@@ -516,7 +532,7 @@ public class ConfigTree extends ConfigTreeBase {
 	@Override
 	public boolean Delete() {
 		// TODO Auto-generated method stub
-		return false;
+		return deleteConfig();
 	}
 	@Override
 	public boolean Copy() {

@@ -31,7 +31,7 @@ public interface IConfig {
 	 * 删除配置项
 	 * @param configEntity
 	 */
-	void deleteConfig(ConfigEntity configEntity);
+	void deleteConfig(ConfigCategoryEnum categoryEnum,String configID);
 	/**
 	 * 将指定配置设置默认
 	 * @param configEntity
