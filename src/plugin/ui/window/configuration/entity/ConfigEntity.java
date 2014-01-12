@@ -12,7 +12,7 @@ import org.eclipse.swt.internal.ole.win32.GUID;
  *
  */
 @XmlRootElement
-public class ConfigEntity {
+public class ConfigEntity implements Cloneable{
 	public UUID id;
 	public String name;
 	public ConfigCategoryEnum configCategory;
@@ -23,4 +23,16 @@ public class ConfigEntity {
 	public CommonEntity common;
 	public CodeReviewEntity codeReview;
 	public GoalEntity goal;
+	
+	@Override
+	public ConfigEntity clone(){
+		ConfigEntity configEntity = null;
+		try {
+			configEntity = (ConfigEntity) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return configEntity;
+	}
 }

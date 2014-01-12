@@ -20,28 +20,19 @@ public class Config implements IConfig {
 	}
 	
 	@Override
-	public void NewConfig(ConfigEntity configEntity) {
+	public void newConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
 		persistenceContext.add(configEntity.configCategory, configEntity);
 	}
 
 	@Override
-	public void EditConfig(ConfigEntity configEntity) {
+	public void editConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
 		persistenceContext.update(configEntity.configCategory, configEntity);
 	}
 
 	@Override
-	public void CopyConfig(ConfigEntity configEntity) {
-		// TODO Auto-generated method stub
-		System.out.println("Copy");
-		System.out.println(configEntity.configCategory);
-		System.out.println(configEntity.name);
-
-	}
-
-	@Override
-	public void ExportConfig(ConfigEntity configEntity) {
+	public void exportConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
 		System.out.println("Export");
 		System.out.println(configEntity.configCategory);
@@ -49,7 +40,7 @@ public class Config implements IConfig {
 	}
 
 	@Override
-	public void DeleteConfig(ConfigEntity configEntity) {
+	public void deleteConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
 		System.out.println("Delete");
 		System.out.println(configEntity.configCategory);

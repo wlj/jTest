@@ -13,29 +13,25 @@ public interface IConfig {
 	 * 新建配置项
 	 * @param configEntity
 	 */
-	void NewConfig(ConfigEntity configEntity);
+	void newConfig(ConfigEntity configEntity);
 	
 	ConfigEntity getConfig(ConfigCategoryEnum categoryEnum,UUID configID);
 	/**
 	 * 编辑配置项
 	 * @param configEntity
 	 */
-	void EditConfig(ConfigEntity configEntity);
-	/**
-	 * 复制
-	 * @param configEntity
-	 */
-	void CopyConfig(ConfigEntity configEntity);
+	void editConfig(ConfigEntity configEntity);
+	
 	/**
 	 * 导出
 	 * @param configEntity
 	 */
-	void ExportConfig(ConfigEntity configEntity);
+	void exportConfig(ConfigEntity configEntity);
 	/**
 	 * 删除配置项
 	 * @param configEntity
 	 */
-	void DeleteConfig(ConfigEntity configEntity);
+	void deleteConfig(ConfigEntity configEntity);
 	/**
 	 * 将指定配置设置默认
 	 * @param configEntity

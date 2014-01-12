@@ -112,7 +112,7 @@ public class ConfigTree extends ConfigTreeBase {
 		
 		configEntity.name=newConfigName;
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
-		config.EditConfig(configEntity);
+		config.editConfig(configEntity);
 		text.dispose();
 	}
 	/**
@@ -156,7 +156,7 @@ public class ConfigTree extends ConfigTreeBase {
 		configEntity.name=newConfigName;
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		selectedItem.setData(configEntity.id);
-		config.NewConfig(configEntity);
+		config.newConfig(configEntity);
 		try {
 			beginEdit();
 			return true;
@@ -169,12 +169,22 @@ public class ConfigTree extends ConfigTreeBase {
 	/**
 	 * 复制配置项
 	 */
-	private void copyConfig(){
+	private boolean copyConfig(){
+		String sourceID = selectedItem.getData().toString();
+		UUID configID = UUID.fromString(sourceID);
+		ConfigEntity configEntity = config.getConfig(ConfigCategoryEnum.User, configID);
+		ConfigEntity cpConfigEntity = configEntity.clone();
+		cpConfigEntity.id = UUID.randomUUID();
+		cpConfigEntity.name = configEntity.name + " 副本"+getNewConfigIndex(configEntity.name + " 副本");
 		
-//		ConfigItemEntity configEntity=new ConfigItemEntity();
-//		configEntity.setName("副本");
-//		configEntity.setConfigCategory(ConfigCategoryEnum.Team);
-//		config.CopyConfig(configEntity);
+		TreeItem parentItem = tree.getItem(0);
+		TreeItem copyTreeItem = new TreeItem(parentItem,SWT.NONE);
+		copyTreeItem.setText(cpConfigEntity.name);
+		copyTreeItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+		
+		config.newConfig(cpConfigEntity);
+		
+		return true;	
 	}
 	/**
 	 * 构造方法
@@ -489,6 +499,12 @@ public class ConfigTree extends ConfigTreeBase {
 				Add();
 			}
 		});
+		mgr.add(new Action("Copy"){
+			@Override
+			public void run() {
+				Copy();
+			}
+		});
 		Menu menu = mgr.createContextMenu(tree);
 		tree.setMenu(menu);
 	}
@@ -505,7 +521,8 @@ public class ConfigTree extends ConfigTreeBase {
 	@Override
 	public boolean Copy() {
 		// TODO Auto-generated method stub
-		return false;
+		
+		return copyConfig();
 	}
 	@Override
 	public boolean SetAsDefault() {
