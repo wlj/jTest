@@ -22,18 +22,13 @@ public class Config implements IConfig {
 	@Override
 	public void NewConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
-		System.out.println("New");
-		System.out.println(configEntity.configCategory);
-		System.out.println(configEntity.name);
 		persistenceContext.add(configEntity.configCategory, configEntity);
 	}
 
 	@Override
 	public void EditConfig(ConfigEntity configEntity) {
 		// TODO Auto-generated method stub
-		System.out.println("Edit");
-		System.out.println(configEntity.configCategory);
-		System.out.println(configEntity.name);
+		persistenceContext.update(configEntity.configCategory, configEntity);
 	}
 
 	@Override

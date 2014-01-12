@@ -88,6 +88,7 @@ public class ConfigTree extends ConfigTreeBase {
 					String configName = configEntity.name;
 					TreeItem item = new TreeItem(parentItem, SWT.NONE);
 					item.setText(configName);
+					item.setData(configEntity.id);
 					item.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 				}
 			}
@@ -105,8 +106,10 @@ public class ConfigTree extends ConfigTreeBase {
 		String newConfigName=text.getText().trim();
 		selectedItem=editor.getItem();
 		selectedItem.setText(newConfigName);
+		UUID configID = UUID.fromString(selectedItem.getData().toString());
+		ConfigEntity configEntity = config.getConfig(ConfigCategoryEnum.User, configID);
 		TreeItem parentItem=selectedItem.getParentItem();
-		ConfigEntity configEntity=new ConfigEntity();
+		
 		configEntity.name=newConfigName;
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		config.EditConfig(configEntity);
@@ -146,11 +149,13 @@ public class ConfigTree extends ConfigTreeBase {
 		selectedItem=new TreeItem(parentItem,SWT.NONE);
 		selectedItem.setText(newPrefix+" "+getNewConfigIndex(newPrefix));
 		selectedItem.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+		
 		String newConfigName=selectedItem.getText().trim();
 		ConfigEntity configEntity=new ConfigEntity();
 		configEntity.id=UUID.randomUUID();
 		configEntity.name=newConfigName;
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
+		selectedItem.setData(configEntity.id);
 		config.NewConfig(configEntity);
 		try {
 			beginEdit();
