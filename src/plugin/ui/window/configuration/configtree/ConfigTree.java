@@ -190,6 +190,10 @@ public class ConfigTree extends ConfigTreeBase {
 	 * 删除配置项
 	 */
 	private boolean deleteConfig(){
+		TreeItem selectParentItem = selectedItem.getParentItem();
+		if(selectParentItem==null || !("User".equals(selectParentItem.getText()))){
+			return false;
+		}
 		String sourceID = selectedItem.getData().toString();
 		config.deleteConfig(ConfigCategoryEnum.User, sourceID);
 		selectedItem.dispose();
@@ -489,6 +493,9 @@ public class ConfigTree extends ConfigTreeBase {
 		trtmRunStaticAnalysisAndTests.setText("Run Static Analysis and Unit Tests");
 
 	}
+	
+	
+	
 	/**
 	 * 初始化菜单
 	 * @param evt

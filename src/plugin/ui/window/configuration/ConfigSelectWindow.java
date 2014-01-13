@@ -2,6 +2,8 @@ package plugin.ui.window.configuration;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
@@ -39,9 +41,58 @@ public class ConfigSelectWindow {
 
 		btnNew = new Button(actionComposite, SWT.NONE);
 		btnNew.setText("New");
+		btnNew.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.button == 1){
+					configTree.Add();
+				}
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		
 
 		btnDelete = new Button(actionComposite, SWT.NONE);
 		btnDelete.setText("Delete");
+		btnDelete.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.button == 1){
+					
+						configTree.Delete();
+					
+				}
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		// set treeComposite
 		scrolledComposite = new ScrolledComposite(configSelectComposite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
@@ -64,5 +115,7 @@ public class ConfigSelectWindow {
 		scrolledComposite.setMinSize(configTree.getTree().computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		
 	}
+	
+	
 
 }

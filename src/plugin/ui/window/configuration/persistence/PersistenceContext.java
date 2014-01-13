@@ -51,6 +51,6 @@ public class PersistenceContext {
 	 * @return
 	 */
 	public boolean remove(ConfigCategoryEnum categoryEnum,String configName){
-		return this.remove(categoryEnum, configName);
+		return this.configPersistence.remove(categoryEnum, UUID.fromString(configName));
 	}
 }
