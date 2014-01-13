@@ -75,8 +75,11 @@ public class ConfigurationWindow {
 		fd_centerSashForm.right = new FormAttachment(100);
 		centerSashFormComposite.setLayoutData(fd_centerSashForm);
 		configListTreeComposite = new ConfigSelectWindow(centerSashFormComposite, SWT.None);
+		
 		detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, "a");
+		configListTreeComposite.configTree.addObserver(detailConfigComposite.oneConfigSelectedComposite);
 		centerSashFormComposite.setWeights(compositePortion);
+		
 	}
 
 }

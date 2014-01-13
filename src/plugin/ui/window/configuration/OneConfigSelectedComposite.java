@@ -1,5 +1,8 @@
 package plugin.ui.window.configuration;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FormAttachment;
@@ -16,11 +19,14 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.configtree.ConfigTree;
+import plugin.ui.window.configuration.configtree.ConfigTreeBase;
 import plugin.ui.window.configuration.detailtabs.DetailTabFolder;
+import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
-public class OneConfigSelectedComposite extends Composite {
+public class OneConfigSelectedComposite extends Composite implements Observer {
 	Composite nameparentComposite;
 	Composite rightActionComposite;
 	DetailTabFolder detailTabFolder;
@@ -64,7 +70,7 @@ public class OneConfigSelectedComposite extends Composite {
 		nameparentComposite.setLayout(new FormLayout());
 
 		lblName = new Label(nameparentComposite, SWT.CENTER);
-		lblName.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		lblName.setFont(SWTResourceManager.getFont("Î¢ï¿½ï¿½ï¿½Åºï¿½", 10, SWT.NORMAL));
 		FormData fd_lblName = new FormData();
 		fd_lblName.width = 60;
 		fd_lblName.height = 25;
@@ -74,7 +80,7 @@ public class OneConfigSelectedComposite extends Composite {
 		lblName.setText("Name");
 
 		lblParent = new Label(nameparentComposite, SWT.CENTER);
-		lblParent.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		lblParent.setFont(SWTResourceManager.getFont("Î¢ï¿½ï¿½ï¿½Åºï¿½", 10, SWT.NORMAL));
 		FormData fd_lblParent = new FormData();
 		fd_lblParent.width = 60;
 		fd_lblParent.height = 25;
@@ -133,6 +139,15 @@ public class OneConfigSelectedComposite extends Composite {
 			btnRevert.setLayoutData(fd_btnRevert);
 			btnRevert.setText("Revert");
 		}
+	}
+
+	@Override
+	public void update(Observable configTree, Object arg) {
+		// TODO Auto-generated method stub
+		ConfigTreeBase tree = (ConfigTreeBase)configTree;
+		ConfigEntity entity=tree.getSelectedConfigEntity();
+		this.textName.setText(entity.name);
+		this.textParent.setText(entity.configCategory.toString());
 	}
 
 }
