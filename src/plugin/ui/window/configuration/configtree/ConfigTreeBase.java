@@ -1,8 +1,11 @@
 package plugin.ui.window.configuration.configtree;
 
+import java.util.Observable;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
 
+import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.ui.window.configuration.interfaces.IConfig;
 import plugin.ui.window.configuration.persistence.PersistenceContext;
 
@@ -11,7 +14,7 @@ import plugin.ui.window.configuration.persistence.PersistenceContext;
  * @author wlj
  *
  */
-public abstract class ConfigTreeBase {
+public abstract class ConfigTreeBase extends Observable {
 	/**
 	 * 配置接口
 	 */
@@ -52,4 +55,9 @@ public abstract class ConfigTreeBase {
 	 * @return
 	 */
 	public abstract boolean SetAsDefault();
+	/**
+	 * 获取选中的配置文件
+	 * @return
+	 */
+	public abstract ConfigEntity getSelectedConfigEntity();
 }

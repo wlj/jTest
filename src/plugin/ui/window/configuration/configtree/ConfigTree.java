@@ -113,6 +113,7 @@ public class ConfigTree extends ConfigTreeBase {
 		configEntity.configCategory = Enum.valueOf(ConfigCategoryEnum.class, parentItem.getText());
 		config.editConfig(configEntity);
 		text.dispose();
+		
 	}
 	/**
 	 * 获取新建节点的索引号
@@ -245,6 +246,8 @@ public class ConfigTree extends ConfigTreeBase {
 				if(isTreeitem){
 					selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 					initMenu(evt);
+					setChanged();
+					notifyObservers();
 				}
 				
 				///System.out.println(selectedItem.getText());
@@ -551,6 +554,14 @@ public class ConfigTree extends ConfigTreeBase {
 	public boolean SetAsDefault() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public ConfigEntity getSelectedConfigEntity() {
+		// TODO Auto-generated method stub
+		String sourceID = selectedItem.getData().toString();
+		UUID configID = UUID.fromString(sourceID);
+		ConfigEntity configEntity = config.getConfig(ConfigCategoryEnum.User, configID);
+		return configEntity;
 	}
 
 }
