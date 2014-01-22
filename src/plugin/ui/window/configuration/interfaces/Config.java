@@ -58,7 +58,13 @@ public class Config implements IConfig {
 	@Override
 	public ConfigEntity getConfig(ConfigCategoryEnum categoryEnum,UUID configID) {
 		// TODO Auto-generated method stub
-		return persistenceContext.getConfigEntity(categoryEnum, configID);
+		try{
+			return persistenceContext.getConfigEntity(categoryEnum, configID);
+		}catch(NullPointerException ex){
+			System.err.println("没有找到配置文件");
+			return null;
+		}
+		
 	}
 
 }

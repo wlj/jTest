@@ -146,6 +146,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 		// TODO Auto-generated method stub
 		ConfigTreeBase tree = (ConfigTreeBase)configTree;
 		ConfigEntity entity=tree.getSelectedConfigEntity();
+		
 		this.textName.setText(entity.name);
 		this.textParent.setText(entity.configCategory.toString());
 	}

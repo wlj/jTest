@@ -246,11 +246,11 @@ public class ConfigTree extends ConfigTreeBase {
 				if(isTreeitem){
 					selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 					initMenu(evt);
-					setChanged();
-					notifyObservers();
+					if(selectedItem.getParentItem()!=null){
+						setChanged();
+						notifyObservers();
+					}
 				}
-				
-				///System.out.println(selectedItem.getText());
 				
 			}
 
@@ -487,9 +487,9 @@ public class ConfigTree extends ConfigTreeBase {
 		trtmCodeSmellstdd.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
 		trtmCodeSmellstdd.setText("Code Smells (TDD Standards)");
 		
-		TreeItem trtmDemoConfiguration = new TreeItem(trtmUser, SWT.NONE);
-		trtmDemoConfiguration.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
-		trtmDemoConfiguration.setText("Demo Configuration");
+//		TreeItem trtmDemoConfiguration = new TreeItem(trtmUser, SWT.NONE);
+//		trtmDemoConfiguration.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
+//		trtmDemoConfiguration.setText("Demo Configuration");
 		
 		TreeItem trtmRunStaticAnalysisAndTests = new TreeItem(trtmBuiltin, SWT.NONE);
 		trtmRunStaticAnalysisAndTests.setImage(SWTResourceManager.getImage(Const.HYPERCUBE_ICON_PATH));
