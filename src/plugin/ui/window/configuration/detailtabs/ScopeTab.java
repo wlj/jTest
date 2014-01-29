@@ -7,6 +7,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -16,6 +17,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.FileFilter4Scope;
+import plugin.ui.window.configuration.entity.TimeFilter;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -26,6 +29,16 @@ public class ScopeTab {
 	private Text text_authorNameInLineFilter;
 	private Text text_minMethodNum;
 	private Table tableMethodsPattern;
+	
+	public Button btnNoTimeFilters;
+	public Button btnSinceDate;
+	public DateTime sinceDateTime;
+	public Button btnTileDate;
+	public DateTime tileDateTime;
+	public Button btnTestFilesInLast;
+	public Button btnTestLocalFile;
+	public Button btnNoAuthorFilters;
+	public Button btnFilesAuthoredByUser;
 
 	public ScopeTab(TabFolder tabFolder, int style) {
 		tbtmScope = new TabItem(tabFolder, style);
@@ -36,7 +49,7 @@ public class ScopeTab {
 		tbtmScope.setControl(scrolledCompositeScope);
 		scrolledCompositeScope.setExpandHorizontal(true);
 		scrolledCompositeScope.setExpandVertical(true);
-
+		
 		Composite compositeInScrolledCompositeScope = new Composite(scrolledCompositeScope, SWT.NONE);
 		compositeInScrolledCompositeScope.setLayout(new FormLayout());
 
@@ -46,7 +59,7 @@ public class ScopeTab {
 		fd_tabFolderInScope.top = new FormAttachment(0, 10);
 		fd_tabFolderInScope.left = new FormAttachment(0, 10);
 		tabFolderInScope.setLayoutData(fd_tabFolderInScope);
-
+		
 		// add and set File Filter in Scope
 		{
 			TabItem tbtmFileFilter = new TabItem(tabFolderInScope, SWT.NONE);
@@ -65,38 +78,38 @@ public class ScopeTab {
 			fd_grpTimeOptions.top = new FormAttachment(0, 5);
 			grpTimeOptions.setLayoutData(fd_grpTimeOptions);
 
-			Button btnNoTimeFilters = new Button(grpTimeOptions, SWT.RADIO);
+			btnNoTimeFilters = new Button(grpTimeOptions, SWT.RADIO);
 			FormData fd_btnNoTimeFilters = new FormData();
 			fd_btnNoTimeFilters.top = new FormAttachment(0, 10);
 			btnNoTimeFilters.setLayoutData(fd_btnNoTimeFilters);
 			btnNoTimeFilters.setText("No time filters");
 
-			Button btnSinceDate = new Button(grpTimeOptions, SWT.RADIO);
+			btnSinceDate = new Button(grpTimeOptions, SWT.RADIO);
 			FormData fd_btnSinceDate = new FormData();
 			fd_btnSinceDate.top = new FormAttachment(btnNoTimeFilters, 5);
 			btnSinceDate.setLayoutData(fd_btnSinceDate);
 			btnSinceDate.setText("Test only files added or modified since the cutoff date");
 
-			DateTime sinceDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
+			sinceDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
 			FormData fd_dateTime = new FormData();
 			fd_dateTime.left = new FormAttachment(btnSinceDate, 15);
 			fd_dateTime.top = new FormAttachment(btnNoTimeFilters);
 			sinceDateTime.setLayoutData(fd_dateTime);
 
-			Button btnTileDate = new Button(grpTimeOptions, SWT.CHECK);
+			btnTileDate = new Button(grpTimeOptions, SWT.CHECK);
 			FormData fd_btnTileDate = new FormData();
 			fd_btnTileDate.top = new FormAttachment(sinceDateTime, 5);
 			fd_btnTileDate.left = new FormAttachment(0, 15);
 			btnTileDate.setLayoutData(fd_btnTileDate);
 			btnTileDate.setText("and added or modified before (now when disabled)");
 
-			DateTime tileDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
+			tileDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
 			FormData fd_TileDataTime = new FormData();
 			fd_TileDataTime.top = new FormAttachment(btnSinceDate, 3);
 			fd_TileDataTime.left = new FormAttachment(sinceDateTime, 0, SWT.LEFT);
 			tileDateTime.setLayoutData(fd_TileDataTime);
 
-			Button btnTestFilesInLast = new Button(grpTimeOptions, SWT.RADIO);
+			btnTestFilesInLast = new Button(grpTimeOptions, SWT.RADIO);
 			FormData fd_btnTestFilesInLast = new FormData();
 			fd_btnTestFilesInLast.top = new FormAttachment(btnTileDate, 5);
 			btnTestFilesInLast.setLayoutData(fd_btnTestFilesInLast);
@@ -115,7 +128,7 @@ public class ScopeTab {
 			lblDays.setLayoutData(fd_lblDays);
 			lblDays.setText("days");
 
-			Button btnTestLocalFile = new Button(grpTimeOptions, SWT.RADIO);
+			btnTestLocalFile = new Button(grpTimeOptions, SWT.RADIO);
 			FormData fd_btnTestLocalFile = new FormData();
 			fd_btnTestLocalFile.bottom = new FormAttachment(100, -5);
 			fd_btnTestLocalFile.top = new FormAttachment(btnTestFilesInLast, 5);
@@ -132,13 +145,13 @@ public class ScopeTab {
 			fd_grpAuthorOptions.top = new FormAttachment(grpTimeOptions, 10);
 			grpAuthorOptions.setLayoutData(fd_grpAuthorOptions);
 
-			Button btnNoAuthorFilters = new Button(grpAuthorOptions, SWT.RADIO);
+			btnNoAuthorFilters = new Button(grpAuthorOptions, SWT.RADIO);
 			FormData fd_btnNoAuthorFilters = new FormData();
 			fd_btnNoAuthorFilters.top = new FormAttachment(0, 10);
 			btnNoAuthorFilters.setLayoutData(fd_btnNoAuthorFilters);
 			btnNoAuthorFilters.setText("No author filters");
 
-			Button btnFilesAuthoredByUser = new Button(grpAuthorOptions, SWT.RADIO);
+			btnFilesAuthoredByUser = new Button(grpAuthorOptions, SWT.RADIO);
 			FormData fd_btnRadioButton = new FormData();
 			fd_btnRadioButton.top = new FormAttachment(btnNoAuthorFilters, 5);
 			fd_btnRadioButton.bottom = new FormAttachment(100, -5);
@@ -323,7 +336,31 @@ public class ScopeTab {
 			scrolledCompositeScope.setMinSize(compositeInScrolledCompositeScope.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		}
 	}
-
+    /**
+     * 设置选中的值
+     * @param fileFiler
+     */
+	public void setSelected(FileFilter4Scope fileFiler){
+		
+		if(fileFiler!=null && fileFiler.timeFilter.timeOption==1){
+			btnNoTimeFilters.setSelection(true);
+		}
+		
+	}
+	/**
+	 * 获取过滤选项
+	 * @return
+	 */
+	public FileFilter4Scope getFileFilter(){
+		FileFilter4Scope fileFilter4Scope = new FileFilter4Scope();
+		TimeFilter timeFilter=new TimeFilter();
+		if(this.btnNoTimeFilters.getSelection()){
+			timeFilter.timeOption=1;
+		}
+		fileFilter4Scope.timeFilter=timeFilter;
+		return fileFilter4Scope;
+	}
+	
 	public TabItem getTabItem(){
 		return this.tbtmScope;
 	}

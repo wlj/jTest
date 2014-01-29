@@ -5,6 +5,8 @@ import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -38,6 +40,8 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 	private Button btnDisconnect;
 	private Button btnApply;
 	private Button btnRevert;
+	private ConfigEntity entity;
+	private ConfigTreeBase tree;
 	// for analysis tabs
 	private TabFolder tabFolder;
 
@@ -131,6 +135,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 			fd_btnApply.right = new FormAttachment(100, -5);
 			btnApply.setLayoutData(fd_btnApply);
 			btnApply.setText("Apply");
+			btnApply_OnClick();
 
 			btnRevert = new Button(rightActionComposite, SWT.NONE);
 			FormData fd_btnRevert = new FormData();
@@ -140,12 +145,34 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 			btnRevert.setText("Revert");
 		}
 	}
-
+	public void btnApply_OnClick(){
+		this.btnApply.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("apply");
+				entity.scope.fileFilters = detailTabFolder.scopeTab.getFileFilter();
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
 	@Override
 	public void update(Observable configTree, Object arg) {
 		// TODO Auto-generated method stub
 		ConfigTreeBase tree = (ConfigTreeBase)configTree;
-		ConfigEntity entity=tree.getSelectedConfigEntity();
+		entity=tree.getSelectedConfigEntity();
 		
 		this.textName.setText(entity.name);
 		this.textParent.setText(entity.configCategory.toString());

@@ -9,45 +9,6 @@ import java.util.Date;
  */
 public class FileFilter4Scope extends ScopeBase {
 	
-	private TimeFilter timeFilter;
-	private AuthorFilter authorFilter;
-	/**
-	 * 获取时间过滤选项
-	 * @return
-	 */
-	public TimeFilter getTimeFilter() {
-		return timeFilter;
-	}
-	/**
-	 * 设置时间过滤选项
-	 * @param timeFilter
-	 */
-	public void setTimeFilter(TimeFilter timeFilter) {
-		this.timeFilter = timeFilter;
-	}
-	
-	/**
-	 * 获取作者过滤选项
-	 * @return
-	 */
-	public AuthorFilter getAuthorFilter() {
-		return authorFilter;
-	}
-	/**
-	 * 设置作者过滤选项设置
-	 * @param authorFilter
-	 */
-	public void setAuthorFilter(AuthorFilter authorFilter) {
-		this.authorFilter = authorFilter;
-	}
-	
-	/**
-	 * 判断是否已过虑
-	 */
-	//@Override
-	//public boolean isFilter(String path) {
-		// TODO Auto-generated method stub
-		//return false;
-	//}
-
+	public TimeFilter timeFilter;
+	public AuthorFilter authorFilter;
 }

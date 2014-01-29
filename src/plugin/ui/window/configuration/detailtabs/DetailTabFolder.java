@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.TabItem;
 public class DetailTabFolder {
 	public TabFolder tabFolder;
 	
-	ScopeTab scopeTab;
+	public ScopeTab scopeTab;
 	StaticTab staticTab;
 	GenerationTab generationTab;
 	ExecutionTab executionTab;
@@ -29,6 +29,7 @@ public class DetailTabFolder {
 		tabFolder.setLayoutData(fd_tabFolder);
 		// add tab items
 		scopeTab = new ScopeTab(tabFolder, SWT.None);
+		scopeTab.setSelected(null);
 		staticTab = new StaticTab(tabFolder, SWT.None);
 		generationTab = new GenerationTab(tabFolder, SWT.None);
 		executionTab = new ExecutionTab(tabFolder, SWT.None);
