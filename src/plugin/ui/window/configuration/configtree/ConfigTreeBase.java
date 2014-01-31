@@ -18,7 +18,7 @@ public abstract class ConfigTreeBase extends Observable {
 	/**
 	 * 配置接口
 	 */
-	protected IConfig config;
+	public IConfig config;
 	protected Tree tree;
 	/**
 	 * 构造函数
@@ -50,6 +50,8 @@ public abstract class ConfigTreeBase extends Observable {
 	 * @return
 	 */
 	public abstract boolean Copy();
+	
+	///public abstract boolean Update();
 	/**
 	 * 设为默认项
 	 * @return

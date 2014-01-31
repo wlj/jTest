@@ -158,7 +158,8 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("apply");
-				entity.scope.fileFilters = detailTabFolder.scopeTab.getFileFilter();
+				entity.scope = detailTabFolder.scopeTab.getScope();
+				tree.config.editConfig(entity);
 			}
 			
 			@Override
@@ -171,7 +172,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 	@Override
 	public void update(Observable configTree, Object arg) {
 		// TODO Auto-generated method stub
-		ConfigTreeBase tree = (ConfigTreeBase)configTree;
+		tree = (ConfigTreeBase)configTree;
 		entity=tree.getSelectedConfigEntity();
 		
 		this.textName.setText(entity.name);

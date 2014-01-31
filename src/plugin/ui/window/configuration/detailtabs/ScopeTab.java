@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import plugin.ui.window.configuration.entity.FileFilter4Scope;
+import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.ui.window.configuration.entity.TimeFilter;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
@@ -351,14 +352,16 @@ public class ScopeTab {
 	 * 获取过滤选项
 	 * @return
 	 */
-	public FileFilter4Scope getFileFilter(){
+	public ScopeEntity getScope(){
+		ScopeEntity scope=new ScopeEntity();
 		FileFilter4Scope fileFilter4Scope = new FileFilter4Scope();
 		TimeFilter timeFilter=new TimeFilter();
 		if(this.btnNoTimeFilters.getSelection()){
 			timeFilter.timeOption=1;
 		}
 		fileFilter4Scope.timeFilter=timeFilter;
-		return fileFilter4Scope;
+		scope.fileFilters=fileFilter4Scope;
+		return scope;
 	}
 	
 	public TabItem getTabItem(){
