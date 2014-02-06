@@ -1,5 +1,8 @@
 package plugin.ui.window.configuration.detailtabs;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FormAttachment;
@@ -359,7 +362,26 @@ public class ScopeTab {
 		if(this.btnNoTimeFilters.getSelection()){
 			timeFilter.timeOption=1;
 		}
+		if(this.btnSinceDate.getSelection()){
+			timeFilter.timeOption=2;
+			sinceDateTime.setEnabled(true);
+			timeFilter.startDate.set(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay());
+			btnTileDate.setEnabled(true);
+			if(btnTileDate.getSelection()){
+				tileDateTime.setEnabled(true);
+				timeFilter.endDate.set(tileDateTime.getYear(), tileDateTime.getMonth(), tileDateTime.getMonth());
+			}
+		}
+		if(btnTestFilesInLast.getSelection()){
+			text_lastDaysInLineFilter.setEnabled(true);
+			timeFilter.timeOption=3;
+			timeFilter.nearestDays=Integer.parseInt(this.text_authorNameInLineFilter.getText());
+		}
+		if(btnTestLocalFile.getSelection()){
+			timeFilter.timeOption=4;
+		}
 		fileFilter4Scope.timeFilter=timeFilter;
+		
 		scope.fileFilters=fileFilter4Scope;
 		return scope;
 	}

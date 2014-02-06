@@ -1,5 +1,6 @@
 package plugin.ui.window.configuration.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -8,8 +9,12 @@ import java.util.Date;
  *
  */
 public class TimeFilter {
+	public TimeFilter(){
+		this.startDate=Calendar.getInstance();
+		this.endDate=Calendar.getInstance();
+	}
 	public int timeOption;
-	public Date startDate;
-	public Date endDate;
+	public Calendar startDate;
+	public Calendar endDate;
 	public int nearestDays;
 }
