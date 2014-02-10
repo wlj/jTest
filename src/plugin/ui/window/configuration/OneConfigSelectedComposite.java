@@ -159,6 +159,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 				// TODO Auto-generated method stub
 				System.out.println("apply");
 				entity.scope = detailTabFolder.scopeTab.getScope();
+				entity.staticEntity = detailTabFolder.staticTab.getStatic();
 				tree.config.editConfig(entity);
 			}
 			

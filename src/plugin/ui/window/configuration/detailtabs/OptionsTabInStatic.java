@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import plugin.ui.window.configuration.entity.StaticGeneral;
+
 public class OptionsTabInStatic {
 
 	TabItem tabItem;
@@ -49,5 +51,7 @@ public class OptionsTabInStatic {
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 	}
+	
+	
 
 }

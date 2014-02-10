@@ -13,10 +13,24 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.BugDetectionEntity;
+import plugin.ui.window.configuration.entity.StaticGeneral;
+
 public class BugDetectiveInOptionsTab {
 
 	TabItem tabItem;
 	private Text text_TimeLimit;
+	public Button btnShallowestfastest;
+	public Button btnShallowfast;
+	public Button btnStandard;
+	public Button btnDeepslower;
+	public Button btnThoroughslower;
+	public Button btnAlsoImposeTime;
+	public Button btnDoNotReport;
+	public Button btnReportAllSimilar;
+	public Button btnDoNotShowViolationPoint;
+	public Button btnDoNotShowSuspiciousPoint;
+	
 
 	public BugDetectiveInOptionsTab(TabFolder tabFolder) {
 		tabItem = new TabItem(tabFolder, SWT.None);
@@ -39,41 +53,41 @@ public class BugDetectiveInOptionsTab {
 		fd_grpDepthOfAnalysis.left = new FormAttachment(0, 10);
 		grpDepthOfAnalysis.setLayoutData(fd_grpDepthOfAnalysis);
 		
-		Button btnShallowestfastest = new Button(grpDepthOfAnalysis, SWT.RADIO);
+		btnShallowestfastest = new Button(grpDepthOfAnalysis, SWT.RADIO);
 		FormData fd_btnShallowestfastest = new FormData();
 		fd_btnShallowestfastest.left = new FormAttachment(0, 10);
 		btnShallowestfastest.setLayoutData(fd_btnShallowestfastest);
 		btnShallowestfastest.setText("shallowest (fastest)");
 		
-		Button btnShallowfast = new Button(grpDepthOfAnalysis, SWT.RADIO);
+		btnShallowfast = new Button(grpDepthOfAnalysis, SWT.RADIO);
 		FormData fd_btnShallowfast = new FormData();
 		fd_btnShallowfast.top = new FormAttachment(btnShallowestfastest, 6);
 		fd_btnShallowfast.left = new FormAttachment(btnShallowestfastest, 0, SWT.LEFT);
 		btnShallowfast.setLayoutData(fd_btnShallowfast);
 		btnShallowfast.setText("shallow (fast)");
 		
-		Button btnStandard = new Button(grpDepthOfAnalysis, SWT.RADIO);
+		btnStandard = new Button(grpDepthOfAnalysis, SWT.RADIO);
 		FormData fd_btnStandard = new FormData();
 		fd_btnStandard.top = new FormAttachment(btnShallowfast, 6);
 		fd_btnStandard.left = new FormAttachment(btnShallowfast, 0, SWT.LEFT);
 		btnStandard.setLayoutData(fd_btnStandard);
 		btnStandard.setText("standard");
 		
-		Button btnDeepslower = new Button(grpDepthOfAnalysis, SWT.RADIO);
+		btnDeepslower = new Button(grpDepthOfAnalysis, SWT.RADIO);
 		FormData fd_btnDeepslower = new FormData();
 		fd_btnDeepslower.top = new FormAttachment(btnStandard, 6);
 		fd_btnDeepslower.left = new FormAttachment(btnShallowestfastest, 0, SWT.LEFT);
 		btnDeepslower.setLayoutData(fd_btnDeepslower);
 		btnDeepslower.setText("deep (slower)");
 		
-		Button btnThoroughslower = new Button(grpDepthOfAnalysis, SWT.RADIO);
+		btnThoroughslower = new Button(grpDepthOfAnalysis, SWT.RADIO);
 		FormData fd_btnThoroughslower = new FormData();
 		fd_btnThoroughslower.top = new FormAttachment(btnDeepslower, 6);
 		fd_btnThoroughslower.left = new FormAttachment(btnShallowestfastest, 0, SWT.LEFT);
 		btnThoroughslower.setLayoutData(fd_btnThoroughslower);
 		btnThoroughslower.setText("thorough (slower)");
 		
-		Button btnAlsoImposeTime = new Button(grpDepthOfAnalysis, SWT.CHECK);
+		btnAlsoImposeTime = new Button(grpDepthOfAnalysis, SWT.CHECK);
 		FormData fd_btnAlsoImposeTime = new FormData();
 		fd_btnAlsoImposeTime.top = new FormAttachment(btnThoroughslower, 6);
 		fd_btnAlsoImposeTime.left = new FormAttachment(btnShallowestfastest, 0, SWT.LEFT);
@@ -110,7 +124,7 @@ public class BugDetectiveInOptionsTab {
 		fd_grpViolationReportingVerbosity.right = new FormAttachment(100, -5);
 		grpViolationReportingVerbosity.setLayoutData(fd_grpViolationReportingVerbosity);
 		
-		Button btnDoNotReport = new Button(grpViolationReportingVerbosity, SWT.CHECK);
+		btnDoNotReport = new Button(grpViolationReportingVerbosity, SWT.CHECK);
 		FormData fd_btnDoNotReport = new FormData();
 		fd_btnDoNotReport.top = new FormAttachment(0, 10);
 		fd_btnDoNotReport.left = new FormAttachment(0, 10);
@@ -126,21 +140,21 @@ public class BugDetectiveInOptionsTab {
 		fd_grpLevelOfReporting.left = new FormAttachment(btnDoNotReport, 0, SWT.LEFT);
 		grpLevelOfReporting.setLayoutData(fd_grpLevelOfReporting);
 		
-		Button btnReportAllSimilar = new Button(grpLevelOfReporting, SWT.RADIO);
+		btnReportAllSimilar = new Button(grpLevelOfReporting, SWT.RADIO);
 		FormData fd_btnReportAllSimilar = new FormData();
 		fd_btnReportAllSimilar.top = new FormAttachment(0, 5);
 		fd_btnReportAllSimilar.left = new FormAttachment(0, 5);
 		btnReportAllSimilar.setLayoutData(fd_btnReportAllSimilar);
 		btnReportAllSimilar.setText("Report all similar violations");
 		
-		Button btnDoNotShowViolationPoint = new Button(grpLevelOfReporting, SWT.RADIO);
+		btnDoNotShowViolationPoint = new Button(grpLevelOfReporting, SWT.RADIO);
 		FormData fd_btnDoNotShowViolationPoint = new FormData();
 		fd_btnDoNotShowViolationPoint.left = new FormAttachment(btnReportAllSimilar, 0, SWT.LEFT);
 		fd_btnDoNotShowViolationPoint.top = new FormAttachment(btnReportAllSimilar, 6, SWT.BOTTOM);
 		btnDoNotShowViolationPoint.setLayoutData(fd_btnDoNotShowViolationPoint);
 		btnDoNotShowViolationPoint.setText("Do not show more than one violation with the same cause and violation point");
 		
-		Button btnDoNotShowSuspiciousPoint = new Button(grpLevelOfReporting, SWT.RADIO);
+		btnDoNotShowSuspiciousPoint = new Button(grpLevelOfReporting, SWT.RADIO);
 		FormData fd_btnDoNotShowSuspiciousPoint = new FormData();
 		fd_btnDoNotShowSuspiciousPoint.left = new FormAttachment(btnDoNotShowViolationPoint, 0, SWT.LEFT);
 		fd_btnDoNotShowSuspiciousPoint.top = new FormAttachment(btnDoNotShowViolationPoint, 6, SWT.BOTTOM);
@@ -150,5 +164,45 @@ public class BugDetectiveInOptionsTab {
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
+	}
+	/**
+	 * 获取BugDetective选项
+	 * @return
+	 */
+	public BugDetectionEntity getBugDetectionEntity(){
+		BugDetectionEntity bugDetectionEntity = new BugDetectionEntity();
+		if(btnShallowestfastest.getSelection()){
+			bugDetectionEntity.depth = 1;
+		}
+		if(btnShallowfast.getSelection()){
+			bugDetectionEntity.depth = 2;
+		}
+		if(btnStandard.getSelection()){
+			bugDetectionEntity.depth = 3;
+		}
+		if(btnDeepslower.getSelection()){
+			bugDetectionEntity.depth = 4;
+		}
+		if(btnThoroughslower.getSelection()){
+			bugDetectionEntity.depth = 5;
+		}
+		if(btnAlsoImposeTime.getSelection()){
+			bugDetectionEntity.isLimitTime = true;
+			String catchTime = btnAlsoImposeTime.getText();
+			bugDetectionEntity.catchDays = Integer.parseInt(catchTime);
+		}
+		if(btnDoNotReport.getSelection()){
+			bugDetectionEntity.isReportViolation = true;
+		}
+		if(btnReportAllSimilar.getSelection()){
+			bugDetectionEntity.levelReportViolation = 1;
+		}
+		if(btnDoNotShowViolationPoint.getSelection()){
+			bugDetectionEntity.levelReportViolation = 2;
+		}
+		if(btnDoNotShowSuspiciousPoint.getSelection()){
+			bugDetectionEntity.levelReportViolation = 3;
+		}
+		return bugDetectionEntity;
 	}
 }

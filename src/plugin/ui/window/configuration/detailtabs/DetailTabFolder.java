@@ -11,12 +11,12 @@ public class DetailTabFolder {
 	public TabFolder tabFolder;
 	
 	public ScopeTab scopeTab;
-	StaticTab staticTab;
-	GenerationTab generationTab;
-	ExecutionTab executionTab;
-	CommonTab commonTab;
-	CodeReviewTab codeReviewTab;
-	GoalsTab goalsTab;
+	public StaticTab staticTab;
+	public GenerationTab generationTab;
+	public ExecutionTab executionTab;
+	public CommonTab commonTab;
+	public CodeReviewTab codeReviewTab;
+	public GoalsTab goalsTab;
 	
 	public DetailTabFolder(Composite parent, int style) {
 		// TODO Auto-generated constructor stub

@@ -5,10 +5,12 @@ package plugin.ui.window.configuration.entity;
  *
  */
 public class BugDetectionEntity {
-	//是否启用增量配置
-	private boolean isEnableIncrementalAnalysis;
+	
+	public boolean isLimitTime;
+	public boolean isReportViolation;
 	//缓存的天数
-	private int catchDays;
+	public int catchDays;
 	//目录深度
-	private int depth;
+	public int depth;
+	public int levelReportViolation;
 }

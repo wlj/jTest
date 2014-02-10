@@ -12,6 +12,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.GenerationEntity;
+import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -22,6 +24,7 @@ public class GenerationTab {
 	public GenerationInputTab inputTab;
 	public GenerationFilterTab filterTab;
 	public GenerationTestClassTab testClassTab;
+	public Button btnEnableUnitTestGeneration;
 
 	public GenerationTab(TabFolder tabFolder, int style) {
 		// add Generation tab into right part of sashForm
@@ -37,7 +40,7 @@ public class GenerationTab {
 		Composite compositeInScrolledCompositeGeneration = new Composite(scrolledCompositeGeneration, SWT.NONE);
 		compositeInScrolledCompositeGeneration.setLayout(new FormLayout());
 
-		Button btnEnableUnitTestGeneration = new Button(compositeInScrolledCompositeGeneration, SWT.CHECK);
+		btnEnableUnitTestGeneration = new Button(compositeInScrolledCompositeGeneration, SWT.CHECK);
 		FormData fd_btnEnableUnitTestGeneration = new FormData();
 		fd_btnEnableUnitTestGeneration.top = new FormAttachment(0, 5);
 		fd_btnEnableUnitTestGeneration.left = new FormAttachment(0, 5);
@@ -58,6 +61,18 @@ public class GenerationTab {
 		
 		scrolledCompositeGeneration.setContent(compositeInScrolledCompositeGeneration);
 		scrolledCompositeGeneration.setMinSize(compositeInScrolledCompositeGeneration.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	
+	/**
+	 * 获取Generation选项
+	 * @return
+	 */
+	public GenerationEntity getGeneration(){
+		GenerationEntity generatinon = new GenerationEntity();
+		if(btnEnableUnitTestGeneration.getSelection()){
+			generatinon.isEnabled = true;
+		}
+		return generatinon;
 	}
 
 }

@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import plugin.ui.window.configuration.entity.AuthorFilter;
+import plugin.ui.window.configuration.entity.CodeFilter4Scope;
 import plugin.ui.window.configuration.entity.FileFilter4Scope;
 import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.ui.window.configuration.entity.TimeFilter;
@@ -45,6 +46,18 @@ public class ScopeTab {
 	public Button btnTestLocalFile;
 	public Button btnNoAuthorFilters;
 	public Button btnFilesAuthoredByUser;
+	public Button btnLimitSimpleMethods;
+	public Button btnLimitsDeprecatedClassMethod;
+	public Button btnNoTimeFiltersInLineFilter;
+	public Button btnSinceDateInLineFilter;
+	public Button btnTestFilesInLastInLineFilter;
+	public Button btnTestLocalFileInLineFilter;
+	public Button btnNoAuthorFiltersInLineFilter;
+	public Button btnFilesAuthoredByUserInLineFilter;
+	public Button btnRemoveMethodPattern;
+	public Button btnSkipMethedByPattern;
+	public Button btnAddMethodPattern;
+	
 
 	public ScopeTab(TabFolder tabFolder, int style) {
 		tbtmScope = new TabItem(tabFolder, style);
@@ -190,13 +203,13 @@ public class ScopeTab {
 			fd_grpTimeOptions.top = new FormAttachment(0, 5);
 			grpTimeOptionsInLineFilter.setLayoutData(fd_grpTimeOptions);
 
-			Button btnNoTimeFiltersInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
+			btnNoTimeFiltersInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnNoTimeFilters = new FormData();
 			fd_btnNoTimeFilters.top = new FormAttachment(0, 10);
 			btnNoTimeFiltersInLineFilter.setLayoutData(fd_btnNoTimeFilters);
 			btnNoTimeFiltersInLineFilter.setText("No time filters");
 
-			Button btnSinceDateInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
+			btnSinceDateInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnSinceDate = new FormData();
 			fd_btnSinceDate.top = new FormAttachment(btnNoTimeFiltersInLineFilter, 5);
 			btnSinceDateInLineFilter.setLayoutData(fd_btnSinceDate);
@@ -208,7 +221,7 @@ public class ScopeTab {
 			fd_dateTime.top = new FormAttachment(btnNoTimeFiltersInLineFilter);
 			sinceDateTimeInLineFilter.setLayoutData(fd_dateTime);
 
-			Button btnTestFilesInLastInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
+			btnTestFilesInLastInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnTestFilesInLast = new FormData();
 			fd_btnTestFilesInLast.top = new FormAttachment(btnSinceDateInLineFilter, 7);
 			btnTestFilesInLastInLineFilter.setLayoutData(fd_btnTestFilesInLast);
@@ -227,7 +240,7 @@ public class ScopeTab {
 			lblDays.setLayoutData(fd_lblDays);
 			lblDays.setText("days");
 
-			Button btnTestLocalFileInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
+			btnTestLocalFileInLineFilter = new Button(grpTimeOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnTestLocalFile = new FormData();
 			fd_btnTestLocalFile.bottom = new FormAttachment(100, -5);
 			fd_btnTestLocalFile.top = new FormAttachment(btnTestFilesInLastInLineFilter, 5);
@@ -244,13 +257,13 @@ public class ScopeTab {
 			fd_grpAuthorOptions.bottom = new FormAttachment(100, -10);
 			grpAuthorOptionsInLineFilter.setLayoutData(fd_grpAuthorOptions);
 
-			Button btnNoAuthorFiltersInLineFilter = new Button(grpAuthorOptionsInLineFilter, SWT.RADIO);
+			btnNoAuthorFiltersInLineFilter = new Button(grpAuthorOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnNoAuthorFilters = new FormData();
 			fd_btnNoAuthorFilters.top = new FormAttachment(0, 10);
 			btnNoAuthorFiltersInLineFilter.setLayoutData(fd_btnNoAuthorFilters);
 			btnNoAuthorFiltersInLineFilter.setText("No author filters");
 
-			Button btnFilesAuthoredByUserInLineFilter = new Button(grpAuthorOptionsInLineFilter, SWT.RADIO);
+			btnFilesAuthoredByUserInLineFilter = new Button(grpAuthorOptionsInLineFilter, SWT.RADIO);
 			FormData fd_btnRadioButton = new FormData();
 			fd_btnRadioButton.top = new FormAttachment(btnNoAuthorFiltersInLineFilter, 5);
 			btnFilesAuthoredByUserInLineFilter.setLayoutData(fd_btnRadioButton);
@@ -271,7 +284,7 @@ public class ScopeTab {
 			tbtmMethodFilters.setControl(methodFiltersComposite);
 			methodFiltersComposite.setLayout(new FormLayout());
 
-			Button btnSkipMethedByPattern = new Button(methodFiltersComposite, SWT.CHECK);
+			btnSkipMethedByPattern = new Button(methodFiltersComposite, SWT.CHECK);
 			FormData fd_btnCheckButton = new FormData();
 			fd_btnCheckButton.top = new FormAttachment(0, 5);
 			fd_btnCheckButton.right = new FormAttachment(100, -5);
@@ -293,7 +306,7 @@ public class ScopeTab {
 			tblclmnMethodPattern.setWidth(210);
 			tblclmnMethodPattern.setText("Method name regular expression");
 
-			Button btnAddMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
+			btnAddMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
 			FormData fd_btnAddMethodPattern = new FormData();
 			fd_btnAddMethodPattern.left = new FormAttachment(tableMethodsPattern, 5);
 			fd_btnAddMethodPattern.width = 60;
@@ -301,7 +314,7 @@ public class ScopeTab {
 			btnAddMethodPattern.setLayoutData(fd_btnAddMethodPattern);
 			btnAddMethodPattern.setText("Add");
 
-			Button btnRemoveMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
+			btnRemoveMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
 			FormData fd_btnRemoveMethodPattern = new FormData();
 			fd_btnRemoveMethodPattern.width = 60;
 			fd_btnRemoveMethodPattern.left = new FormAttachment(btnAddMethodPattern, 0, SWT.LEFT);
@@ -320,13 +333,13 @@ public class ScopeTab {
 			fd_bottomCompositeInScope.left = new FormAttachment(0, 10);
 			bottomCompositeInScope.setLayoutData(fd_bottomCompositeInScope);
 
-			Button btnLimitSimpleMethods = new Button(bottomCompositeInScope, SWT.CHECK);
+			btnLimitSimpleMethods = new Button(bottomCompositeInScope, SWT.CHECK);
 			FormData fd_btnLimitSimpleMethods = new FormData();
 			fd_btnLimitSimpleMethods.top = new FormAttachment(0, 3);
 			btnLimitSimpleMethods.setLayoutData(fd_btnLimitSimpleMethods);
 			btnLimitSimpleMethods.setText("Do not test methods with cyclomatic complexity less than");
 
-			Button btnLimitsDeprecatedClassMethod = new Button(bottomCompositeInScope, SWT.CHECK);
+			btnLimitsDeprecatedClassMethod = new Button(bottomCompositeInScope, SWT.CHECK);
 			FormData fd_btnLimitsDeprecatedClassMethod = new FormData();
 			fd_btnLimitsDeprecatedClassMethod.bottom = new FormAttachment(100, -10);
 			fd_btnLimitsDeprecatedClassMethod.top = new FormAttachment(btnLimitSimpleMethods, 5);
@@ -359,6 +372,7 @@ public class ScopeTab {
 	 */
 	public ScopeEntity getScope(){
 		ScopeEntity scope=new ScopeEntity();
+		//FileFilter4Scope
 		FileFilter4Scope fileFilter4Scope = new FileFilter4Scope();
 		TimeFilter timeFilter=new TimeFilter();
 		if(this.btnNoTimeFilters.getSelection()){
@@ -383,6 +397,8 @@ public class ScopeTab {
 			timeFilter.timeOption=4;
 		}
 		fileFilter4Scope.timeFilter=timeFilter;
+		
+		
 		AuthorFilter authorFilter=new AuthorFilter();
 		
 		if(btnNoAuthorFilters.getSelection()){
@@ -396,6 +412,68 @@ public class ScopeTab {
 		}
 		fileFilter4Scope.authorFilter=authorFilter;
 		scope.fileFilters=fileFilter4Scope;
+		
+		if(btnLimitSimpleMethods.getSelection()){
+			scope.testMethodsCyclomatic = true;
+			text_minMethodNum.setEnabled(true);
+			String cyclomaticComplexity = text_minMethodNum.getText();
+			if(cyclomaticComplexity != null){
+				scope.cyclomaticComplexity = Integer.parseInt(cyclomaticComplexity);
+			}
+			
+		}
+		if(btnLimitsDeprecatedClassMethod.getSelection()){
+			scope.deprecatedClassesOrMethods = true;
+		}
+		//CodeFilter4Scope
+		CodeFilter4Scope codeFilter4Scope = new CodeFilter4Scope();
+		TimeFilter timeFilterInLineFilter=new TimeFilter();
+		if(this.btnNoTimeFiltersInLineFilter.getSelection()){
+			timeFilterInLineFilter.timeOption=1;
+		}
+		if(this.btnSinceDateInLineFilter.getSelection()){
+			timeFilterInLineFilter.timeOption=2;
+			sinceDateTime.setEnabled(true);
+			timeFilterInLineFilter.startDate.set(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay());
+		}
+		if(btnTestFilesInLastInLineFilter.getSelection()){
+			text_lastDaysInLineFilter.setEnabled(true);
+			timeFilterInLineFilter.timeOption=3;
+			timeFilterInLineFilter.nearestDays=Integer.parseInt(this.text_lastDaysInLineFilter.getText());
+		}
+		if(btnTestLocalFileInLineFilter.getSelection()){
+			timeFilterInLineFilter.timeOption=4;
+		}
+		codeFilter4Scope.timeFilter = timeFilterInLineFilter;
+		
+		
+		AuthorFilter authorFilterInLineFilter=new AuthorFilter();
+		
+		if(btnNoAuthorFiltersInLineFilter.getSelection()){
+			authorFilterInLineFilter.authorOption=1;
+		}
+		if(btnFilesAuthoredByUserInLineFilter.getSelection()){
+			text_authorNameInFileFilter.setEnabled(true);
+			authorFilterInLineFilter.authorOption=2;
+			String authorName = text_authorNameInFileFilter.getText();
+			authorFilterInLineFilter.authorNames=authorName;
+		}
+		codeFilter4Scope.authorFilter = authorFilterInLineFilter;
+		scope.codeFilter=codeFilter4Scope;
+		
+		if(btnLimitSimpleMethods.getSelection()){
+			scope.testMethodsCyclomatic = true;
+			text_minMethodNum.setEnabled(true);
+			String cyclomaticComplexity = text_minMethodNum.getText();
+			if(cyclomaticComplexity != null){
+				scope.cyclomaticComplexity = Integer.parseInt(cyclomaticComplexity);
+			}
+			
+		}
+		if(btnLimitsDeprecatedClassMethod.getSelection()){
+			scope.deprecatedClassesOrMethods = true;
+		}
+		
 		return scope;
 	}
 	

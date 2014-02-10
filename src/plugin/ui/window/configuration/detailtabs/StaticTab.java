@@ -11,6 +11,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.Metrics;
+import plugin.ui.window.configuration.entity.ScopeEntity;
+import plugin.ui.window.configuration.entity.StaticEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -86,6 +89,35 @@ public class StaticTab {
 		
 		scrolledComposite.setContent(staticComposite);
 		scrolledComposite.setMinSize(staticComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	
+	/**
+	 * 获取static选项
+	 * @return
+	 */
+	public StaticEntity getStatic(){
+		StaticEntity statis=new StaticEntity();
+		if(btnEnableStaticAnalysis.getSelection()){
+			statis.isEnabled = true;
+		}
+		if(btnLimitMaximumNumber.getSelection()){
+			statis.isLimitTasks = true;
+			txtLimitMaxTask.setEnabled(true);
+			String limitnum = txtLimitMaxTask.getText();
+			if(limitnum != null){
+				statis.maxCount = Integer.parseInt(limitnum);
+			}
+		}
+		if(btnSkipAutomaticallyGenerated.getSelection()){
+			statis.skipTestClass = true;
+		}
+		if(btnDoNotApply.getSelection()){
+			statis.isApplySuppressions = true;
+		}
+		statis.metrics = staticInnerTabFolder.metricsTabInStatic.getMetrics();
+		statis.general = staticInnerTabFolder.optionsTabInStatic.generalInOptionsTab.getstaticGeneral();
+		statis.bugDetection = staticInnerTabFolder.optionsTabInStatic.bugDetectiveInOptionsTab.getBugDetectionEntity();
+		return statis;
 	}
 
 }

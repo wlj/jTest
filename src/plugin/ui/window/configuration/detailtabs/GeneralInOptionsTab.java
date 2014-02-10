@@ -13,11 +13,22 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.StaticGeneral;
+
 public class GeneralInOptionsTab {
 	TabItem tabItem;
 	private Text text_1;
 	private Text text_2;
 	private Text text_3;
+	public Button btnSkipJspFiles;
+	public Button btnExcludeVeryLarge;
+	public Button btnCheckFilesWith;
+	public Button btnOnlyReportEGNTFP;
+	public Button btnUseCustomBeginend;
+	public Button btnIgnoreGlobalAnalysis;
+	public Button btnAllowCompilationErrors;
+	public Button btnIncludeUserdefinedTest;
+	public Button btnIgnoreCodeDuplication;
 	
 	public GeneralInOptionsTab(TabFolder tabFolder){
 		tabItem = new TabItem(tabFolder, SWT.None);
@@ -30,14 +41,14 @@ public class GeneralInOptionsTab {
 		Composite compositeInScrolledComposite = new Composite(scrolledComposite, SWT.NONE);
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		// TO DO: add content into compositeInScrolledComposite
-		Button btnSkipJspFiles = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnSkipJspFiles = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnSkipJspFiles = new FormData();
 		fd_btnSkipJspFiles.top = new FormAttachment(0, 10);
 		fd_btnSkipJspFiles.left = new FormAttachment(0, 10);
 		btnSkipJspFiles.setLayoutData(fd_btnSkipJspFiles);
 		btnSkipJspFiles.setText("Skip JSP files");
 		
-		Button btnExcludeVeryLarge = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnExcludeVeryLarge = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnExcludeVeryLarge = new FormData();
 		fd_btnExcludeVeryLarge.top = new FormAttachment(btnSkipJspFiles, 6);
 		fd_btnExcludeVeryLarge.left = new FormAttachment(btnSkipJspFiles, 0, SWT.LEFT);
@@ -57,21 +68,21 @@ public class GeneralInOptionsTab {
 		lblLines.setLayoutData(fd_lblLines);
 		lblLines.setText("lines");
 		
-		Button btnCheckFilesWith = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnCheckFilesWith = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnCheckFilesWith = new FormData();
 		fd_btnCheckFilesWith.top = new FormAttachment(btnExcludeVeryLarge, 6);
 		fd_btnCheckFilesWith.left = new FormAttachment(btnSkipJspFiles, 0, SWT.LEFT);
 		btnCheckFilesWith.setLayoutData(fd_btnCheckFilesWith);
 		btnCheckFilesWith.setText("Check files with compilation errors");
 		
-		Button btnOnlyReportEGNTFP = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnOnlyReportEGNTFP = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnOnlyReportEGNTFP = new FormData();
 		fd_btnOnlyReportEGNTFP.top = new FormAttachment(btnCheckFilesWith, 6);
 		fd_btnOnlyReportEGNTFP.left = new FormAttachment(btnCheckFilesWith, 10, SWT.LEFT);
 		btnOnlyReportEGNTFP.setLayoutData(fd_btnOnlyReportEGNTFP);
 		btnOnlyReportEGNTFP.setText("Only report errors guaranteed not to be false positives");
 		
-		Button btnUseCustomBeginend = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnUseCustomBeginend = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnUseCustomBeginend = new FormData();
 		fd_btnUseCustomBeginend.top = new FormAttachment(btnOnlyReportEGNTFP, 6);
 		fd_btnUseCustomBeginend.left = new FormAttachment(btnSkipJspFiles, 0, SWT.LEFT);
@@ -115,21 +126,21 @@ public class GeneralInOptionsTab {
 		fd_grpGlobalAnalysis.left = new FormAttachment(0, 10);
 		grpGlobalAnalysis.setLayoutData(fd_grpGlobalAnalysis);
 		
-		Button btnIgnoreGlobalAnalysis = new Button(grpGlobalAnalysis, SWT.CHECK);
+		btnIgnoreGlobalAnalysis = new Button(grpGlobalAnalysis, SWT.CHECK);
 		FormData fd_btnIgnoreGlobalAnalysis = new FormData();
 		fd_btnIgnoreGlobalAnalysis.top = new FormAttachment(0);
 		fd_btnIgnoreGlobalAnalysis.left = new FormAttachment(0, 10);
 		btnIgnoreGlobalAnalysis.setLayoutData(fd_btnIgnoreGlobalAnalysis);
 		btnIgnoreGlobalAnalysis.setText("Ignore global analysis rules");
 		
-		Button btnAllowCompilationErrors = new Button(grpGlobalAnalysis, SWT.CHECK);
+		btnAllowCompilationErrors = new Button(grpGlobalAnalysis, SWT.CHECK);
 		FormData fd_btnAllowCompilationErrors = new FormData();
 		fd_btnAllowCompilationErrors.top = new FormAttachment(btnIgnoreGlobalAnalysis, 6, SWT.BOTTOM);			
 		fd_btnAllowCompilationErrors.left = new FormAttachment(btnIgnoreGlobalAnalysis, 0, SWT.LEFT);
 		btnAllowCompilationErrors.setLayoutData(fd_btnAllowCompilationErrors);
 		btnAllowCompilationErrors.setText("Allow compilation errors in global analysis (may cause false positive violations)");
 		
-		Button btnIncludeUserdefinedTest = new Button(grpGlobalAnalysis, SWT.CHECK);
+		btnIncludeUserdefinedTest = new Button(grpGlobalAnalysis, SWT.CHECK);
 		FormData fd_btnIncludeUserdefinedTest = new FormData();
 		fd_btnIncludeUserdefinedTest.top = new FormAttachment(btnAllowCompilationErrors, 6, SWT.BOTTOM);			
 		fd_btnIncludeUserdefinedTest.left = new FormAttachment(btnAllowCompilationErrors, 0, SWT.LEFT);
@@ -145,7 +156,7 @@ public class GeneralInOptionsTab {
 		fd_grpCodeDuplicationAnalysis.left = new FormAttachment(0, 10);
 		grpCodeDuplicationAnalysis.setLayoutData(fd_grpCodeDuplicationAnalysis);
 		
-		Button btnIgnoreCodeDuplication = new Button(grpCodeDuplicationAnalysis, SWT.CHECK);
+		btnIgnoreCodeDuplication = new Button(grpCodeDuplicationAnalysis, SWT.CHECK);
 		FormData fd_btnIgnoreCodeDuplication = new FormData();
 		fd_btnIgnoreCodeDuplication.top = new FormAttachment(0);
 		fd_btnIgnoreCodeDuplication.left = new FormAttachment(0, 10);
@@ -155,4 +166,46 @@ public class GeneralInOptionsTab {
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
+	/**
+	 * 获取StaticGeneral选项
+	 * @return
+	 */
+	public StaticGeneral getstaticGeneral(){
+		StaticGeneral staticGeneral = new StaticGeneral();
+		if(btnSkipJspFiles.getSelection()){
+			staticGeneral.isSkipJSP = true;
+		}
+		if(btnExcludeVeryLarge.getSelection()){
+			staticGeneral.isExcludeLargeFile = true;
+			String text1 = text_1.getText();
+			staticGeneral.largeFileSize = Integer.parseInt(text1);
+		}
+		if(btnCheckFilesWith.getSelection()){
+			staticGeneral.isCheckFileWithCompileError = true;	
+		}
+		if(btnOnlyReportEGNTFP.getSelection()){
+			staticGeneral.isOnlyReportError = true;
+		}
+		if(btnUseCustomBeginend.getSelection()){
+			staticGeneral.isUseCustomBeginEnd = true;
+			staticGeneral.customBegin = text_2.getText();
+			staticGeneral.customEnd = text_3.getText();
+		}
+		if(btnIgnoreGlobalAnalysis.getSelection()){
+			staticGeneral.isIgnoreGlobalRules = true;
+		}
+		if(btnAllowCompilationErrors.getSelection()){
+			staticGeneral.isCheckFileWithCompileError = true;
+		}
+		if(btnIncludeUserdefinedTest.getSelection()){
+			staticGeneral.isIncludeUserTestClass = true;
+		}
+		if(btnIgnoreCodeDuplication.getSelection()){
+			staticGeneral.isIgnoreRepeat = true;
+		}
+		
+		return staticGeneral;
+		
+	}
+	
 }

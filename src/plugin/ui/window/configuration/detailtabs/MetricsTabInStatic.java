@@ -13,10 +13,15 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import plugin.ui.window.configuration.entity.Metrics;
+import plugin.ui.window.configuration.entity.StaticEntity;
+
 public class MetricsTabInStatic {
 
 	TabItem tabItem;
 	Table metricsTable;
+	public Button btn_publish;
+	public Button btn_report;
 
 	public MetricsTabInStatic(TabFolder tabFolder) {
 		// add components into tabItem
@@ -31,13 +36,13 @@ public class MetricsTabInStatic {
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		
 		// to be complete
-		Button btn_publish = new Button(compositeInScrolledComposite,SWT.CHECK);
+		btn_publish = new Button(compositeInScrolledComposite,SWT.CHECK);
 		btn_publish.setText("Publish metrics statistics in reports");
 		FormData fd_btn_publishButton = new FormData();
 		fd_btn_publishButton.left = new FormAttachment(0,5);
 		btn_publish.setLayoutData(fd_btn_publishButton);
 		
-		Button btn_report = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btn_report = new Button(compositeInScrolledComposite, SWT.CHECK);
 		btn_report.setText("Report tasks for metrics values out of acceptable ranges");
 		FormData fd_btn_report = new FormData();
 		fd_btn_report.left = new FormAttachment(0,5);
@@ -81,6 +86,20 @@ public class MetricsTabInStatic {
 		
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	/**
+	 * 获取Metrics选项
+	 * @return
+	 */
+	public Metrics getMetrics(){
+		Metrics metrics = new Metrics();
+		if(btn_publish.getSelection()){
+			metrics.isPublic = true;
+		}
+		if(btn_report.getSelection()){
+			metrics.isReportTasksForMetrics = true;
+		}
+		return metrics;
 	}
 
 }

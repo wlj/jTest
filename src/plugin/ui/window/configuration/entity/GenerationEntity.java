@@ -5,8 +5,8 @@ package plugin.ui.window.configuration.entity;
  *
  */
 public class GenerationEntity {
-	private boolean isEnabled;
-	private Filter4GenerationEntity filter;
-	private Input4GenerationEntity input;
-	private TestCase4GenerationEntity testCase;
+	public boolean isEnabled;
+	public Filter4GenerationEntity filter;
+	public Input4GenerationEntity input;
+	public TestCase4GenerationEntity testCase;
 }
