@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.AuthorFilter;
 import plugin.ui.window.configuration.entity.FileFilter4Scope;
 import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.ui.window.configuration.entity.TimeFilter;
@@ -31,6 +32,7 @@ public class ScopeTab {
 	
 	private Text text_lastDaysInLineFilter;
 	private Text text_authorNameInLineFilter;
+	private Text text_authorNameInFileFilter;
 	private Text text_minMethodNum;
 	private Table tableMethodsPattern;
 	
@@ -162,12 +164,12 @@ public class ScopeTab {
 			btnFilesAuthoredByUser.setLayoutData(fd_btnRadioButton);
 			btnFilesAuthoredByUser.setText("Test only files authored by user");
 
-			text_authorNameInLineFilter = new Text(grpAuthorOptions, SWT.BORDER);
+			text_authorNameInFileFilter = new Text(grpAuthorOptions, SWT.BORDER);
 			FormData fd_text = new FormData();
 			fd_text.top = new FormAttachment(btnNoAuthorFilters, 5);
 			fd_text.left = new FormAttachment(btnFilesAuthoredByUser, 5);
 			fd_text.bottom = new FormAttachment(100, -5);
-			text_authorNameInLineFilter.setLayoutData(fd_text);
+			text_authorNameInFileFilter.setLayoutData(fd_text);
 		}
 
 		// add and set Line Filter in Scope
@@ -375,13 +377,24 @@ public class ScopeTab {
 		if(btnTestFilesInLast.getSelection()){
 			text_lastDaysInLineFilter.setEnabled(true);
 			timeFilter.timeOption=3;
-			timeFilter.nearestDays=Integer.parseInt(this.text_authorNameInLineFilter.getText());
+			timeFilter.nearestDays=Integer.parseInt(this.text_lastDaysInLineFilter.getText());
 		}
 		if(btnTestLocalFile.getSelection()){
 			timeFilter.timeOption=4;
 		}
 		fileFilter4Scope.timeFilter=timeFilter;
+		AuthorFilter authorFilter=new AuthorFilter();
 		
+		if(btnNoAuthorFilters.getSelection()){
+			authorFilter.authorOption=1;
+		}
+		if(btnFilesAuthoredByUser.getSelection()){
+			text_authorNameInFileFilter.setEnabled(true);
+			authorFilter.authorOption=2;
+			String authorName = text_authorNameInFileFilter.getText();
+			authorFilter.authorNames=authorName;
+		}
+		fileFilter4Scope.authorFilter=authorFilter;
 		scope.fileFilters=fileFilter4Scope;
 		return scope;
 	}
