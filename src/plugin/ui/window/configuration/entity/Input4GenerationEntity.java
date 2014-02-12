@@ -5,5 +5,7 @@ package plugin.ui.window.configuration.entity;
  *
  */
 public class Input4GenerationEntity {
-	private int unitTestType;
+	public int unitTestType;
+	public boolean isGenerateOnlyOneCase;
+	
 }

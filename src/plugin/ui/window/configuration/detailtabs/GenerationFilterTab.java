@@ -12,9 +12,26 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import plugin.ui.window.configuration.entity.Filter4GenerationEntity;
+import plugin.ui.window.configuration.entity.Input4GenerationEntity;
+
 public class GenerationFilterTab {
 
 	private TabItem tabItem;
+	public Button btnOnlyIncreaseCoverage;
+	public Button btnCheckButton;
+	public Button btnGenerateTestsThat;
+	public Button btnGenerateTestsThat_1;
+	public Button btnGenerateTestCases;
+	public Button btnIncludeCommentsIn;
+	public Button btnPublicMethods;
+	public Button btnCheckButton_1;
+	public Button btnPackagePrivateMethods;
+	public Button btnCheckButton_2;
+	public Button btnPrivateMethods;
+	public Button btnWithOutofdateTest;
+	public Button btnWithUptodateTest; 
+	
 
 	public GenerationFilterTab(TabFolder tabFolderInGeneration) {
 		tabItem = new TabItem(tabFolderInGeneration, SWT.NONE);
@@ -24,7 +41,7 @@ public class GenerationFilterTab {
 		tabItem.setControl(filterInGenerationComposite);
 		filterInGenerationComposite.setLayout(new FormLayout());
 
-		Button btnOnlyIncreaseCoverage = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnOnlyIncreaseCoverage = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnOnlyIncreaseCoverage = new FormData();
 		fd_btnOnlyIncreaseCoverage.top = new FormAttachment(0, 10);
 		fd_btnOnlyIncreaseCoverage.left = new FormAttachment(0, 10);
@@ -45,14 +62,14 @@ public class GenerationFilterTab {
 		lblCoverage.setLayoutData(fd_lblCoverage);
 		lblCoverage.setText("coverage");
 		
-		Button btnCheckButton = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnCheckButton = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnCheckButton = new FormData();
 		fd_btnCheckButton.top = new FormAttachment(0, 33);
 		fd_btnCheckButton.left = new FormAttachment(0, 10);
 		btnCheckButton.setLayoutData(fd_btnCheckButton);
 		btnCheckButton.setText("Generate tests that pass null values to methods");
 		
-		Button btnGenerateTestsThat = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnGenerateTestsThat = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnGenerateTestsThat = new FormData();
 		fd_btnGenerateTestsThat.top = new FormAttachment(0, 56);
 		fd_btnGenerateTestsThat.left = new FormAttachment(0, 10);
@@ -74,7 +91,7 @@ public class GenerationFilterTab {
 		lblExceptions.setLayoutData(fd_lblExceptions);
 		lblExceptions.setText("exceptions");
 		
-		Button btnGenerateTestsThat_1 = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnGenerateTestsThat_1 = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnGenerateTestsThat_1 = new FormData();
 		fd_btnGenerateTestsThat_1.right = new FormAttachment(0, 307);
 		fd_btnGenerateTestsThat_1.top = new FormAttachment(0, 83);
@@ -82,7 +99,7 @@ public class GenerationFilterTab {
 		btnGenerateTestsThat_1.setLayoutData(fd_btnGenerateTestsThat_1);
 		btnGenerateTestsThat_1.setText("Generate tests that report time out problems");
 		
-		Button btnGenerateTestCases = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnGenerateTestCases = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnGenerateTestCases = new FormData();
 		fd_btnGenerateTestCases.right = new FormAttachment(0, 233);
 		fd_btnGenerateTestCases.top = new FormAttachment(0, 106);
@@ -104,7 +121,7 @@ public class GenerationFilterTab {
 		lblMethodCalls.setLayoutData(fd_lblMethodCalls);
 		lblMethodCalls.setText("method calls");
 		
-		Button btnIncludeCommentsIn = new Button(filterInGenerationComposite, SWT.CHECK);
+		btnIncludeCommentsIn = new Button(filterInGenerationComposite, SWT.CHECK);
 		FormData fd_btnIncludeCommentsIn = new FormData();
 		fd_btnIncludeCommentsIn.right = new FormAttachment(0, 243);
 		fd_btnIncludeCommentsIn.top = new FormAttachment(0, 129);
@@ -121,19 +138,19 @@ public class GenerationFilterTab {
 		grpGenerateTestsFor.setLayoutData(fd_grpGenerateTestsFor);
 		grpGenerateTestsFor.setText("Generate tests for method access level");
 		
-		Button btnPublicMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
+		btnPublicMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
 		btnPublicMethods.setBounds(10, 22, 110, 17);
 		btnPublicMethods.setText("Public methods");
 		
-		Button btnCheckButton_1 = new Button(grpGenerateTestsFor, SWT.CHECK);
+		btnCheckButton_1 = new Button(grpGenerateTestsFor, SWT.CHECK);
 		btnCheckButton_1.setBounds(10, 43, 132, 17);
 		btnCheckButton_1.setText("Protected methods");
 		
-		Button btnPackagePrivateMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
+		btnPackagePrivateMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
 		btnPackagePrivateMethods.setBounds(10, 66, 169, 17);
 		btnPackagePrivateMethods.setText("Package private methods");
 		
-		Button btnPrivateMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
+		btnPrivateMethods = new Button(grpGenerateTestsFor, SWT.CHECK);
 		btnPrivateMethods.setBounds(10, 88, 110, 17);
 		btnPrivateMethods.setText("Private methods");
 		
@@ -146,18 +163,67 @@ public class GenerationFilterTab {
 		fd_grpGenerateTestFor.right = new FormAttachment(grpGenerateTestsFor, 0, SWT.RIGHT);
 		grpGenerateTestFor.setLayoutData(fd_grpGenerateTestFor);
 		
-		Button btnCheckButton_2 = new Button(grpGenerateTestFor, SWT.CHECK);
+		btnCheckButton_2 = new Button(grpGenerateTestFor, SWT.CHECK);
 		btnCheckButton_2.setBounds(10, 21, 136, 17);
 		btnCheckButton_2.setText("Without test classes");
 		
-		Button btnWithOutofdateTest = new Button(grpGenerateTestFor, SWT.CHECK);
+		btnWithOutofdateTest = new Button(grpGenerateTestFor, SWT.CHECK);
 		btnWithOutofdateTest.setBounds(10, 44, 188, 17);
 		btnWithOutofdateTest.setText("With out-of-date test classes");
 		
-		Button btnWithUptodateTest = new Button(grpGenerateTestFor, SWT.CHECK);
+		btnWithUptodateTest = new Button(grpGenerateTestFor, SWT.CHECK);
 		btnWithUptodateTest.setBounds(10, 67, 188, 17);
 		btnWithUptodateTest.setText("With up-to-date test classes");
 
+	}
+	/**
+	 * 获取Filter4Generation选项
+	 * @return
+	 */
+	public Filter4GenerationEntity getFilter4Generation(){
+		Filter4GenerationEntity filter4GenerationEntity = new Filter4GenerationEntity();
+		if(btnOnlyIncreaseCoverage.getSelection()){
+			filter4GenerationEntity.isOnlyTestCase4HighCoverage = true;
+		}
+		if(btnCheckButton.getSelection()){
+			filter4GenerationEntity.isGenerateNullArgument = true;
+		}
+		if(btnGenerateTestsThat.getSelection()){
+			filter4GenerationEntity.isHandlingExceptions = true;
+		}
+		if(btnGenerateTestsThat_1.getSelection()){
+			filter4GenerationEntity.isGenerateTimeOutTestCase = true;
+			//=text_monitoringNewApp.getText();
+		}
+		if(btnGenerateTestCases.getSelection()){
+			filter4GenerationEntity.isGenerateStubs4MethodCallCase = true;
+		}
+		if(btnIncludeCommentsIn.getSelection()){
+			filter4GenerationEntity.isIncludeComments = true;
+		}
+		if(btnPublicMethods.getSelection()){
+			filter4GenerationEntity.isPublic = true;
+		}
+		if(btnPackagePrivateMethods.getSelection()){
+			filter4GenerationEntity.isInternal = true;
+		}
+		if(btnPrivateMethods.getSelection()){
+			filter4GenerationEntity.isPrivate = true;
+		}
+		if(btnCheckButton_1.getSelection()){
+			filter4GenerationEntity.isProtect = true;
+		}
+		if(btnCheckButton_2.getSelection()){
+			filter4GenerationEntity.isWithoutTestClass = true;
+		}
+		if(btnWithOutofdateTest.getSelection()){
+			filter4GenerationEntity.isWithOutDateTestClass = true;
+		}
+		if(btnWithUptodateTest.getSelection()){
+			filter4GenerationEntity.isWithUpdateTestClass = true;
+		}
+		
+		return filter4GenerationEntity;
 	}
 
 }

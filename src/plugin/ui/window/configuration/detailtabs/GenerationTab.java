@@ -12,7 +12,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.FileFilter4Scope;
 import plugin.ui.window.configuration.entity.GenerationEntity;
+import plugin.ui.window.configuration.entity.Input4GenerationEntity;
 import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
@@ -72,7 +74,11 @@ public class GenerationTab {
 		if(btnEnableUnitTestGeneration.getSelection()){
 			generatinon.isEnabled = true;
 		}
+		generatinon.input = inputTab.getInput4Generation();
+		generatinon.filter = filterTab.getFilter4Generation();
+		generatinon.testCase = testClassTab.getTestCase4Generation();
 		return generatinon;
 	}
+	
 
 }
