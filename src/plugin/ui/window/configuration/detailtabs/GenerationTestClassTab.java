@@ -12,12 +12,21 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.Filter4GenerationEntity;
+import plugin.ui.window.configuration.entity.TestCase4GenerationEntity;
+
 public class GenerationTestClassTab {
 	
 	TabItem testClassTabItem;
 	private Text textOutputClass;
 	private Text text;
 	private Text javadocText;
+	public Button btnDoNotGenerate;
+	public Button btnAddGeneratedmodifiedFiles;
+	public Button btnUseAnExternal;
+	public Button btnAddGeneratedTest;
+	public Button btnReplaceTheExisting;
+	public Button btnAddThisText;
 	
 	public GenerationTestClassTab(TabFolder tabFolderInGeneration) {
 		// TODO Auto-generated constructor stub
@@ -28,7 +37,7 @@ public class GenerationTestClassTab {
 		testClassTabItem.setText("Test Class");
 		testClassComposite.setLayout(new FormLayout());
 		
-		Button btnDoNotGenerate = new Button(testClassComposite, SWT.CHECK);
+		btnDoNotGenerate = new Button(testClassComposite, SWT.CHECK);
 		FormData fd_btnDoNotGenerate = new FormData();
 		fd_btnDoNotGenerate.top = new FormAttachment(0, 10);
 		fd_btnDoNotGenerate.left = new FormAttachment(0, 10);
@@ -41,14 +50,14 @@ public class GenerationTestClassTab {
 		fd_text.left = new FormAttachment(btnDoNotGenerate, 6);
 		text.setLayoutData(fd_text);
 		
-		Button btnAddGeneratedmodifiedFiles = new Button(testClassComposite, SWT.CHECK);
+		btnAddGeneratedmodifiedFiles = new Button(testClassComposite, SWT.CHECK);
 		FormData fd_btnAddGeneratedmodifiedFiles = new FormData();
 		fd_btnAddGeneratedmodifiedFiles.top = new FormAttachment(btnDoNotGenerate, 6);
 		fd_btnAddGeneratedmodifiedFiles.left = new FormAttachment(0, 10);
 		btnAddGeneratedmodifiedFiles.setLayoutData(fd_btnAddGeneratedmodifiedFiles);
 		btnAddGeneratedmodifiedFiles.setText("Add generated/modified files to source control");
 		
-		Button btnUseAnExternal = new Button(testClassComposite, SWT.CHECK);
+		btnUseAnExternal = new Button(testClassComposite, SWT.CHECK);
 		FormData fd_btnUseAnExternal = new FormData();
 		fd_btnUseAnExternal.top = new FormAttachment(btnAddGeneratedmodifiedFiles, 6);
 		fd_btnUseAnExternal.left = new FormAttachment(btnDoNotGenerate, 0, SWT.LEFT);
@@ -65,14 +74,14 @@ public class GenerationTestClassTab {
 		fd_grpWhenGeneratingTests.right = new FormAttachment(100, -10);
 		grpWhenGeneratingTests.setLayoutData(fd_grpWhenGeneratingTests);
 		
-		Button btnAddGeneratedTest = new Button(grpWhenGeneratingTests, SWT.RADIO);
+		btnAddGeneratedTest = new Button(grpWhenGeneratingTests, SWT.RADIO);
 		FormData fd_btnAddGeneratedTest = new FormData();
 		fd_btnAddGeneratedTest.top = new FormAttachment(0, 3);
 		fd_btnAddGeneratedTest.left = new FormAttachment(0, 3);
 		btnAddGeneratedTest.setLayoutData(fd_btnAddGeneratedTest);
 		btnAddGeneratedTest.setText("Add generated test cases to the existing test class");
 		
-		Button btnReplaceTheExisting = new Button(grpWhenGeneratingTests, SWT.RADIO);
+		btnReplaceTheExisting = new Button(grpWhenGeneratingTests, SWT.RADIO);
 		FormData fd_btnReplaceTheExisting = new FormData();
 		fd_btnReplaceTheExisting.top = new FormAttachment(btnAddGeneratedTest, 6);
 		fd_btnReplaceTheExisting.left = new FormAttachment(btnAddGeneratedTest, 0, SWT.LEFT);
@@ -102,7 +111,7 @@ public class GenerationTestClassTab {
 		fd_text_1.right = new FormAttachment(btnEdit, -5,SWT.LEFT);
 		textOutputClass.setLayoutData(fd_text_1);
 		
-		Button btnAddThisText = new Button(testClassComposite, SWT.CHECK);
+		btnAddThisText = new Button(testClassComposite, SWT.CHECK);
 		FormData fd_btnAddThisText = new FormData();
 		fd_btnAddThisText.top = new FormAttachment(textOutputClass, 12);
 		fd_btnAddThisText.left = new FormAttachment(btnDoNotGenerate, 0, SWT.LEFT);
@@ -116,6 +125,35 @@ public class GenerationTestClassTab {
 		javadocFormData.right = new FormAttachment(100, -5);
 		javadocText.setLayoutData(javadocFormData);
 
+	}
+	/**
+	 * 获取TestCase4Generation选项
+	 * @return
+	 */
+	public TestCase4GenerationEntity getTestCase4Generation(){
+		TestCase4GenerationEntity testCase4GenerationEntity = new TestCase4GenerationEntity();
+		if(btnDoNotGenerate.getSelection()){
+			testCase4GenerationEntity.isNotGenerateOtherTestCase = true;
+		}
+		if(btnAddGeneratedmodifiedFiles.getSelection()){
+			testCase4GenerationEntity.isCommitSouceControl = true;
+		}
+		if(btnUseAnExternal.getSelection()){
+			testCase4GenerationEntity.isUseLinkedLocation = true;
+		}
+		
+		if(btnAddGeneratedTest.getSelection()){
+			testCase4GenerationEntity.existingTestClass = 1;
+		}
+		if(btnReplaceTheExisting.getSelection()){
+			testCase4GenerationEntity.existingTestClass = 2;
+		}
+		if(btnAddThisText.getSelection()){
+			testCase4GenerationEntity.isAddTestToJavadoc = true;
+		}
+		
+		
+		return testCase4GenerationEntity;
 	}
 
 }
