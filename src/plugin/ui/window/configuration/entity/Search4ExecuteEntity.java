@@ -5,5 +5,9 @@ package plugin.ui.window.configuration.entity;
  *
  */
 public class Search4ExecuteEntity {
-	
+	public boolean isTestFromRepository;
+	public boolean isTestClassesMatchPatterns;
+	public boolean isTestClassesInScope;
+	public boolean isTestSuitesInScope;
+	public boolean isTestClassesWithinWorkspace;
 }

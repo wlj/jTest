@@ -161,6 +161,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 				entity.scope = detailTabFolder.scopeTab.getScope();
 				entity.staticEntity = detailTabFolder.staticTab.getStatic();
 				entity.generation = detailTabFolder.generationTab.getGeneration();
+				entity.execution = detailTabFolder.executionTab.getExecution();
 				tree.config.editConfig(entity);
 			}
 			

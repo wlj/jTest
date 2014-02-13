@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import plugin.ui.window.configuration.entity.ExecutionEntity;
+import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -17,9 +19,10 @@ public class ExecutionTab {
 
 	private TabItem tbtmExecution;
 	private TabFolder tabFolder;
-	SearchInExecutionTab searchInExecutionTab;
-	OptionsInExecutionTab optionsInExecutionTab;
-	SeveritiesInExecutionTab severitiesInExecutionTab;
+	public Button btnEnableTestExecution;
+	public SearchInExecutionTab searchInExecutionTab;
+	public OptionsInExecutionTab optionsInExecutionTab;
+	public SeveritiesInExecutionTab severitiesInExecutionTab;
 
 	public ExecutionTab(TabFolder tabFolder, int style) {
 		tbtmExecution = new TabItem(tabFolder, SWT.NONE);
@@ -34,7 +37,7 @@ public class ExecutionTab {
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		// TO DO: add content into compositeInScrolledComposite
 		
-		Button btnEnableTestExecution = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnEnableTestExecution = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnEnableTestExecution = new FormData();
 		fd_btnEnableTestExecution.top = new FormAttachment(0);
 		fd_btnEnableTestExecution.left = new FormAttachment(0);
@@ -57,5 +60,17 @@ public class ExecutionTab {
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 	}
-
+	/**
+	 * 获取Execution选项
+	 * @return
+	 */
+	public ExecutionEntity getExecution(){
+		ExecutionEntity execution = new ExecutionEntity();
+		if(btnEnableTestExecution.getSelection()){
+			execution.isEnableTestExecution = true;
+		}
+		execution.option4ExecutionEntity = optionsInExecutionTab.getOption4Execution();
+		execution.search4ExecutionEntity = searchInExecutionTab.getSearch4Execution();
+		return execution;
+	}
 }

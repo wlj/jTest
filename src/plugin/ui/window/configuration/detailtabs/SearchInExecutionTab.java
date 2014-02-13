@@ -11,10 +11,19 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 
+import plugin.ui.window.configuration.entity.Option4ExecutionEntity;
+import plugin.ui.window.configuration.entity.Search4ExecuteEntity;
+
 public class SearchInExecutionTab {
 	TabItem tabItem;
 	private Table table_RelativeToProjects;
 	private Table table_Patterns;
+	public Button btnTestsFromRepository;
+	public Button btnTestClassesPatterns;
+	public Button btnTestClassesIn;
+	public Button btnTestSuitesIn;
+	public Button btnTestClassesWithin;
+	
 	
 	public SearchInExecutionTab(TabFolder tabFolder){
 		tabItem = new TabItem(tabFolder, SWT.None);
@@ -28,7 +37,7 @@ public class SearchInExecutionTab {
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		// TO DO: add content into compositeInScrolledComposite
 		
-		Button btnTestsFromRepository = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTestsFromRepository = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTestsFromRepository = new FormData();
 		fd_btnTestsFromRepository.top = new FormAttachment(0,5);
 		fd_btnTestsFromRepository.left = new FormAttachment(0, 5);
@@ -68,7 +77,7 @@ public class SearchInExecutionTab {
 		btnRemoveRelativeToProjects.setLayoutData(fd_btnRemoveRelativeToProjects);
 		btnRemoveRelativeToProjects.setText("Remove");
 		
-		Button btnTestClassesPatterns = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTestClassesPatterns = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTestClassesPatterns = new FormData();
 		fd_btnTestClassesPatterns.top = new FormAttachment(table_RelativeToProjects, 6);
 		fd_btnTestClassesPatterns.left = new FormAttachment(btnTestsFromRepository, 0, SWT.LEFT);
@@ -108,21 +117,21 @@ public class SearchInExecutionTab {
 		btnRemovePatterns.setLayoutData(fd_btnRemovePatterns);
 		btnRemovePatterns.setText("Remove");
 		
-		Button btnTestClassesIn = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTestClassesIn = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTestClassesIn = new FormData();
 		fd_btnTestClassesIn.top = new FormAttachment(table_Patterns, 6);
 		fd_btnTestClassesIn.left = new FormAttachment(btnTestsFromRepository, 0, SWT.LEFT);
 		btnTestClassesIn.setLayoutData(fd_btnTestClassesIn);
 		btnTestClassesIn.setText("Test classes in scope");
 		
-		Button btnTestSuitesIn = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTestSuitesIn = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTestSuitesIn = new FormData();
 		fd_btnTestSuitesIn.top = new FormAttachment(btnTestClassesIn, 6);
 		fd_btnTestSuitesIn.left = new FormAttachment(btnTestsFromRepository, 0, SWT.LEFT);
 		btnTestSuitesIn.setLayoutData(fd_btnTestSuitesIn);
 		btnTestSuitesIn.setText("Test suites in scope");
 		
-		Button btnTestClassesWithin = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTestClassesWithin = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTestClassesWithin = new FormData();
 		fd_btnTestClassesWithin.top = new FormAttachment(btnTestSuitesIn, 6);
 		fd_btnTestClassesWithin.left = new FormAttachment(btnTestsFromRepository, 0, SWT.LEFT);
@@ -131,6 +140,29 @@ public class SearchInExecutionTab {
 		
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	/**
+	 * 获取Search4Execution选项
+	 * @return
+	 */
+	public Search4ExecuteEntity getSearch4Execution(){
+		Search4ExecuteEntity search4Execute= new Search4ExecuteEntity();
+		if(btnTestsFromRepository.getSelection()){
+			search4Execute.isTestFromRepository = true;
+		}
+		if(btnTestClassesPatterns.getSelection()){
+			search4Execute.isTestClassesMatchPatterns = true;
+		}
+		if(btnTestClassesIn.getSelection()){
+			search4Execute.isTestClassesInScope = true;
+		}
+		if(btnTestSuitesIn.getSelection()){
+			search4Execute.isTestSuitesInScope = true;
+		}
+		if(btnTestClassesWithin.getSelection()){
+			search4Execute.isTestClassesWithinWorkspace = true;
+		}
+		return search4Execute;
 	}
 	
 	

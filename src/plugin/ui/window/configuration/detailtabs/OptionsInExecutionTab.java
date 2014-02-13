@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.ExecutionEntity;
+import plugin.ui.window.configuration.entity.Option4ExecutionEntity;
+
 public class OptionsInExecutionTab {
 	TabItem tabItem;
 	private Text text_ReportFailureLessThanCoverage;
@@ -20,7 +23,27 @@ public class OptionsInExecutionTab {
 	private Text text_TimeoutMaxLimitForEachClassOrSuite;
 	private Text text_TimeoutMaxLimit;
 	private Table table_PluginTestsToRun;
-
+	public Button btnReportExecutableLineCoverage;
+	public Button btnReportDecisionCoverage;
+	public Button btnReportFailureOrFileWithCoverageLessThan;
+	public Button btnPublishMethodCoverageInfo;
+	public Button btnClearPreviousCoverage;
+	public Button btnReportUnverifiedOutcomesMaxLimit;
+	public Button btnReportUnverifiedOutcomeDistributions;
+	public Button btnAddNewlyOutcomesToExcel;
+	public Button btnDetectMemoryLeaks;
+	public Button btnCheckDesignByContract;
+	public Button btnTimeoutForEachTest;
+	public Button btnTotalTimeoutForTestExecution;
+	public Button btnSeperateLaunchForEachClassSuite;
+	public Button btnRunTestsInDebugMode;
+	public Button btnDoNotRun;
+	public Button btnAutomaticallySearchThe;
+	public Button btnLaunchSelectedTests;
+	public Button btnSpecifyPluginTests;
+	
+	
+	
 	public OptionsInExecutionTab(TabFolder tabFolder) {
 		tabItem = new TabItem(tabFolder, SWT.None);
 		tabItem.setText("Options");
@@ -32,21 +55,21 @@ public class OptionsInExecutionTab {
 		Composite compositeInScrolledComposite = new Composite(scrolledComposite, SWT.NONE);
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		// TO DO: add content into compositeInScrolledComposite
-		Button btnReportExecutableLineCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnReportExecutableLineCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnReportExecutableLineCoverage = new FormData();
 		fd_btnReportExecutableLineCoverage.top = new FormAttachment(0, 5);
 		fd_btnReportExecutableLineCoverage.left = new FormAttachment(0, 5);
 		btnReportExecutableLineCoverage.setLayoutData(fd_btnReportExecutableLineCoverage);
 		btnReportExecutableLineCoverage.setText("Report executable line coverage");
 
-		Button btnReportDecisionCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnReportDecisionCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnReportDecisionCoverage = new FormData();
 		fd_btnReportDecisionCoverage.top = new FormAttachment(btnReportExecutableLineCoverage, 5);
 		fd_btnReportDecisionCoverage.left = new FormAttachment(btnReportExecutableLineCoverage, 10, SWT.LEFT);
 		btnReportDecisionCoverage.setLayoutData(fd_btnReportDecisionCoverage);
 		btnReportDecisionCoverage.setText("Report decision (branch) coverage");
 
-		Button btnReportFailureOrFileWithCoverageLessThan = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnReportFailureOrFileWithCoverageLessThan = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnReportFailureOrFileWithCoverageLessThan = new FormData();
 		fd_btnReportFailureOrFileWithCoverageLessThan.top = new FormAttachment(btnReportDecisionCoverage, 5);
 		fd_btnReportFailureOrFileWithCoverageLessThan.left = new FormAttachment(btnReportDecisionCoverage, 0, SWT.LEFT);
@@ -59,21 +82,21 @@ public class OptionsInExecutionTab {
 		fd_text_ReportFailureLessThanCoverage.left = new FormAttachment(btnReportFailureOrFileWithCoverageLessThan, 6);
 		text_ReportFailureLessThanCoverage.setLayoutData(fd_text_ReportFailureLessThanCoverage);
 
-		Button btnPublishMethodCoverageInfo = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnPublishMethodCoverageInfo = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnPublishMethodCoverageInfo = new FormData();
 		fd_btnPublishMethodCoverageInfo.top = new FormAttachment(btnReportFailureOrFileWithCoverageLessThan, 6);
 		fd_btnPublishMethodCoverageInfo.left = new FormAttachment(btnReportDecisionCoverage, 0, SWT.LEFT);
 		btnPublishMethodCoverageInfo.setLayoutData(fd_btnPublishMethodCoverageInfo);
 		btnPublishMethodCoverageInfo.setText("Publish method coverage detail in reports (slow, memory intensive, and generates large reports)");
 
-		Button btnClearPreviousCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnClearPreviousCoverage = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnClearPreviousCoverage = new FormData();
 		fd_btnClearPreviousCoverage.top = new FormAttachment(btnPublishMethodCoverageInfo, 6);
 		fd_btnClearPreviousCoverage.left = new FormAttachment(btnReportDecisionCoverage, 0, SWT.LEFT);
 		btnClearPreviousCoverage.setLayoutData(fd_btnClearPreviousCoverage);
 		btnClearPreviousCoverage.setText("Clear previous coverage information when launching new tests");
 
-		Button btnReportUnverifiedOutcomesMaxLimit = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnReportUnverifiedOutcomesMaxLimit = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnReportUnverifiedOutcomesMaxLimit = new FormData();
 		fd_btnReportUnverifiedOutcomesMaxLimit.top = new FormAttachment(btnClearPreviousCoverage, 6);
 		fd_btnReportUnverifiedOutcomesMaxLimit.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
@@ -86,35 +109,35 @@ public class OptionsInExecutionTab {
 		fd_text_ReportUnverifiedOutcomeMaxLimit.left = new FormAttachment(btnReportUnverifiedOutcomesMaxLimit, 2, SWT.RIGHT);
 		text_ReportUnverifiedOutcomeMaxLimit.setLayoutData(fd_text_ReportUnverifiedOutcomeMaxLimit);
 
-		Button btnReportUnverifiedOutcomeDistributions = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnReportUnverifiedOutcomeDistributions = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnReportUnverifiedOutcomeDistributions = new FormData();
 		fd_btnReportUnverifiedOutcomeDistributions.top = new FormAttachment(btnReportUnverifiedOutcomesMaxLimit, 6);
 		fd_btnReportUnverifiedOutcomeDistributions.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
 		btnReportUnverifiedOutcomeDistributions.setLayoutData(fd_btnReportUnverifiedOutcomeDistributions);
 		btnReportUnverifiedOutcomeDistributions.setText("Report unverified outcome distributions");
 
-		Button btnAddNewlyOutcomesToExcel = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnAddNewlyOutcomesToExcel = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnAddNewlyOutcomesToExcel = new FormData();
 		fd_btnAddNewlyOutcomesToExcel.top = new FormAttachment(btnReportUnverifiedOutcomeDistributions, 6);
 		fd_btnAddNewlyOutcomesToExcel.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
 		btnAddNewlyOutcomesToExcel.setLayoutData(fd_btnAddNewlyOutcomesToExcel);
 		btnAddNewlyOutcomesToExcel.setText("Add newly observed outcomes of parameterized tests to Excel file (slows down execution)");
 
-		Button btnDetectMemoryLeaks = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnDetectMemoryLeaks = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnDetectMemoryLeaks = new FormData();
 		fd_btnDetectMemoryLeaks.top = new FormAttachment(btnAddNewlyOutcomesToExcel, 6);
 		fd_btnDetectMemoryLeaks.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
 		btnDetectMemoryLeaks.setLayoutData(fd_btnDetectMemoryLeaks);
 		btnDetectMemoryLeaks.setText("Detect memory leaks (slow and memory intensive)");
 
-		Button btnCheckDesignByContract = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnCheckDesignByContract = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnCheckDesignByContract = new FormData();
 		fd_btnCheckDesignByContract.top = new FormAttachment(btnDetectMemoryLeaks, 6);
 		fd_btnCheckDesignByContract.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
 		btnCheckDesignByContract.setLayoutData(fd_btnCheckDesignByContract);
 		btnCheckDesignByContract.setText("Check Design by Contract");
 
-		Button btnTimeoutForEachTest = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTimeoutForEachTest = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTimeoutForEachTest = new FormData();
 		fd_btnTimeoutForEachTest.top = new FormAttachment(btnCheckDesignByContract, 6);
 		fd_btnTimeoutForEachTest.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
@@ -127,7 +150,7 @@ public class OptionsInExecutionTab {
 		fd_text_TimeoutMaxLimitForEachClassOrSuite.left = new FormAttachment(btnTimeoutForEachTest, 6);
 		text_TimeoutMaxLimitForEachClassOrSuite.setLayoutData(fd_text_TimeoutMaxLimitForEachClassOrSuite);
 
-		Button btnTotalTimeoutForTestExecution = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnTotalTimeoutForTestExecution = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnTotalTimeoutForTestExecution = new FormData();
 		fd_btnTotalTimeoutForTestExecution.top = new FormAttachment(btnTimeoutForEachTest, 6);
 		fd_btnTotalTimeoutForTestExecution.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
@@ -140,14 +163,14 @@ public class OptionsInExecutionTab {
 		fd_text_TimeoutMaxLimit.left = new FormAttachment(btnTotalTimeoutForTestExecution, 6);
 		text_TimeoutMaxLimit.setLayoutData(fd_text_TimeoutMaxLimit);
 
-		Button btnSeperateLaunchForEachClassSuite = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnSeperateLaunchForEachClassSuite = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnSeperateLaunchForEachClassSuite = new FormData();
 		fd_btnSeperateLaunchForEachClassSuite.top = new FormAttachment(btnTotalTimeoutForTestExecution, 6);
 		fd_btnSeperateLaunchForEachClassSuite.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
 		btnSeperateLaunchForEachClassSuite.setLayoutData(fd_btnSeperateLaunchForEachClassSuite);
 		btnSeperateLaunchForEachClassSuite.setText("Seperate launch for each test class or suite");
 
-		Button btnRunTestsInDebugMode = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnRunTestsInDebugMode = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnRunTestsInDebugMode = new FormData();
 		fd_btnRunTestsInDebugMode.top = new FormAttachment(btnSeperateLaunchForEachClassSuite, 6);
 		fd_btnRunTestsInDebugMode.left = new FormAttachment(btnReportExecutableLineCoverage, 0, SWT.LEFT);
@@ -164,28 +187,28 @@ public class OptionsInExecutionTab {
 		fd_grpPluginTests.right = new FormAttachment(100, -5);
 		grpPluginTests.setLayoutData(fd_grpPluginTests);
 		
-		Button btnDoNotRun = new Button(grpPluginTests, SWT.RADIO);
+		btnDoNotRun = new Button(grpPluginTests, SWT.RADIO);
 		FormData fd_btnDoNotRun = new FormData();
 		fd_btnDoNotRun.top = new FormAttachment(0);
 		fd_btnDoNotRun.left = new FormAttachment(0, 10);
 		btnDoNotRun.setLayoutData(fd_btnDoNotRun);
 		btnDoNotRun.setText("Do not run plugin tests");
 		
-		Button btnAutomaticallySearchThe = new Button(grpPluginTests, SWT.RADIO);
+		btnAutomaticallySearchThe = new Button(grpPluginTests, SWT.RADIO);
 		FormData fd_btnAutomaticallySearchThe = new FormData();
 		fd_btnAutomaticallySearchThe.top = new FormAttachment(btnDoNotRun, 6);
 		fd_btnAutomaticallySearchThe.left = new FormAttachment(btnDoNotRun, 0, SWT.LEFT);
 		btnAutomaticallySearchThe.setLayoutData(fd_btnAutomaticallySearchThe);
 		btnAutomaticallySearchThe.setText("Automatically search the project for JUnit Plug-in Test launch files to run");
 		
-		Button btnLaunchSelectedTests = new Button(grpPluginTests, SWT.RADIO);
+		btnLaunchSelectedTests = new Button(grpPluginTests, SWT.RADIO);
 		FormData fd_btnLaunchSelectedTests = new FormData();
 		fd_btnLaunchSelectedTests.top = new FormAttachment(btnAutomaticallySearchThe, 6);
 		fd_btnLaunchSelectedTests.left = new FormAttachment(btnDoNotRun, 0, SWT.LEFT);
 		btnLaunchSelectedTests.setLayoutData(fd_btnLaunchSelectedTests);
 		btnLaunchSelectedTests.setText("Launch selected tests as plug-in tests");
 		
-		Button btnSpecifyPluginTests = new Button(grpPluginTests, SWT.RADIO);
+		btnSpecifyPluginTests = new Button(grpPluginTests, SWT.RADIO);
 		FormData fd_btnSpecifyPluginTests = new FormData();
 		fd_btnSpecifyPluginTests.top = new FormAttachment(btnLaunchSelectedTests, 55, SWT.BOTTOM);
 		fd_btnSpecifyPluginTests.left = new FormAttachment(btnDoNotRun, 0, SWT.LEFT);
@@ -220,5 +243,71 @@ public class OptionsInExecutionTab {
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
+	/**
+	 * 获取Option4Execution选项
+	 * @return
+	 */
+	public Option4ExecutionEntity getOption4Execution(){
+		Option4ExecutionEntity option4Execution = new Option4ExecutionEntity();
+		if(btnReportExecutableLineCoverage.getSelection()){
+			option4Execution.isReportLineCoverage = true;
+		}
+		if(btnReportDecisionCoverage.getSelection()){
+		    option4Execution.isReportDecisionCoverage = true;	
+		}
+		if(btnReportFailureOrFileWithCoverageLessThan.getSelection()){
+			option4Execution.isReportFailureLessThanCoverage = true;
+			option4Execution.lessThanCoverage = Integer.parseInt(text_ReportFailureLessThanCoverage.getText());
+		}
+		if(btnPublishMethodCoverageInfo.getSelection()){
+			option4Execution.isPublishMethodCoverage = true;
+		}
+		if(btnClearPreviousCoverage.getSelection()){
+			option4Execution.isClearPreviousCoverage = true;
+		}
+		if(btnReportUnverifiedOutcomesMaxLimit.getSelection()){
+			option4Execution.isReportUnverifiedOutcomesLimit = true;
+			option4Execution.limitOutcomes = Integer.parseInt(text_ReportUnverifiedOutcomeMaxLimit.getText());
+		}
+		if(btnReportUnverifiedOutcomeDistributions.getSelection()){
+			option4Execution.isReportUnverifiedOutcomesDistributions = true;
+		}
+		if(btnAddNewlyOutcomesToExcel.getSelection()){
+			option4Execution.isAddOutcomesToExcel = true;
+		}
+		if(btnDetectMemoryLeaks.getSelection()){
+			option4Execution.isDetectMemoryLeaks = true;
+		}
+		if(btnCheckDesignByContract.getSelection()){
+			option4Execution.isCheckDesignByContract = true;
+		}
+		if(btnTimeoutForEachTest.getSelection()){
+			option4Execution.isTimeoutBeforeExecuteNextTest = true;
+			option4Execution.timeoutMinutes = Integer.parseInt(text_TimeoutMaxLimitForEachClassOrSuite.getText());
+		}
+		if(btnTotalTimeoutForTestExecution.getSelection()){
+			option4Execution.isTotalTimeout4TestExecution = true;
+			option4Execution.totalTimeoutMinutes = Integer.parseInt(text_TimeoutMaxLimit.getText());
+		}
+		if(btnSeperateLaunchForEachClassSuite.getSelection()){
+			option4Execution.isSeperatelaunch = true;
+		}
+		if(btnRunTestsInDebugMode.getSelection()){
+			option4Execution.isRunTestsInDebugMode = true;
+		}
+		if(btnDoNotRun.getSelection()){
+			option4Execution.PluginTests = 1;
+		}
+		if(btnAutomaticallySearchThe.getSelection()){
+			option4Execution.PluginTests = 2;
+		}
+		if(btnLaunchSelectedTests.getSelection()){
+			option4Execution.PluginTests =3;
+		}
+		if(btnSpecifyPluginTests.getSelection()){
+			option4Execution.PluginTests = 4;
+		}
+		return option4Execution;
+		}
 
 }

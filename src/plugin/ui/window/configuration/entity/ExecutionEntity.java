@@ -10,10 +10,12 @@ package plugin.ui.window.configuration.entity;
  */
 public class ExecutionEntity {
 	//严重等级
-	private SeverityLevelEntity serverityLevelEntity;
+	public SeverityLevelEntity serverityLevelEntity;
 	//选项
-	private Option4ExecutionEntity option4ExecutionEntity;
+	public Option4ExecutionEntity option4ExecutionEntity;
 	//搜索
+	public Search4ExecuteEntity search4ExecutionEntity;
+	public boolean isEnableTestExecution;
 	
 	
 }
