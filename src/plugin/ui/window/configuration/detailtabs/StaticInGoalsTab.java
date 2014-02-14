@@ -14,11 +14,19 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.GoalEntity;
+import plugin.ui.window.configuration.entity.StaticGoalEntity;
+
 public class StaticInGoalsTab {
 	TabItem tabItem;
 	private Text text_numberOfTasks;
 	private Text text_maxTask;
 	private DateTime dateTimeBy;
+	public Button btnPerformAllTasks;
+	public Button btnNotPerformAllTasks;
+	public Button btnNoMoreThan;
+	public Button btnMaxTaskNumberButton;
+	
 
 	public StaticInGoalsTab(TabFolder tabFolder) {
 		tabItem = new TabItem(tabFolder, SWT.NONE);
@@ -40,23 +48,23 @@ public class StaticInGoalsTab {
 		fd_grpStatic.left = new FormAttachment(0, 5);
 		grpStatic.setLayoutData(fd_grpStatic);
 
-		Button btnPerformAllTasks = new Button(grpStatic, SWT.RADIO);
+		btnPerformAllTasks = new Button(grpStatic, SWT.RADIO);
 		FormData fd_btnPerformAllTasks = new FormData();
 		fd_btnPerformAllTasks.left = new FormAttachment(0, 5);
 		btnPerformAllTasks.setLayoutData(fd_btnPerformAllTasks);
 		btnPerformAllTasks.setText("Perform all tasks");
 
-		Button btnRadioButton = new Button(grpStatic, SWT.RADIO);
+		btnNotPerformAllTasks = new Button(grpStatic, SWT.RADIO);
 		FormData fd_btnRadioButton = new FormData();
 		fd_btnRadioButton.top = new FormAttachment(btnPerformAllTasks, 10, SWT.BOTTOM);
 		fd_btnRadioButton.left = new FormAttachment(btnPerformAllTasks, 0, SWT.LEFT);
-		btnRadioButton.setLayoutData(fd_btnRadioButton);
-		btnRadioButton.setText("Don't perform tasks");
+		btnNotPerformAllTasks.setLayoutData(fd_btnRadioButton);
+		btnNotPerformAllTasks.setText("Don't perform tasks");
 
-		Button btnNoMoreThan = new Button(grpStatic, SWT.RADIO);
+		btnNoMoreThan = new Button(grpStatic, SWT.RADIO);
 		FormData fd_btnNoMoreThan = new FormData();
-		fd_btnNoMoreThan.top = new FormAttachment(btnRadioButton, 10, SWT.BOTTOM);
-		fd_btnNoMoreThan.left = new FormAttachment(btnRadioButton, 0, SWT.LEFT);
+		fd_btnNoMoreThan.top = new FormAttachment(btnNotPerformAllTasks, 10, SWT.BOTTOM);
+		fd_btnNoMoreThan.left = new FormAttachment(btnNotPerformAllTasks, 0, SWT.LEFT);
 		btnNoMoreThan.setLayoutData(fd_btnNoMoreThan);
 		btnNoMoreThan.setText("No more than");
 
@@ -80,7 +88,7 @@ public class StaticInGoalsTab {
 		fd_dateTimeBy.bottom = new FormAttachment(lblTasksPerDeveloper, 0, SWT.BOTTOM);
 		dateTimeBy.setLayoutData(fd_dateTimeBy);
 
-		Button btnMaxTaskNumberButton = new Button(grpStatic, SWT.CHECK);
+		btnMaxTaskNumberButton = new Button(grpStatic, SWT.CHECK);
 		btnMaxTaskNumberButton.setText("Max tasks to recommend:");
 		FormData fd_btnMaxTaskNumberButton = new FormData();
 		fd_btnMaxTaskNumberButton.left = new FormAttachment(btnNoMoreThan, 0, SWT.LEFT);
@@ -164,5 +172,29 @@ public class StaticInGoalsTab {
 
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	/**
+	 * 获取Static4Goal选项
+	 * @return
+	 */
+	public StaticGoalEntity getStatic4Goal(){
+		StaticGoalEntity static4Goal= new StaticGoalEntity();
+		if(btnPerformAllTasks.getSelection()){
+			static4Goal.performTasks = 1;
+		}
+		if(btnNotPerformAllTasks.getSelection()){
+			static4Goal.performTasks =2;
+		}
+		if(btnNoMoreThan.getSelection()){
+			static4Goal.performTasks =3;
+			static4Goal.developerTasks = Integer.parseInt(text_numberOfTasks.getText());
+			static4Goal.datetime.set(dateTimeBy.getYear(),dateTimeBy.getMonth(),dateTimeBy.getDay());
+		}
+		if(btnMaxTaskNumberButton.getSelection()){
+			static4Goal.isMaxRecommandTasks = true;
+			static4Goal.maxRecommandTasks = Integer.parseInt(text_maxTask.getText());
+		}
+		return static4Goal;
+		
 	}
 }

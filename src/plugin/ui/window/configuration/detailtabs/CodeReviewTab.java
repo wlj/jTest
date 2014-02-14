@@ -12,6 +12,11 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.Author4CodeReviewEntity;
+import plugin.ui.window.configuration.entity.CodeReviewEntity;
+import plugin.ui.window.configuration.entity.CommonEntity;
+import plugin.ui.window.configuration.entity.Filter4CodeReviewEntity;
+import plugin.ui.window.configuration.entity.Monitor4CodeReviewEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -19,10 +24,14 @@ public class CodeReviewTab {
 
 	private TabItem tbtmCodeReview;
 	private Text text_Identifier;
-	AuthorsTab authorsTab;
-	ReviewersTab reviewersTab;
-	MonitorsTab monitorsTab;
-	FiltersTab filtersTab;
+	public AuthorsTab authorsTab;
+	public ReviewersTab reviewersTab;
+	public MonitorsTab monitorsTab;
+	public FiltersTab filtersTab;
+	public Button btnEnableCodeReview;
+	public Button btnUseUniqueuserhost;
+	public Button btnGenerateComprehensiveReport;
+	public Button btnAutoPublishReviews;
 	
 	public CodeReviewTab(TabFolder tabFolder, int style) {
 		tbtmCodeReview = new TabItem(tabFolder, SWT.NONE);
@@ -36,7 +45,7 @@ public class CodeReviewTab {
 		Composite compositeInScrolledComposite = new Composite(scrolledComposite, SWT.NONE);
 		compositeInScrolledComposite.setLayout(new FormLayout());
 		// TO DO: add content into compositeInScrolledComposite
-		Button btnEnableCodeReview = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnEnableCodeReview = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnEnableCodeReview = new FormData();
 		fd_btnEnableCodeReview.top = new FormAttachment(0, 10);
 		fd_btnEnableCodeReview.left = new FormAttachment(0, 10);
@@ -50,7 +59,7 @@ public class CodeReviewTab {
 		lblIdentifier.setLayoutData(fd_lblIdentifier);
 		lblIdentifier.setText("Identifier");
 		
-		Button btnUseUniqueuserhost = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnUseUniqueuserhost = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnUseUniqueuserhost = new FormData();
 		fd_btnUseUniqueuserhost.right = new FormAttachment(100, -5);
 		fd_btnUseUniqueuserhost.bottom = new FormAttachment(lblIdentifier, 0, SWT.BOTTOM);
@@ -64,14 +73,14 @@ public class CodeReviewTab {
 		fd_text_Identifier.top = new FormAttachment(lblIdentifier, -2, SWT.TOP);
 		text_Identifier.setLayoutData(fd_text_Identifier);
 		
-		Button btnGenerateComprehensiveReport = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnGenerateComprehensiveReport = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnGenerateComprehensiveReport = new FormData();
 		fd_btnGenerateComprehensiveReport.top = new FormAttachment(text_Identifier, 6);
 		fd_btnGenerateComprehensiveReport.left = new FormAttachment(0, 10);
 		btnGenerateComprehensiveReport.setLayoutData(fd_btnGenerateComprehensiveReport);
 		btnGenerateComprehensiveReport.setText("Generate comprehensive report (includes all scanners)");
 		
-		Button btnAutoPublishReviews = new Button(compositeInScrolledComposite, SWT.CHECK);
+		btnAutoPublishReviews = new Button(compositeInScrolledComposite, SWT.CHECK);
 		FormData fd_btnAutoPublishReviews = new FormData();
 		fd_btnAutoPublishReviews.top = new FormAttachment(btnGenerateComprehensiveReport, 6);
 		fd_btnAutoPublishReviews.left = new FormAttachment(0, 10);
@@ -93,6 +102,31 @@ public class CodeReviewTab {
 		
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	/**
+	 * 获取CodeReview选项
+	 * @return
+	 */
+	public CodeReviewEntity getCodeReview(){
+		CodeReviewEntity codeReview= new CodeReviewEntity();
+		if(btnEnableCodeReview.getSelection()){
+			codeReview.isEnabled = true;
+		}
+		codeReview.identifier = text_Identifier.getText();
+		if(btnUseUniqueuserhost.getSelection()){
+			codeReview.isUseUniqueUserHost = true;
+		}
+		if(btnGenerateComprehensiveReport.getSelection()){
+			codeReview.isGenerateAllReport = true;
+		}
+		if(btnAutoPublishReviews.getSelection()){
+			codeReview.isAutoPublishReview = true;
+		}
+		//todo
+		////Author4CodeReviewEntity author4CodeReview = new Author4CodeReviewEntity();
+		///Monitor4CodeReviewEntity monitor4CodeReview = new Monitor4CodeReviewEntity();
+		///Filter4CodeReviewEntity filter4CodeReview = new Filter4CodeReviewEntity();
+		return codeReview;
 	}
 
 }

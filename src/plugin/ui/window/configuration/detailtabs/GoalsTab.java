@@ -9,6 +9,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import plugin.ui.window.configuration.entity.CommonEntity;
+import plugin.ui.window.configuration.entity.GoalEntity;
+import plugin.ui.window.configuration.entity.Static4GoalEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -44,5 +47,14 @@ public class GoalsTab {
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
-
+	/**
+	 * 获取Goal选项
+	 * @return
+	 */
+	public GoalEntity getGoal(){
+		GoalEntity goal= new GoalEntity();
+		goal.
+		return goal;
+		
+	}
 }

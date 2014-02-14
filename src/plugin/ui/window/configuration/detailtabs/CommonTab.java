@@ -12,6 +12,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.CommonEntity;
+import plugin.ui.window.configuration.entity.Search4ExecuteEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -23,6 +25,17 @@ public class CommonTab {
 	private Text text_GenerateAndExecute;
 	private Text text_RecordTestCoverage;
 	private Text txtVmArguments;
+	public Button btnRefreshProjectsalways;
+	public Button btnUpdateProjectsFrom;
+	public Button btnFullrebuildAllFiles;
+	public Button btnIncre;
+	public Button btnOnlyIfGeneration;
+	public Button btnStopTestingOn;
+	public Button btnLocalDirectory;
+	public Button btnWorkspace;
+	public Button btnUseTestClass;
+	public Button btnGenerateAndExecute;
+	public Button btnRecordTestCoverage;
 
 	public CommonTab(TabFolder tabFolder, int style) {
 		tbtmCommon = new TabItem(tabFolder, SWT.NONE);
@@ -47,13 +60,13 @@ public class CommonTab {
 		fd_grpBeforeTesting.left = new FormAttachment(0, 5);
 		grpBeforeTesting.setLayoutData(fd_grpBeforeTesting);
 
-		Button btnRefreshProjectsalways = new Button(grpBeforeTesting, SWT.CHECK);
+		btnRefreshProjectsalways = new Button(grpBeforeTesting, SWT.CHECK);
 		FormData fd_btnRefreshProjectsalways = new FormData();
 		fd_btnRefreshProjectsalways.left = new FormAttachment(0, 5);
 		btnRefreshProjectsalways.setLayoutData(fd_btnRefreshProjectsalways);
 		btnRefreshProjectsalways.setText("Refresh projects (always true in command-line mode)");
 
-		Button btnUpdateProjectsFrom = new Button(grpBeforeTesting, SWT.CHECK);
+		btnUpdateProjectsFrom = new Button(grpBeforeTesting, SWT.CHECK);
 		btnUpdateProjectsFrom.setLayoutData(new FormData());
 		FormData fd_btnUpdateProjectsFrom = new FormData();
 		fd_btnUpdateProjectsFrom.top = new FormAttachment(btnRefreshProjectsalways, 3, SWT.BOTTOM);
@@ -71,26 +84,26 @@ public class CommonTab {
 		fd_grpBuild.left = new FormAttachment(btnRefreshProjectsalways, 0, SWT.LEFT);
 		grpBuild.setLayoutData(fd_grpBuild);
 
-		Button btnFullrebuildAllFiles = new Button(grpBuild, SWT.CHECK);
+		btnFullrebuildAllFiles = new Button(grpBuild, SWT.CHECK);
 		FormData fd_btnFullrebuildAllFiles = new FormData();
 		fd_btnFullrebuildAllFiles.left = new FormAttachment(0, 5);
 		btnFullrebuildAllFiles.setLayoutData(fd_btnFullrebuildAllFiles);
 		btnFullrebuildAllFiles.setText("Full(rebuild all files)");
 
-		Button btnIncre = new Button(grpBuild, SWT.CHECK);
+		btnIncre = new Button(grpBuild, SWT.CHECK);
 		FormData fd_btnIncre = new FormData();
 		fd_btnIncre.left = new FormAttachment(btnFullrebuildAllFiles, 5);
 		btnIncre.setLayoutData(fd_btnIncre);
 		btnIncre.setText("Incremental(build files changed since last build)");
 
-		Button btnOnlyIfGeneration = new Button(grpBuild, SWT.CHECK);
+		btnOnlyIfGeneration = new Button(grpBuild, SWT.CHECK);
 		FormData fd_btnOnlyIfGeneration = new FormData();
 		fd_btnOnlyIfGeneration.left = new FormAttachment(btnFullrebuildAllFiles, 10, SWT.LEFT);
 		fd_btnOnlyIfGeneration.top = new FormAttachment(btnFullrebuildAllFiles, 3, SWT.BOTTOM);
 		btnOnlyIfGeneration.setLayoutData(fd_btnOnlyIfGeneration);
 		btnOnlyIfGeneration.setText("Only if Generation or Execution is enabled");
 
-		Button btnStopTestingOn = new Button(grpBuild, SWT.CHECK);
+		btnStopTestingOn = new Button(grpBuild, SWT.CHECK);
 		FormData fd_btnStopTestingOn = new FormData();
 		fd_btnStopTestingOn.top = new FormAttachment(btnOnlyIfGeneration, 3, SWT.BOTTOM);
 		fd_btnStopTestingOn.left = new FormAttachment(btnOnlyIfGeneration, 0, SWT.LEFT);
@@ -106,21 +119,21 @@ public class CommonTab {
 		fd_grpWorkingDirectory.left = new FormAttachment(grpBeforeTesting, 0, SWT.LEFT);
 		grpWorkingDirectory.setLayoutData(fd_grpWorkingDirectory);
 
-		Button btnLocalDirectory = new Button(grpWorkingDirectory, SWT.RADIO);
+		btnLocalDirectory = new Button(grpWorkingDirectory, SWT.RADIO);
 		btnLocalDirectory.setText("Local Directory: ");
 		FormData fd_btnLocalDirectory = new FormData();
 		fd_btnLocalDirectory.left = new FormAttachment(0, 5);
 		fd_btnLocalDirectory.top = new FormAttachment(0, 5);
 		btnLocalDirectory.setLayoutData(fd_btnLocalDirectory);
 
-		Button btnWorkspace = new Button(grpWorkingDirectory, SWT.RADIO);
+		btnWorkspace = new Button(grpWorkingDirectory, SWT.RADIO);
 		btnWorkspace.setText("Workspace: ");
 		FormData fd_btnWorkspace = new FormData();
 		fd_btnWorkspace.left = new FormAttachment(btnLocalDirectory, 0, SWT.LEFT);
 		fd_btnWorkspace.top = new FormAttachment(btnLocalDirectory, 10, SWT.BOTTOM);
 		btnWorkspace.setLayoutData(fd_btnWorkspace);
 
-		Button btnUseTestClass = new Button(grpWorkingDirectory, SWT.RADIO);
+		btnUseTestClass = new Button(grpWorkingDirectory, SWT.RADIO);
 		btnUseTestClass.setText("Use test class project as working directory");
 		FormData fd_btnUseTestClass = new FormData();
 		fd_btnUseTestClass.left = new FormAttachment(btnWorkspace, 0, SWT.LEFT);
@@ -157,14 +170,14 @@ public class CommonTab {
 		fd_grpInContainerTesting.left = new FormAttachment(grpWorkingDirectory, 0, SWT.LEFT);
 		grpInContainerTesting.setLayoutData(fd_grpInContainerTesting);
 		
-		Button btnGenerateAndExecute = new Button(grpInContainerTesting, SWT.CHECK);
+		btnGenerateAndExecute = new Button(grpInContainerTesting, SWT.CHECK);
 		FormData fd_btnGenerateAndExecute = new FormData();
 		fd_btnGenerateAndExecute.top = new FormAttachment(0, 5);
 		fd_btnGenerateAndExecute.left = new FormAttachment(0, 5);
 		btnGenerateAndExecute.setLayoutData(fd_btnGenerateAndExecute);
 		btnGenerateAndExecute.setText("Generate and execute Catus tests on server: ");
 		
-		Button btnRecordTestCoverage = new Button(grpInContainerTesting, SWT.CHECK);
+		btnRecordTestCoverage = new Button(grpInContainerTesting, SWT.CHECK);
 		FormData fd_btnRecordTestCoverage = new FormData();
 		fd_btnRecordTestCoverage.top = new FormAttachment(btnGenerateAndExecute, 10);
 		fd_btnRecordTestCoverage.left = new FormAttachment(btnGenerateAndExecute, 0, SWT.LEFT);
@@ -236,5 +249,52 @@ public class CommonTab {
 		scrolledComposite.setContent(compositeCommon);
 		scrolledComposite.setMinSize(compositeCommon.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
+	/**
+	 * 获取Common选项
+	 * @return
+	 */
+	public CommonEntity getCommon(){
+		CommonEntity common= new CommonEntity();
+		if(btnRefreshProjectsalways.getSelection()){
+			common.isRefreshProjects = true;
+		}
+		if(btnUpdateProjectsFrom.getSelection()){
+			common.isUpdateProjectsFromSourceControl = true;
+		}
+		if(btnFullrebuildAllFiles.getSelection()){
+			common.isRebuildAllFiles = true;
+		}
+		if(btnIncre.getSelection()){
+			common.isIncremental = true;
+		}
+		if(btnOnlyIfGeneration.getSelection()){
+			common.isEnabledGenerationExecution = true;
+		}
+		if(btnStopTestingOn.getSelection()){
+			common.isStopTestingOnBuildErrors = true;
+		}
+		if(btnLocalDirectory.getSelection()){
+			common.workingDirectory = 1;
+			common.localDirectory = txt_localDir.getText();
+		}
+		if(btnWorkspace.getSelection()){
+			common.workingDirectory = 2;
+			common.workspace = txt_workspace.getText();
+		}
+		if(btnUseTestClass.getSelection()){
+			common.workingDirectory =3;
+		}
+		if(btnGenerateAndExecute.getSelection()){
+			common.isIsGenerateAndExecuteCatusTests = true;
+			common.generateAndExecuteCatusTests = text_GenerateAndExecute.getText();
+		}
+		if(btnRecordTestCoverage.getSelection()){
+			common.isRecordTestCoverage = true;
+			common.recordTestCoverage = text_RecordTestCoverage.getText();
+		}
+		common.vMArguments = txtVmArguments.getText();
+		
+		return common;
+		}
 
 }
