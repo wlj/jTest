@@ -6,17 +6,19 @@ package plugin.ui.window.configuration.entity;
  */
 public class CodeReviewEntity {
 	//是否启用代码评审
-	private boolean isEnabled;
+	public boolean isEnabled;
 	//是否生成全面报告
-	private boolean isGenerateAllReprot;
+	public boolean isGenerateAllReport;
+	public boolean isUseUniqueUserHost;
 	//是否自动发布审查
-	private boolean isAutoPublishReview;
+	public boolean isAutoPublishReview;
+	public String identifier;
 	//作者
-	private Author4CodeReviewEntity[] authors;
+	public Author4CodeReviewEntity[] authors;
 	//审查者
-	private Reviewer4CodeReviewEntity[] reviewers;
+	public Reviewer4CodeReviewEntity[] reviewers;
 	//监视者
-	private Monitor4CodeReview[] monitors;
+	public Monitor4CodeReviewEntity[] monitors;
 	//过滤器
-	private Filter4CodeReviewEntity filters;
+	public Filter4CodeReviewEntity filters;
 }

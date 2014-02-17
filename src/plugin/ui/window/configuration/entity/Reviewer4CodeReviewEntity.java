@@ -6,9 +6,9 @@ package plugin.ui.window.configuration.entity;
  */
 public class Reviewer4CodeReviewEntity {
 	//名称
-	private String name;
+	public String name;
 	//被审查名称（作者名称）
-	private String authorName;
+	public String authorName;
 	//审查路径
-	private String reviewPath;
+	public String reviewPath;
 }

@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.TabItem;
 
 import plugin.ui.window.configuration.entity.CommonEntity;
 import plugin.ui.window.configuration.entity.GoalEntity;
-import plugin.ui.window.configuration.entity.Static4GoalEntity;
+//import plugin.ui.window.configuration.entity.Static4GoalEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -53,7 +53,6 @@ public class GoalsTab {
 	 */
 	public GoalEntity getGoal(){
 		GoalEntity goal= new GoalEntity();
-		goal.
 		return goal;
 		
 	}

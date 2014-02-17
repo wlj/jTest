@@ -4,11 +4,11 @@ package plugin.ui.window.configuration.entity;
  * @author wlj
  *
  */
-public class Monitor4CodeReview {
+public class Monitor4CodeReviewEntity {
 	//name
-	private String name;
+	public String name;
 	//被监视着（作者）名称
-	private String anthorName;
+	public String anthorName;
 	//监视路径
-	private String monitorPath;
+	public String monitorPath;
 }

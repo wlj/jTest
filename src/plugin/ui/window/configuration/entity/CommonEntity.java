@@ -1,21 +1,21 @@
 package plugin.ui.window.configuration.entity;
 
 public class CommonEntity {
-	private boolean refreshProjects;
-	private boolean updateProjectsFromSourceControl;
-	private boolean rebuildAllFiles;
-	private boolean incremental;
-	private boolean isEnabledGenerationExecution;
-	private boolean stopTestingOnBuildErrors;
+	public boolean isRefreshProjects;
+	public boolean isUpdateProjectsFromSourceControl;
+	public boolean isRebuildAllFiles;
+	public boolean isIncremental;
+	public boolean isEnabledGenerationExecution;
+	public boolean isStopTestingOnBuildErrors;
 	//1、local Directory 2、Workspace 3、 Use test class project as working directory
-	private int workingDirectory;
-	private String localDirectory;
-	private String workspace;
-	private boolean isGenerateAndExecuteCatusTests;
-	private String generateAndExecuteCatusTests;
-	private boolean isRecordTestCoverage;
-	private String recordTestCoverage;
-	private String vMArguments;
+	public int workingDirectory;
+	public String localDirectory;
+	public String workspace;
+	public boolean isIsGenerateAndExecuteCatusTests;
+	public String generateAndExecuteCatusTests;
+	public boolean isRecordTestCoverage;
+	public String recordTestCoverage;
+	public String vMArguments;
 	
 	
 }
