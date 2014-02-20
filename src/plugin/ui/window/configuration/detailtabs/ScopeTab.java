@@ -5,6 +5,11 @@ import java.util.Date;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -18,6 +23,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import plugin.ui.window.configuration.entity.AuthorFilter;
@@ -57,6 +63,7 @@ public class ScopeTab {
 	public Button btnRemoveMethodPattern;
 	public Button btnSkipMethedByPattern;
 	public Button btnAddMethodPattern;
+	public DateTime sinceDateTimeInLineFilter;
 	
 
 	public ScopeTab(TabFolder tabFolder, int style) {
@@ -108,7 +115,22 @@ public class ScopeTab {
 			fd_btnSinceDate.top = new FormAttachment(btnNoTimeFilters, 5);
 			btnSinceDate.setLayoutData(fd_btnSinceDate);
 			btnSinceDate.setText("Test only files added or modified since the cutoff date");
-
+			btnSinceDate.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					sinceDateTime.setEnabled(btnSinceDate.getSelection());
+					btnTileDate.setEnabled(btnSinceDate.getSelection());
+					tileDateTime.setEnabled(btnSinceDate.getSelection()&&btnTileDate.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			sinceDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
 			FormData fd_dateTime = new FormData();
 			fd_dateTime.left = new FormAttachment(btnSinceDate, 15);
@@ -121,7 +143,20 @@ public class ScopeTab {
 			fd_btnTileDate.left = new FormAttachment(0, 15);
 			btnTileDate.setLayoutData(fd_btnTileDate);
 			btnTileDate.setText("and added or modified before (now when disabled)");
-
+			btnTileDate.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					tileDateTime.setEnabled(btnTileDate.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			tileDateTime = new DateTime(grpTimeOptions, SWT.BORDER);
 			FormData fd_TileDataTime = new FormData();
 			fd_TileDataTime.top = new FormAttachment(btnSinceDate, 3);
@@ -133,7 +168,20 @@ public class ScopeTab {
 			fd_btnTestFilesInLast.top = new FormAttachment(btnTileDate, 5);
 			btnTestFilesInLast.setLayoutData(fd_btnTestFilesInLast);
 			btnTestFilesInLast.setText("Test only files added or modified in the last");
-
+			btnTestFilesInLast.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					text_lastDaysInLineFilter.setEnabled(btnTestFilesInLast.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			text_lastDaysInLineFilter = new Text(grpTimeOptions, SWT.BORDER);
 			FormData fd_text_lastDays = new FormData();
 			fd_text_lastDays.top = new FormAttachment(btnTileDate, 3);
@@ -176,7 +224,20 @@ public class ScopeTab {
 			fd_btnRadioButton.bottom = new FormAttachment(100, -5);
 			btnFilesAuthoredByUser.setLayoutData(fd_btnRadioButton);
 			btnFilesAuthoredByUser.setText("Test only files authored by user");
-
+			btnFilesAuthoredByUser.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					text_authorNameInFileFilter.setEnabled(btnFilesAuthoredByUser.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			text_authorNameInFileFilter = new Text(grpAuthorOptions, SWT.BORDER);
 			FormData fd_text = new FormData();
 			fd_text.top = new FormAttachment(btnNoAuthorFilters, 5);
@@ -214,8 +275,21 @@ public class ScopeTab {
 			fd_btnSinceDate.top = new FormAttachment(btnNoTimeFiltersInLineFilter, 5);
 			btnSinceDateInLineFilter.setLayoutData(fd_btnSinceDate);
 			btnSinceDateInLineFilter.setText("Test only lines added or modified since the cutoff date");
-
-			DateTime sinceDateTimeInLineFilter = new DateTime(grpTimeOptionsInLineFilter, SWT.BORDER);
+			btnSinceDateInLineFilter.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					sinceDateTimeInLineFilter.setEnabled(btnSinceDateInLineFilter.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			sinceDateTimeInLineFilter = new DateTime(grpTimeOptionsInLineFilter, SWT.BORDER);
 			FormData fd_dateTime = new FormData();
 			fd_dateTime.left = new FormAttachment(btnSinceDateInLineFilter, 15);
 			fd_dateTime.top = new FormAttachment(btnNoTimeFiltersInLineFilter);
@@ -226,7 +300,20 @@ public class ScopeTab {
 			fd_btnTestFilesInLast.top = new FormAttachment(btnSinceDateInLineFilter, 7);
 			btnTestFilesInLastInLineFilter.setLayoutData(fd_btnTestFilesInLast);
 			btnTestFilesInLastInLineFilter.setText("Test only lines added or modified in the last");
-
+			btnTestFilesInLastInLineFilter.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					text_lastDaysInLineFilter.setEnabled(btnTestFilesInLastInLineFilter.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			text_lastDaysInLineFilter = new Text(grpTimeOptionsInLineFilter, SWT.BORDER);
 			FormData fd_text_lastDays = new FormData();
 			fd_text_lastDays.top = new FormAttachment(btnSinceDateInLineFilter, 5);
@@ -246,7 +333,7 @@ public class ScopeTab {
 			fd_btnTestLocalFile.top = new FormAttachment(btnTestFilesInLastInLineFilter, 5);
 			btnTestLocalFileInLineFilter.setLayoutData(fd_btnTestLocalFile);
 			btnTestLocalFileInLineFilter.setText("Test only lines added or modified locally");
-
+			
 			Group grpAuthorOptionsInLineFilter = new Group(lineFilterComposite, SWT.NONE);
 			grpAuthorOptionsInLineFilter.setText("Author options");
 			grpAuthorOptionsInLineFilter.setLayout(new FormLayout());
@@ -268,7 +355,20 @@ public class ScopeTab {
 			fd_btnRadioButton.top = new FormAttachment(btnNoAuthorFiltersInLineFilter, 5);
 			btnFilesAuthoredByUserInLineFilter.setLayoutData(fd_btnRadioButton);
 			btnFilesAuthoredByUserInLineFilter.setText("Test only lines authored by user");
-
+			btnFilesAuthoredByUserInLineFilter.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					text_authorNameInLineFilter.setEnabled(btnFilesAuthoredByUserInLineFilter.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			text_authorNameInLineFilter = new Text(grpAuthorOptionsInLineFilter, SWT.BORDER);
 			FormData fd_text = new FormData();
 			fd_text.top = new FormAttachment(btnNoAuthorFiltersInLineFilter, 5);
@@ -291,7 +391,22 @@ public class ScopeTab {
 			fd_btnCheckButton.left = new FormAttachment(0, 5);
 			btnSkipMethedByPattern.setLayoutData(fd_btnCheckButton);
 			btnSkipMethedByPattern.setText("Skip methods with names that match one of the following regular expressions");
-
+			btnSkipMethedByPattern.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					tableMethodsPattern.setEnabled(btnSkipMethedByPattern.getSelection());
+					btnAddMethodPattern.setEnabled(btnSkipMethedByPattern.getSelection());
+					btnRemoveMethodPattern.setEnabled(btnSkipMethedByPattern.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			tableMethodsPattern = new Table(methodFiltersComposite, SWT.BORDER | SWT.FULL_SELECTION);
 			FormData fd_table = new FormData();
 			fd_table.left = new FormAttachment(btnSkipMethedByPattern, 5, SWT.LEFT);
@@ -313,7 +428,28 @@ public class ScopeTab {
 			fd_btnAddMethodPattern.top = new FormAttachment(btnSkipMethedByPattern, 5);
 			btnAddMethodPattern.setLayoutData(fd_btnAddMethodPattern);
 			btnAddMethodPattern.setText("Add");
-
+			btnAddMethodPattern.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseUp(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseDown(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					TableItem item=new TableItem(tableMethodsPattern, SWT.NONE);
+					
+					item.setText("sunt");
+				}
+				
+				@Override
+				public void mouseDoubleClick(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			btnRemoveMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
 			FormData fd_btnRemoveMethodPattern = new FormData();
 			fd_btnRemoveMethodPattern.width = 60;
@@ -338,7 +474,20 @@ public class ScopeTab {
 			fd_btnLimitSimpleMethods.top = new FormAttachment(0, 3);
 			btnLimitSimpleMethods.setLayoutData(fd_btnLimitSimpleMethods);
 			btnLimitSimpleMethods.setText("Do not test methods with cyclomatic complexity less than");
-
+			btnLimitSimpleMethods.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					text_minMethodNum.setEnabled(btnLimitSimpleMethods.getSelection());
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			btnLimitsDeprecatedClassMethod = new Button(bottomCompositeInScope, SWT.CHECK);
 			FormData fd_btnLimitsDeprecatedClassMethod = new FormData();
 			fd_btnLimitsDeprecatedClassMethod.bottom = new FormAttachment(100, -10);
