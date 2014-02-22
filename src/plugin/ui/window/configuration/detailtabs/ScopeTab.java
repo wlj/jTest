@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Text;
 import plugin.ui.window.configuration.entity.AuthorFilter;
 import plugin.ui.window.configuration.entity.CodeFilter4Scope;
 import plugin.ui.window.configuration.entity.FileFilter4Scope;
+import plugin.ui.window.configuration.entity.MethodFilters4Scope;
 import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.ui.window.configuration.entity.TimeFilter;
 import plugin.util.Const;
@@ -675,7 +676,15 @@ public class ScopeTab {
 		if(btnLimitsDeprecatedClassMethod.getSelection()){
 			scope.deprecatedClassesOrMethods = true;
 		}
+		MethodFilters4Scope methodfilters4Scope =  new MethodFilters4Scope();
+		methodfilters4Scope.isEnabled=btnSkipMethedByPattern.getSelection();
+		String[] patterns=new String[tableMethodsPattern.getItemCount()];
 		
+		for(int index=0;index<tableMethodsPattern.getItemCount();index++){
+			patterns[index]=tableMethodsPattern.getItem(index).getText();
+		}
+		methodfilters4Scope.expressions=patterns;
+		scope.methodFilters=methodfilters4Scope;
 		return scope;
 	}
 	
