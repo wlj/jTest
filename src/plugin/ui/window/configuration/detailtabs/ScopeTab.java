@@ -6,6 +6,8 @@ import java.util.Date;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -420,7 +422,34 @@ public class ScopeTab {
 			TableColumn tblclmnMethodPattern = new TableColumn(tableMethodsPattern, SWT.NONE);
 			tblclmnMethodPattern.setWidth(210);
 			tblclmnMethodPattern.setText("Method name regular expression");
-
+			//双击可编辑单元格
+			tableMethodsPattern.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseUp(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseDown(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseDoubleClick(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					int itemIndex = tableMethodsPattern.getSelectionIndex();
+					if(itemIndex<0){
+						return;
+					}
+					TableItem item= tableMethodsPattern.getItem(itemIndex);
+					editorTableItem(item);
+					
+					
+				}
+			});
 			btnAddMethodPattern = new Button(methodFiltersComposite, SWT.NONE);
 			FormData fd_btnAddMethodPattern = new FormData();
 			fd_btnAddMethodPattern.left = new FormAttachment(tableMethodsPattern, 5);
@@ -441,7 +470,7 @@ public class ScopeTab {
 					// TODO Auto-generated method stub
 					TableItem item=new TableItem(tableMethodsPattern, SWT.NONE);
 					
-					item.setText("sunt");
+					editorTableItem(item);
 				}
 				
 				@Override
@@ -457,6 +486,30 @@ public class ScopeTab {
 			fd_btnRemoveMethodPattern.top = new FormAttachment(btnAddMethodPattern, 5);
 			btnRemoveMethodPattern.setLayoutData(fd_btnRemoveMethodPattern);
 			btnRemoveMethodPattern.setText("Remove");
+			btnRemoveMethodPattern.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseUp(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseDown(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					int itemIndex = tableMethodsPattern.getSelectionIndex();
+					if(itemIndex<0){
+						return;
+					}
+					tableMethodsPattern.remove(itemIndex);
+				}
+				
+				@Override
+				public void mouseDoubleClick(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 
 		// add and set bottom composite in Scope
@@ -628,6 +681,39 @@ public class ScopeTab {
 	
 	public TabItem getTabItem(){
 		return this.tbtmScope;
+	}
+	/**
+	 * 编辑单元格
+	 * @param item 单元格
+	 */
+	private void editorTableItem(TableItem item){
+		final TableEditor tEditor=new TableEditor(tableMethodsPattern);
+		final Text nameText = new Text(tableMethodsPattern, SWT.SINGLE | SWT.BORDER);
+		tEditor.grabHorizontal = true; // 宽度
+		tEditor.grabVertical = false; // 高度不占满
+		tEditor.minimumHeight = 25;
+		tEditor.minimumWidth = 210;
+		tEditor.horizontalAlignment = SWT.CENTER;
+		
+		nameText.setText(item.getText());
+		tEditor.setEditor(nameText, item, 0);
+		nameText.setFocus();
+		nameText.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				tEditor.getItem().setText(nameText.getText());
+				tEditor.getEditor().dispose();
+				tEditor.dispose();
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 }
