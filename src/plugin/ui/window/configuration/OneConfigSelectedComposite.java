@@ -28,7 +28,7 @@ import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
-public class OneConfigSelectedComposite extends Composite implements Observer {
+public class OneConfigSelectedComposite extends Composite{
 	Composite nameparentComposite;
 	Composite rightActionComposite;
 	DetailTabFolder detailTabFolder;
@@ -45,7 +45,7 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 	// for analysis tabs
 	private TabFolder tabFolder;
 
-	public OneConfigSelectedComposite(Composite parent, int style, String configName) {
+	public OneConfigSelectedComposite(Composite parent, int style, ConfigEntity entity) {
 		
 		super(parent, style);
 		int tempValue = ConstantcLayoutData.botton_margin;
@@ -61,6 +61,8 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 		// set detail configuration page
 		detailTabFolder = new DetailTabFolder(this, SWT.None);
 		tabFolder = detailTabFolder.tabFolder;
+		this.entity=entity;
+		this.setConfigName();
 	}
 	
 	private void setNameAndParentComposite() {
@@ -173,12 +175,12 @@ public class OneConfigSelectedComposite extends Composite implements Observer {
 			}
 		});
 	}
-	@Override
-	public void update(Observable configTree, Object arg) {
-		// TODO Auto-generated method stub
-		tree = (ConfigTreeBase)configTree;
-		entity=tree.getSelectedConfigEntity();
-		
+	
+	/**
+	 * 设置配置的名称和分组
+	 * @param entity
+	 */
+	private void setConfigName(){
 		this.textName.setText(entity.name);
 		this.textParent.setText(entity.configCategory.toString());
 	}

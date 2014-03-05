@@ -1,7 +1,11 @@
 package plugin.ui.window.configuration;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -9,9 +13,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import plugin.ui.window.configuration.configtree.ConfigTreeBase;
+import plugin.ui.window.configuration.entity.ConfigEntity;
 import plugin.util.LayoutFactory;
 
-public class ConfigurationWindow {
+public class ConfigurationWindow implements Observer {
 
 	protected Shell shell;
 
@@ -76,10 +82,37 @@ public class ConfigurationWindow {
 		centerSashFormComposite.setLayoutData(fd_centerSashForm);
 		configListTreeComposite = new ConfigSelectWindow(centerSashFormComposite, SWT.None);
 		
-		detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, "a");
-		configListTreeComposite.configTree.addObserver(detailConfigComposite.oneConfigSelectedComposite);
+		detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null);
+		configListTreeComposite.configTree.addObserver(this);
 		centerSashFormComposite.setWeights(compositePortion);
 		
 	}
-
+private ConfigEntity entity;
+	@Override
+	public void update(Observable configTree, Object arg1) {
+		// TODO Auto-generated method stub
+		System.out.println(arg1);
+		if(arg1.equals("no-config")){
+			entity=null;
+			detailConfigComposite.showedComposite.dispose();
+			detailConfigComposite=null;
+			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null);
+		}else{
+			
+			ConfigTreeBase tree = (ConfigTreeBase)configTree;
+			ConfigEntity entity1=tree.getSelectedConfigEntity();
+			
+			if(entity!=null&&entity.id.equals(entity1.id)){
+				System.out.println("no-change");
+				return;
+			}
+			entity=entity1;
+			detailConfigComposite.showedComposite.dispose();
+			detailConfigComposite=null;
+			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, entity1);
+		}
+		///this.shell.layout();
+		Display.getDefault().getActiveShell().pack(true);
+		Display.getDefault().getActiveShell().setSize(800, 600);
+	}
 }

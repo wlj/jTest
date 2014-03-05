@@ -246,9 +246,11 @@ public class ConfigTree extends ConfigTreeBase {
 				if(isTreeitem){
 					selectedItem =  ((Tree)(evt.getSource())).getSelection()[0];
 					initMenu(evt);
+					setChanged();
 					if(selectedItem.getParentItem()!=null){
-						setChanged();
-						notifyObservers();
+						notifyObservers("one-config");
+					}else{
+						notifyObservers("no-config");
 					}
 				}
 				
