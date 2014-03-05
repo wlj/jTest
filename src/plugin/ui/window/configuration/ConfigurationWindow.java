@@ -82,7 +82,7 @@ public class ConfigurationWindow implements Observer {
 		centerSashFormComposite.setLayoutData(fd_centerSashForm);
 		configListTreeComposite = new ConfigSelectWindow(centerSashFormComposite, SWT.None);
 		
-		detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null);
+		detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null,null);
 		configListTreeComposite.configTree.addObserver(this);
 		centerSashFormComposite.setWeights(compositePortion);
 		
@@ -93,10 +93,13 @@ private ConfigEntity entity;
 		// TODO Auto-generated method stub
 		System.out.println(arg1);
 		if(arg1.equals("no-config")){
+			if(entity==null){
+				return;
+			}
 			entity=null;
 			detailConfigComposite.showedComposite.dispose();
 			detailConfigComposite=null;
-			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null);
+			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, null,null);
 		}else{
 			
 			ConfigTreeBase tree = (ConfigTreeBase)configTree;
@@ -109,7 +112,7 @@ private ConfigEntity entity;
 			entity=entity1;
 			detailConfigComposite.showedComposite.dispose();
 			detailConfigComposite=null;
-			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None, entity1);
+			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None,tree, entity1);
 		}
 		///this.shell.layout();
 		Display.getDefault().getActiveShell().pack(true);

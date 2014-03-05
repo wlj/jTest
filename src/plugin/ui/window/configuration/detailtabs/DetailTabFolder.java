@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import plugin.ui.window.configuration.entity.ConfigEntity;
+
 public class DetailTabFolder {
 	public TabFolder tabFolder;
 	
@@ -18,7 +20,7 @@ public class DetailTabFolder {
 	public CodeReviewTab codeReviewTab;
 	public GoalsTab goalsTab;
 	
-	public DetailTabFolder(Composite parent, int style) {
+	public DetailTabFolder(Composite parent, int style,ConfigEntity entity) {
 		// TODO Auto-generated constructor stub
 		tabFolder = new TabFolder(parent, style);
 		FormData fd_tabFolder = new FormData();
@@ -28,8 +30,12 @@ public class DetailTabFolder {
 		fd_tabFolder.left = new FormAttachment(0, 5);
 		tabFolder.setLayoutData(fd_tabFolder);
 		// add tab items
-		scopeTab = new ScopeTab(tabFolder, SWT.None);
-		scopeTab.setSelected(null);
+		if(entity==null){
+			scopeTab = new ScopeTab(tabFolder, SWT.None,null);
+		}else{
+			scopeTab = new ScopeTab(tabFolder, SWT.None,entity.scope);
+		}
+		
 		staticTab = new StaticTab(tabFolder, SWT.None);
 		generationTab = new GenerationTab(tabFolder, SWT.None);
 		executionTab = new ExecutionTab(tabFolder, SWT.None);

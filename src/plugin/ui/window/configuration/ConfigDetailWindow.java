@@ -3,6 +3,7 @@ package plugin.ui.window.configuration;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import plugin.ui.window.configuration.configtree.ConfigTreeBase;
 import plugin.ui.window.configuration.entity.ConfigEntity;
 
 public class ConfigDetailWindow{
@@ -12,7 +13,7 @@ public class ConfigDetailWindow{
 	Composite selectedComposite;
 	StackLayout detaiLayout;
 
-	public ConfigDetailWindow(Composite parent, int style, ConfigEntity entity) {
+	public ConfigDetailWindow(Composite parent, int style, ConfigTreeBase tree, ConfigEntity entity) {
 		int tempValue = ConstantcLayoutData.botton_margin;
 		showedComposite = new Composite(parent, style);
 		detaiLayout = new StackLayout();
@@ -22,7 +23,7 @@ public class ConfigDetailWindow{
 			noneConfigSelected = new NoneConfigSelectedComposite(showedComposite, style);
 			selectedComposite = noneConfigSelected;
 		}else{
-			oneConfigSelectedComposite = new OneConfigSelectedComposite(showedComposite, style, entity);
+			oneConfigSelectedComposite = new OneConfigSelectedComposite(showedComposite, style,tree, entity);
 			selectedComposite = oneConfigSelectedComposite;
 		}
 		

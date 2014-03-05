@@ -41,6 +41,7 @@ public class ScopeTab {
 	TabItem tbtmScope;
 	
 	private Text text_lastDaysInLineFilter;
+	private Text text_lastDaysInFileFilter;
 	private Text text_authorNameInLineFilter;
 	private Text text_authorNameInFileFilter;
 	private Text text_minMethodNum;
@@ -69,7 +70,7 @@ public class ScopeTab {
 	public DateTime sinceDateTimeInLineFilter;
 	
 
-	public ScopeTab(TabFolder tabFolder, int style) {
+	public ScopeTab(TabFolder tabFolder, int style, ScopeEntity entity) {
 		tbtmScope = new TabItem(tabFolder, style);
 		tbtmScope.setImage(SWTResourceManager.getImage(Const.SCOPE_ICON_PATH));
 		tbtmScope.setText("Scope");
@@ -139,6 +140,8 @@ public class ScopeTab {
 			fd_dateTime.left = new FormAttachment(btnSinceDate, 15);
 			fd_dateTime.top = new FormAttachment(btnNoTimeFilters);
 			sinceDateTime.setLayoutData(fd_dateTime);
+			
+			
 
 			btnTileDate = new Button(grpTimeOptions, SWT.CHECK);
 			FormData fd_btnTileDate = new FormData();
@@ -176,7 +179,7 @@ public class ScopeTab {
 				@Override
 				public void widgetSelected(SelectionEvent arg0) {
 					// TODO Auto-generated method stub
-					text_lastDaysInLineFilter.setEnabled(btnTestFilesInLast.getSelection());
+					text_lastDaysInFileFilter.setEnabled(btnTestFilesInLast.getSelection());
 				}
 				
 				@Override
@@ -185,16 +188,16 @@ public class ScopeTab {
 					
 				}
 			});
-			text_lastDaysInLineFilter = new Text(grpTimeOptions, SWT.BORDER);
+			text_lastDaysInFileFilter = new Text(grpTimeOptions, SWT.BORDER);
 			FormData fd_text_lastDays = new FormData();
 			fd_text_lastDays.top = new FormAttachment(btnTileDate, 3);
 			fd_text_lastDays.left = new FormAttachment(btnTestFilesInLast, 5);
-			text_lastDaysInLineFilter.setLayoutData(fd_text_lastDays);
+			text_lastDaysInFileFilter.setLayoutData(fd_text_lastDays);
 
 			Label lblDays = new Label(grpTimeOptions, SWT.NONE);
 			FormData fd_lblDays = new FormData();
 			fd_lblDays.top = new FormAttachment(btnTileDate, 3);
-			fd_lblDays.left = new FormAttachment(text_lastDaysInLineFilter, 5);
+			fd_lblDays.left = new FormAttachment(text_lastDaysInFileFilter, 5);
 			lblDays.setLayoutData(fd_lblDays);
 			lblDays.setText("days");
 
@@ -557,16 +560,38 @@ public class ScopeTab {
 			scrolledCompositeScope.setContent(compositeInScrolledCompositeScope);
 			scrolledCompositeScope.setMinSize(compositeInScrolledCompositeScope.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		}
+		Init( entity);
 	}
     /**
      * 设置选中的值
      * @param fileFiler
      */
-	public void setSelected(FileFilter4Scope fileFiler){
-		
-		if(fileFiler!=null && fileFiler.timeFilter.timeOption==1){
-			btnNoTimeFilters.setSelection(true);
+	private void Init(ScopeEntity entity){
+		if(entity==null){
+			sinceDateTime.setEnabled(false);
+		}else {
+			sinceDateTime.setYear(entity.fileFilters.timeFilter.startDate.YEAR);
+			sinceDateTime.setMonth(entity.fileFilters.timeFilter.startDate.MONTH);
+			sinceDateTime.setDay(entity.fileFilters.timeFilter.startDate.DATE);
+			text_lastDaysInFileFilter.setText(String.valueOf(entity.fileFilters.timeFilter.nearestDays));
+			btnTestFilesInLast.setEnabled(entity.fileFilters.timeFilter.timeOption==2);
+			if(entity.fileFilters.timeFilter.timeOption==1){
+				btnNoTimeFilters.setSelection(true);
+			}else if(entity.fileFilters.timeFilter.timeOption==2){
+				btnSinceDate.setSelection(true);
+				sinceDateTime.setEnabled(true);
+				if(entity.fileFilters.timeFilter.isEnabledEndDate){
+					btnTestFilesInLast.setSelection(true);
+					this.text_lastDaysInFileFilter.setEnabled(true);
+				}else{
+					btnTestFilesInLast.setSelection(false);
+					this.tileDateTime.setEnabled(false);
+				}
+			}
+			
+			
 		}
+		
 		
 	}
 	/**
@@ -583,19 +608,15 @@ public class ScopeTab {
 		}
 		if(this.btnSinceDate.getSelection()){
 			timeFilter.timeOption=2;
-			sinceDateTime.setEnabled(true);
 			timeFilter.startDate.set(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay());
-			btnTileDate.setEnabled(true);
-			if(btnTileDate.getSelection()){
-				tileDateTime.setEnabled(true);
-				timeFilter.endDate.set(tileDateTime.getYear(), tileDateTime.getMonth(), tileDateTime.getMonth());
-			}
+			timeFilter.endDate.set(tileDateTime.getYear(), tileDateTime.getMonth(), tileDateTime.getMonth());
+			timeFilter.isEnabledEndDate=btnTestFilesInLast.getSelection();
+			
 		}
 		if(btnTestFilesInLast.getSelection()){
-			text_lastDaysInLineFilter.setEnabled(true);
-			timeFilter.timeOption=3;
-			timeFilter.nearestDays=Integer.parseInt(this.text_lastDaysInLineFilter.getText());
+			timeFilter.nearestDays=Integer.parseInt(this.text_lastDaysInFileFilter.getText());
 		}
+		
 		if(btnTestLocalFile.getSelection()){
 			timeFilter.timeOption=4;
 		}

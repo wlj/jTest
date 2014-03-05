@@ -45,9 +45,10 @@ public class OneConfigSelectedComposite extends Composite{
 	// for analysis tabs
 	private TabFolder tabFolder;
 
-	public OneConfigSelectedComposite(Composite parent, int style, ConfigEntity entity) {
+	public OneConfigSelectedComposite(Composite parent, int style,ConfigTreeBase tree, ConfigEntity entity) {
 		
 		super(parent, style);
+		this.tree=tree;
 		int tempValue = ConstantcLayoutData.botton_margin;
 		// TODO Auto-generated constructor stub
 		// when a configuration selected, this composite will appear in the
@@ -59,7 +60,7 @@ public class OneConfigSelectedComposite extends Composite{
 		setNameAndParentComposite();
 		setBottemComposite();
 		// set detail configuration page
-		detailTabFolder = new DetailTabFolder(this, SWT.None);
+		detailTabFolder = new DetailTabFolder(this, SWT.None,entity);
 		tabFolder = detailTabFolder.tabFolder;
 		this.entity=entity;
 		this.setConfigName();

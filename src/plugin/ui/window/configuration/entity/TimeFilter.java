@@ -10,11 +10,17 @@ import java.util.Date;
  */
 public class TimeFilter {
 	public TimeFilter(){
-		this.startDate=Calendar.getInstance();
-		this.endDate=Calendar.getInstance();
+		if(this.startDate==null){
+			this.startDate=Calendar.getInstance();
+		}
+		if(this.endDate==null){
+			this.endDate=Calendar.getInstance();
+		}
 	}
 	public int timeOption;
 	public Calendar startDate;
+	public boolean isEnabledEndDate;
 	public Calendar endDate;
+	public boolean isEnableNearestDays;
 	public int nearestDays;
 }
