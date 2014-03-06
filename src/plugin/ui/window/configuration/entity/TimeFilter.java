@@ -9,18 +9,16 @@ import java.util.Date;
  *
  */
 public class TimeFilter {
-	public TimeFilter(){
-		if(this.startDate==null){
-			this.startDate=Calendar.getInstance();
-		}
-		if(this.endDate==null){
-			this.endDate=Calendar.getInstance();
-		}
-	}
 	public int timeOption;
-	public Calendar startDate;
+	private Date startDate;
 	public boolean isEnabledEndDate;
-	public Calendar endDate;
+	public Date endDate;
 	public boolean isEnableNearestDays;
 	public int nearestDays;
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 }

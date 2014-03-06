@@ -569,12 +569,22 @@ public class ScopeTab {
 	private void Init(ScopeEntity entity){
 		if(entity==null){
 			sinceDateTime.setEnabled(false);
+			tileDateTime.setEnabled(false);
+			text_lastDaysInFileFilter.setEnabled(false);
+			text_authorNameInFileFilter.setEnabled(false);
+			btnAddMethodPattern.setEnabled(false);
+			btnRemoveMethodPattern.setEnabled(false);
 		}else {
-			sinceDateTime.setYear(entity.fileFilters.timeFilter.startDate.YEAR);
-			sinceDateTime.setMonth(entity.fileFilters.timeFilter.startDate.MONTH);
-			sinceDateTime.setDay(entity.fileFilters.timeFilter.startDate.DATE);
+			sinceDateTime.setYear(entity.fileFilters.timeFilter.getStartDate().getYear());
+			sinceDateTime.setMonth(entity.fileFilters.timeFilter.getStartDate().getMonth());
+			sinceDateTime.setDay(entity.fileFilters.timeFilter.getStartDate().getDay());
+			tileDateTime.setYear(entity.fileFilters.timeFilter.endDate.getYear());
+			tileDateTime.setMonth(entity.fileFilters.timeFilter.endDate.getMonth());
+			tileDateTime.setDay(entity.fileFilters.timeFilter.endDate.getDay());
 			text_lastDaysInFileFilter.setText(String.valueOf(entity.fileFilters.timeFilter.nearestDays));
 			btnTestFilesInLast.setEnabled(entity.fileFilters.timeFilter.timeOption==2);
+			this.tileDateTime.setEnabled(entity.fileFilters.timeFilter.isEnabledEndDate);
+			text_lastDaysInFileFilter.setEnabled(entity.fileFilters.timeFilter.timeOption==3);
 			if(entity.fileFilters.timeFilter.timeOption==1){
 				btnNoTimeFilters.setSelection(true);
 			}else if(entity.fileFilters.timeFilter.timeOption==2){
@@ -582,14 +592,29 @@ public class ScopeTab {
 				sinceDateTime.setEnabled(true);
 				if(entity.fileFilters.timeFilter.isEnabledEndDate){
 					btnTestFilesInLast.setSelection(true);
-					this.text_lastDaysInFileFilter.setEnabled(true);
 				}else{
 					btnTestFilesInLast.setSelection(false);
-					this.tileDateTime.setEnabled(false);
 				}
+			}else if(entity.fileFilters.timeFilter.timeOption==3){
+				btnTestLocalFile.setEnabled(false);
 			}
 			
 			
+			btnNoAuthorFilters.setSelection(entity.fileFilters.authorFilter.authorOption==1);
+			btnFilesAuthoredByUser.setSelection(entity.fileFilters.authorFilter.authorOption==2);
+			text_authorNameInFileFilter.setEnabled(entity.fileFilters.authorFilter.authorOption==2);
+			text_authorNameInFileFilter.setText(entity.fileFilters.authorFilter.authorNames==null?"":entity.fileFilters.authorFilter.authorNames);
+			
+			btnSkipMethedByPattern.setSelection(entity.methodFilters.isEnabled);
+			btnSkipMethedByPattern.setEnabled(entity.methodFilters.isEnabled);
+			btnRemoveMethodPattern.setEnabled(entity.methodFilters.isEnabled);
+			if(entity.methodFilters.expressions!=null&&entity.methodFilters.expressions.length>0){
+				for(String s : entity.methodFilters.expressions){
+					TableItem item=new TableItem(tableMethodsPattern, SWT.NONE);
+					item.setText(s);
+				}
+				
+			}
 		}
 		
 		
@@ -608,17 +633,16 @@ public class ScopeTab {
 		}
 		if(this.btnSinceDate.getSelection()){
 			timeFilter.timeOption=2;
-			timeFilter.startDate.set(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay());
-			timeFilter.endDate.set(tileDateTime.getYear(), tileDateTime.getMonth(), tileDateTime.getMonth());
-			timeFilter.isEnabledEndDate=btnTestFilesInLast.getSelection();
-			
+			timeFilter.setStartDate(new Date(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay()));
+			timeFilter.isEnabledEndDate=btnTileDate.getSelection();
+			timeFilter.endDate=new Date(tileDateTime.getYear(), tileDateTime.getMonth(), tileDateTime.getMonth());
 		}
 		if(btnTestFilesInLast.getSelection()){
 			timeFilter.nearestDays=Integer.parseInt(this.text_lastDaysInFileFilter.getText());
 		}
 		
 		if(btnTestLocalFile.getSelection()){
-			timeFilter.timeOption=4;
+			timeFilter.timeOption=3;
 		}
 		fileFilter4Scope.timeFilter=timeFilter;
 		
@@ -629,7 +653,6 @@ public class ScopeTab {
 			authorFilter.authorOption=1;
 		}
 		if(btnFilesAuthoredByUser.getSelection()){
-			text_authorNameInFileFilter.setEnabled(true);
 			authorFilter.authorOption=2;
 			String authorName = text_authorNameInFileFilter.getText();
 			authorFilter.authorNames=authorName;
@@ -657,8 +680,7 @@ public class ScopeTab {
 		}
 		if(this.btnSinceDateInLineFilter.getSelection()){
 			timeFilterInLineFilter.timeOption=2;
-			sinceDateTime.setEnabled(true);
-			timeFilterInLineFilter.startDate.set(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay());
+			timeFilterInLineFilter.setStartDate(new Date(sinceDateTime.getYear()+1900, sinceDateTime.getMonth(), sinceDateTime.getDay()));
 		}
 		if(btnTestFilesInLastInLineFilter.getSelection()){
 			text_lastDaysInLineFilter.setEnabled(true);
