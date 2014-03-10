@@ -123,7 +123,10 @@ public class GenerationTestClassTab {
 			   fileDialog.setFilterPath("c:\\"); //Windows path
 			   fileDialog.setText("选择java文件");
 			   String dir = fileDialog.open();
-			   textOutputClass.setText(dir);
+			   if(dir!=null){
+				   textOutputClass.setText(dir);
+			   }
+			   
 			}
 			
 			@Override
