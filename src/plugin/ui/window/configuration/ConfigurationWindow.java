@@ -114,8 +114,6 @@ private ConfigEntity entity;
 			detailConfigComposite=null;
 			detailConfigComposite = new ConfigDetailWindow(centerSashFormComposite, SWT.None,tree, entity1);
 		}
-		///this.shell.layout();
-		Display.getDefault().getActiveShell().pack(true);
-		Display.getDefault().getActiveShell().setSize(800, 600);
+		centerSashFormComposite.layout(true);
 	}
 }
