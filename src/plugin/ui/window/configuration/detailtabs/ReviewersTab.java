@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 
 public class ReviewersTab {
 	TabItem tabItem;
@@ -74,5 +75,29 @@ public class ReviewersTab {
 		
 		scrolledComposite.setContent(compositeAuthors);
 		scrolledComposite.setMinSize(compositeAuthors.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+	}
+	
+	/**
+	 * 添加TableItem
+	 * @param reviewer
+	 * @param author
+	 * @param reviewPath
+	 */
+	public void addReviewItem(String reviewer,String author,String reviewPath){
+		TableItem[] items = this.table.getItems();
+		if(items!=null){
+			for(TableItem tItem :items){
+				System.out.println(tItem.getText(0));
+				if(tItem.getText(0).equals(reviewer)){
+					tItem.setText(1, tItem.getText(1)+","+author);
+					return;
+				}
+			}
+		}
+		
+		TableItem item=new TableItem(this.table,SWT.NONE);
+		item.setText(0, reviewer);
+		item.setText(1, author);
+		item.setText(2, reviewPath);
 	}
 }
