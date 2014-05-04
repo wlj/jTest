@@ -95,7 +95,7 @@ public class CodeReviewTab {
 		fd_tabFolderReviews.bottom = new FormAttachment(100,-5);
 		tabFolderCodeReviews.setLayoutData(fd_tabFolderReviews);
 		// add tabs into code review tab folder
-		authorsTab = new AuthorsTab(tabFolderCodeReviews);
+		authorsTab = new AuthorsTab(tabFolderCodeReviews,this);
 		reviewersTab = new ReviewersTab(tabFolderCodeReviews);
 		monitorsTab = new MonitorsTab(tabFolderCodeReviews);
 		filtersTab = new FiltersTab(tabFolderCodeReviews);

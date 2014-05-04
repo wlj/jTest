@@ -1,11 +1,15 @@
 package plugin.ui.window.configuration.detailtabs;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
@@ -102,7 +106,35 @@ public class GenerationTestClassTab {
 		fd_btnEdit.right = new FormAttachment(100, -5);
 		btnEdit.setLayoutData(fd_btnEdit);
 		btnEdit.setText("Edit...");
-		
+		btnEdit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
+				 fileDialog.setFilterNames(new String[] { "Java Files "});
+			   fileDialog.setFilterExtensions(new String[] { "*.java" }); 
+			   fileDialog.setFilterPath("c:\\"); //Windows path
+			   fileDialog.setText("选择java文件");
+			   String dir = fileDialog.open();
+			   if(dir!=null){
+				   textOutputClass.setText(dir);
+			   }
+			   
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		textOutputClass = new Text(testClassComposite, SWT.BORDER);
 		FormData fd_text_1 = new FormData();
 		fd_text_1.top = new FormAttachment(btnEdit, 0, SWT.TOP);
@@ -110,6 +142,8 @@ public class GenerationTestClassTab {
 		fd_text_1.bottom = new FormAttachment(btnEdit,0, SWT.BOTTOM);
 		fd_text_1.right = new FormAttachment(btnEdit, -5,SWT.LEFT);
 		textOutputClass.setLayoutData(fd_text_1);
+		//文本框设为只读
+		textOutputClass.setEditable(false);
 		
 		btnAddThisText = new Button(testClassComposite, SWT.CHECK);
 		FormData fd_btnAddThisText = new FormData();

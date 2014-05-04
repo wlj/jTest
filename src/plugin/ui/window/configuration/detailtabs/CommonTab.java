@@ -1,12 +1,18 @@
 package plugin.ui.window.configuration.detailtabs;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -125,7 +131,8 @@ public class CommonTab {
 		fd_btnLocalDirectory.left = new FormAttachment(0, 5);
 		fd_btnLocalDirectory.top = new FormAttachment(0, 5);
 		btnLocalDirectory.setLayoutData(fd_btnLocalDirectory);
-
+		
+		
 		btnWorkspace = new Button(grpWorkingDirectory, SWT.RADIO);
 		btnWorkspace.setText("Workspace: ");
 		FormData fd_btnWorkspace = new FormData();
@@ -146,13 +153,43 @@ public class CommonTab {
 		fd_btnView.width = 70;
 		btnView.setLayoutData(fd_btnView);
 		btnView.setText("\u6D4F\u89C8(B)...");
-
+		btnView.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				DirectoryDialog folderdlg=new DirectoryDialog(Display.getCurrent().getActiveShell());
+		        folderdlg.setText("路径选择");
+		        
+		        folderdlg.setFilterPath("SystemDrive");
+		        
+		        folderdlg.setMessage("请选择相应的文件夹");
+		        
+		        String selecteddir=folderdlg.open();
+		        txt_localDir.setText(selecteddir);
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		txt_localDir = new Text(grpWorkingDirectory, SWT.BORDER);
 		FormData fd_txt_localDir = new FormData();
 		fd_txt_localDir.right = new FormAttachment(btnView, -10, SWT.LEFT);
 		fd_txt_localDir.left = new FormAttachment(btnLocalDirectory, 10, SWT.RIGHT);
 		fd_txt_localDir.top = new FormAttachment(btnLocalDirectory, -3, SWT.TOP);
 		txt_localDir.setLayoutData(fd_txt_localDir);
+		//设为只读
+		txt_localDir.setEditable(false);
 
 		txt_workspace = new Text(grpWorkingDirectory, SWT.BORDER);
 		FormData fd_txtWorkspace = new FormData();
@@ -160,6 +197,8 @@ public class CommonTab {
 		fd_txtWorkspace.left = new FormAttachment(btnWorkspace, 10, SWT.RIGHT);
 		fd_txtWorkspace.top = new FormAttachment(btnWorkspace, -3, SWT.TOP);
 		txt_workspace.setLayoutData(fd_txtWorkspace);
+		txt_workspace.setEditable(false);
+		txt_workspace.setText(Platform.getInstanceLocation().getURL().getFile());
 		
 		Group grpInContainerTesting = new Group(compositeCommon, SWT.None);
 		grpInContainerTesting.setText("In-Container Testing");
