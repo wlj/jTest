@@ -2,6 +2,8 @@ package plugin.ui.window.configuration.detailtabs;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -14,6 +16,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import plugin.ui.window.configuration.entity.BugDetectionEntity;
+import plugin.ui.window.configuration.entity.StaticEntity;
 import plugin.ui.window.configuration.entity.StaticGeneral;
 
 public class BugDetectiveInOptionsTab {
@@ -32,7 +35,7 @@ public class BugDetectiveInOptionsTab {
 	public Button btnDoNotShowSuspiciousPoint;
 	
 
-	public BugDetectiveInOptionsTab(TabFolder tabFolder) {
+	public BugDetectiveInOptionsTab(TabFolder tabFolder, BugDetectionEntity entity) {
 		tabItem = new TabItem(tabFolder, SWT.None);
 		tabItem.setText("BugDetective");
 		
@@ -93,6 +96,20 @@ public class BugDetectiveInOptionsTab {
 		fd_btnAlsoImposeTime.left = new FormAttachment(btnShallowestfastest, 0, SWT.LEFT);
 		btnAlsoImposeTime.setLayoutData(fd_btnAlsoImposeTime);
 		btnAlsoImposeTime.setText("Also impose time limit [seconds]:");
+		btnAlsoImposeTime.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				text_TimeLimit.setEnabled(btnAlsoImposeTime.getSelection());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		text_TimeLimit = new Text(grpDepthOfAnalysis, SWT.BORDER);
 		FormData fd_text_TimeLimit = new FormData();
@@ -163,7 +180,53 @@ public class BugDetectiveInOptionsTab {
 		
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		bugDetectiveInOptionsInit(entity);
 
+	}
+//	private Text text_TimeLimit;
+//	public Button btnAlsoImposeTime;
+	/**
+	 * bugDetectiveInOptionsInit
+	 */
+	public void bugDetectiveInOptionsInit(BugDetectionEntity entity){
+		if(entity==null){
+			text_TimeLimit.setEnabled(false);
+			return;
+		}if(entity.isLimitTime){
+			btnAlsoImposeTime.setSelection(true);;
+			text_TimeLimit.setEnabled(true);
+			text_TimeLimit.setText(String.valueOf(entity.catchDays));
+		}else{
+			btnAlsoImposeTime.setSelection(false);
+			text_TimeLimit.setEnabled(false);
+		}
+		if(entity.depth==1){
+			btnShallowestfastest.setSelection(true);
+		}
+        if(entity.depth==2){
+        	btnShallowfast.setSelection(true);
+		}
+        if(entity.depth==3){
+        	btnStandard.setSelection(true);
+        }
+        if(entity.depth==4){
+        	btnDeepslower.setSelection(true);
+        }
+        if(entity.depth==5){
+        	btnThoroughslower.setSelection(true);
+        }
+        if(entity.isReportViolation){
+        	btnDoNotReport.setSelection(true);
+        }
+        if(entity.levelReportViolation==1){
+        	btnReportAllSimilar.setSelection(true);
+        }
+        if(entity.levelReportViolation==2){
+        	btnDoNotShowViolationPoint.setSelection(true);
+        }
+        if(entity.levelReportViolation==3){
+        	btnDoNotShowSuspiciousPoint.setSelection(true);
+        }
 	}
 	/**
 	 * 获取BugDetective选项
@@ -188,7 +251,7 @@ public class BugDetectiveInOptionsTab {
 		}
 		if(btnAlsoImposeTime.getSelection()){
 			bugDetectionEntity.isLimitTime = true;
-			String catchTime = btnAlsoImposeTime.getText();
+			String catchTime = text_TimeLimit.getText();
 			bugDetectionEntity.catchDays = Integer.parseInt(catchTime);
 		}
 		if(btnDoNotReport.getSelection()){

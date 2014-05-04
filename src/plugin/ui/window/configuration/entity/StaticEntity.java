@@ -17,6 +17,7 @@ public class StaticEntity {
 	public boolean isApplySuppressions;
 	//Rules Tree
 	public StaticRuleItemBase[] staticRuleItemBases;
+	public RuleTreeEntity ruleTreeEntity;
 	//Options/General
 	public StaticGeneral general;
 	//Metrics

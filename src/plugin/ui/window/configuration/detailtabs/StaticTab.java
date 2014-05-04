@@ -2,6 +2,8 @@ package plugin.ui.window.configuration.detailtabs;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -11,9 +13,12 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.BugDetectionEntity;
 import plugin.ui.window.configuration.entity.Metrics;
+import plugin.ui.window.configuration.entity.RuleTreeEntity;
 import plugin.ui.window.configuration.entity.ScopeEntity;
 import plugin.ui.window.configuration.entity.StaticEntity;
+import plugin.ui.window.configuration.entity.StaticGeneral;
 import plugin.util.Const;
 import plugin.util.SWTResourceManager;
 
@@ -30,7 +35,7 @@ public class StaticTab {
 	Button btnLimitMaximumNumber;
 	Button btnEnableStaticAnalysis;
 
-	public StaticTab(TabFolder tabFolder, int style) {
+	public StaticTab(TabFolder tabFolder, StaticEntity entity) {
 		tbtmStatic = new TabItem(tabFolder, SWT.NONE);
 		tbtmStatic.setImage(SWTResourceManager.getImage(Const.STATIC_ICON_PATH));
 		tbtmStatic.setText("Static");
@@ -57,6 +62,20 @@ public class StaticTab {
 		fd_btnLimitMaximumNumber.left = new FormAttachment(btnEnableStaticAnalysis, 0, SWT.LEFT);
 		btnLimitMaximumNumber.setLayoutData(fd_btnLimitMaximumNumber);
 		btnLimitMaximumNumber.setText("Limit maximum number of tasks reported per rule to: ");
+		btnLimitMaximumNumber.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				txtLimitMaxTask.setEnabled(btnLimitMaximumNumber.getSelection());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		txtLimitMaxTask = new Text(staticComposite, SWT.BORDER);
 		FormData fd_txtLimitMaxTask = new FormData();
@@ -78,7 +97,7 @@ public class StaticTab {
 		btnDoNotApply.setLayoutData(fd_btnDoNotApply);
 		btnDoNotApply.setText("Do not apply suppressions");
 		
-		staticInnerTabFolder = new StaticInnerTabFolder(staticComposite);
+		staticInnerTabFolder = new StaticInnerTabFolder(staticComposite, entity.ruleTreeEntity, entity.metrics, entity.general, entity.bugDetection);
 		staticTabFolder = staticInnerTabFolder.tabFolder;
 		FormData fd_staticTabFolder = new FormData();
 		fd_staticTabFolder.right = new FormAttachment(100, -5);
@@ -89,6 +108,50 @@ public class StaticTab {
 		
 		scrolledComposite.setContent(staticComposite);
 		scrolledComposite.setMinSize(staticComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		staticInit(entity);
+		//ruleTreeInit();
+		//metricsInit();
+		//generalInOptionInit();
+		//bugDetectiveInOptionsInit();
+	}
+	
+//	Text txtLimitMaxTask;
+//	Button btnSkipAutomaticallyGenerated;
+//	Button btnDoNotApply;
+//	
+//	TabFolder staticTabFolder;
+//	StaticInnerTabFolder staticInnerTabFolder;
+//	
+//	Button btnLimitMaximumNumber;
+//	Button btnSkipAutomaticallyGenerated;
+//	Button btnDoNotApply;
+//	
+//	TabFolder staticTabFolder;
+//	StaticInnerTabFolder staticInnerTabFolder;
+//	
+//	Button btnLimitMaximumNumber;
+//	Button btnEnableStaticAnalysis;
+	private void staticInit(StaticEntity entity){
+		if(entity == null){
+			txtLimitMaxTask.setEnabled(false);
+	    }
+		if(entity.isEnabled) {
+			btnEnableStaticAnalysis.setSelection(true);
+		}
+		if(entity.isLimitTasks){
+			btnLimitMaximumNumber.setSelection(true);
+			txtLimitMaxTask.setEnabled(true);
+			txtLimitMaxTask.setText(String.valueOf(entity.maxCount));
+		}else{
+			btnLimitMaximumNumber.setSelection(false);
+			txtLimitMaxTask.setEnabled(false);
+		}
+		if(entity.skipTestClass){
+			btnSkipAutomaticallyGenerated.setSelection(true);
+		}
+		if(entity.isApplySuppressions){
+			btnDoNotApply.setSelection(true);
+		}	
 	}
 	
 	/**
@@ -103,6 +166,7 @@ public class StaticTab {
 		if(btnLimitMaximumNumber.getSelection()){
 			statis.isLimitTasks = true;
 			txtLimitMaxTask.setEnabled(true);
+			//txtLimitMaxTask.setTextLimit();
 			String limitnum = txtLimitMaxTask.getText();
 			if(limitnum != null){
 				statis.maxCount = Integer.parseInt(limitnum);

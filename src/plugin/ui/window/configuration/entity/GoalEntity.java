@@ -15,5 +15,9 @@ public class GoalEntity {
 //	public GoalItemEntity reviewUnverifyOutcomes;
 	public Static4GoalEntity static4Goal;
 	public Execute4Goal execute4Goal;
+	public GoalEntity(){
+		static4Goal=new Static4GoalEntity();
+		execute4Goal=new Execute4Goal();
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import plugin.ui.window.configuration.entity.ConfigEntity;
+import plugin.ui.window.configuration.entity.StaticEntity;
 
 public class DetailTabFolder {
 	public TabFolder tabFolder;
@@ -32,16 +33,23 @@ public class DetailTabFolder {
 		// add tab items
 		if(entity==null){
 			scopeTab = new ScopeTab(tabFolder, SWT.None,null);
+			staticTab = new StaticTab(tabFolder, null);
+			generationTab = new GenerationTab(tabFolder, SWT.None, null);
+			executionTab = new ExecutionTab(tabFolder, SWT.None, null);
+			commonTab = new CommonTab(tabFolder, SWT.None, null);
+			codeReviewTab = new CodeReviewTab(tabFolder, SWT.None, null);
+			goalsTab = new GoalsTab(tabFolder, SWT.None ,null);
 		}else{
 			scopeTab = new ScopeTab(tabFolder, SWT.None,entity.scope);
+			staticTab = new StaticTab(tabFolder, entity.staticEntity);
+			generationTab = new GenerationTab(tabFolder, SWT.None,entity.generation);
+			executionTab = new ExecutionTab(tabFolder, SWT.None, entity.execution);
+			commonTab = new CommonTab(tabFolder, SWT.None, entity.common);
+			codeReviewTab = new CodeReviewTab(tabFolder, SWT.None, entity.codeReview);
+			goalsTab = new GoalsTab(tabFolder, SWT.None ,entity.goal);
 		}
 		
-		staticTab = new StaticTab(tabFolder, SWT.None);
-		generationTab = new GenerationTab(tabFolder, SWT.None);
-		executionTab = new ExecutionTab(tabFolder, SWT.None);
-		commonTab = new CommonTab(tabFolder, SWT.None);
-		codeReviewTab = new CodeReviewTab(tabFolder, SWT.None);
-		goalsTab = new GoalsTab(tabFolder, SWT.None);
+		
 	}
 	
 	TabFolder getTabFolder(){

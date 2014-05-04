@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration.detailtabs;
 
+import java.util.Date;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FormAttachment;
@@ -13,6 +15,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+
+import plugin.ui.window.configuration.entity.StaticGoalEntity;
 
 public class ExecutionInGoalsTab {
 	TabItem tabItem;
@@ -28,6 +32,23 @@ public class ExecutionInGoalsTab {
 	private Text text_numberOfTasksReviewUnverifiedOutcomes;
 	private DateTime dateTimeByReviewUnverifiedOutcomes;
 	private Text text_maxTaskReviewUnverifiedOutcomes;
+	public Button btnPerformAllTasksFixUnitTestingProblems;
+	public Button btnPerformNoneTaskFixUnitTestingProblems;
+	public Button btnNoMoreThanFixUnitTestingProblems;
+	public Button btnMaxTaskNumberButtonFixUnitTestingProblems;
+	public Button btnPerformAllTasksReviewUnverifiedExceptions;
+	public Button btnPerformNoneTaskReviewUnverifiedExceptions;
+	public Button btnNoMoreThanReviewUnverifiedExceptions;
+	public Button btnMaxTaskNumberButtonReviewUnverifiedExceptions;
+	public Button btnPerformAllTasksReviewUnverifiedFailures;
+	public Button btnPerformNoneTaskReviewUnverifiedFailures;
+	public Button btnNoMoreThanReviewUnverifiedFailures;
+	public Button btnMaxTaskNumberButtonReviewUnverifiedFailures;
+	public Button btnPerformAllTasksReviewUnverifiedOutcomes;
+	public Button btnPerformNoneTaskReviewUnverifiedOutcomes;
+	public Button btnNoMoreThanReviewUnverifiedOutcomes;
+	public Button btnMaxTaskNumberButtonReviewUnverifiedOutcomes;
+	
 
 	public ExecutionInGoalsTab(TabFolder tabFolder) {
 		tabItem = new TabItem(tabFolder, SWT.NONE);
@@ -50,20 +71,20 @@ public class ExecutionInGoalsTab {
 		fd_grp_fixUnitTestingProblems.left = new FormAttachment(0, 5);
 		grp_fixUnitTestingProblems.setLayoutData(fd_grp_fixUnitTestingProblems);
 
-		Button btnPerformAllTasksFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
+		btnPerformAllTasksFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
 		FormData fd_btnPerformAllTasksFixUnitTestingProblems = new FormData();
 		fd_btnPerformAllTasksFixUnitTestingProblems.left = new FormAttachment(0, 5);
 		btnPerformAllTasksFixUnitTestingProblems.setLayoutData(fd_btnPerformAllTasksFixUnitTestingProblems);
 		btnPerformAllTasksFixUnitTestingProblems.setText("Perform all tasks");
 
-		Button btnPerformNoneTaskFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
+		btnPerformNoneTaskFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
 		FormData fd_btnPerformNoneTaskFixUnitTestingProblems = new FormData();
 		fd_btnPerformNoneTaskFixUnitTestingProblems.top = new FormAttachment(btnPerformAllTasksFixUnitTestingProblems, 10, SWT.BOTTOM);
 		fd_btnPerformNoneTaskFixUnitTestingProblems.left = new FormAttachment(btnPerformAllTasksFixUnitTestingProblems, 0, SWT.LEFT);
 		btnPerformNoneTaskFixUnitTestingProblems.setLayoutData(fd_btnPerformNoneTaskFixUnitTestingProblems);
 		btnPerformNoneTaskFixUnitTestingProblems.setText("Don't perform tasks");
 
-		Button btnNoMoreThanFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
+		btnNoMoreThanFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.RADIO);
 		FormData fd_btnNoMoreThanFixUnitTestingProblems = new FormData();
 		fd_btnNoMoreThanFixUnitTestingProblems.top = new FormAttachment(btnPerformNoneTaskFixUnitTestingProblems, 10, SWT.BOTTOM);
 		fd_btnNoMoreThanFixUnitTestingProblems.left = new FormAttachment(btnPerformNoneTaskFixUnitTestingProblems, 0, SWT.LEFT);
@@ -90,7 +111,7 @@ public class ExecutionInGoalsTab {
 		fd_dateTimeByFixUnitTestingProblems.bottom = new FormAttachment(lblTasksPerDeveloperFixUnitTestingProblems, 0, SWT.BOTTOM);
 		dateTimeByFixUnitTestingProblems.setLayoutData(fd_dateTimeByFixUnitTestingProblems);
 
-		Button btnMaxTaskNumberButtonFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.CHECK);
+		btnMaxTaskNumberButtonFixUnitTestingProblems = new Button(grp_fixUnitTestingProblems, SWT.CHECK);
 		btnMaxTaskNumberButtonFixUnitTestingProblems.setText("Max tasks to recommend:");
 		FormData fd_btnMaxTaskNumberButtonFixUnitTestingProblems = new FormData();
 		fd_btnMaxTaskNumberButtonFixUnitTestingProblems.left = new FormAttachment(btnNoMoreThanFixUnitTestingProblems, 0, SWT.LEFT);
@@ -113,20 +134,20 @@ public class ExecutionInGoalsTab {
 		fd_grp_ReviewUnverifiedExceptions.left = new FormAttachment(0, 5);
 		grp_ReviewUnverifiedExceptions.setLayoutData(fd_grp_ReviewUnverifiedExceptions);
 
-		Button btnPerformAllTasksReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
+		btnPerformAllTasksReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
 		FormData fd_btnPerformAllTasksReviewUnverifiedExceptions = new FormData();
 		fd_btnPerformAllTasksReviewUnverifiedExceptions.left = new FormAttachment(0, 5);
 		btnPerformAllTasksReviewUnverifiedExceptions.setLayoutData(fd_btnPerformAllTasksReviewUnverifiedExceptions);
 		btnPerformAllTasksReviewUnverifiedExceptions.setText("Perform all tasks");
 
-		Button btnPerformNoneTaskReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
+		btnPerformNoneTaskReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
 		FormData fd_btnPerformNoneTaskReviewUnverifiedExceptions = new FormData();
 		fd_btnPerformNoneTaskReviewUnverifiedExceptions.top = new FormAttachment(btnPerformAllTasksReviewUnverifiedExceptions, 10, SWT.BOTTOM);
 		fd_btnPerformNoneTaskReviewUnverifiedExceptions.left = new FormAttachment(btnPerformAllTasksReviewUnverifiedExceptions, 0, SWT.LEFT);
 		btnPerformNoneTaskReviewUnverifiedExceptions.setLayoutData(fd_btnPerformNoneTaskReviewUnverifiedExceptions);
 		btnPerformNoneTaskReviewUnverifiedExceptions.setText("Don't perform tasks");
 
-		Button btnNoMoreThanReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
+		btnNoMoreThanReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.RADIO);
 		FormData fd_btnNoMoreThanReviewUnverifiedExceptions = new FormData();
 		fd_btnNoMoreThanReviewUnverifiedExceptions.top = new FormAttachment(btnPerformNoneTaskReviewUnverifiedExceptions, 10, SWT.BOTTOM);
 		fd_btnNoMoreThanReviewUnverifiedExceptions.left = new FormAttachment(btnPerformNoneTaskReviewUnverifiedExceptions, 0, SWT.LEFT);
@@ -153,7 +174,7 @@ public class ExecutionInGoalsTab {
 		fd_dateTimeByReviewUnverifiedExceptions.bottom = new FormAttachment(lblTasksPerDeveloperReviewUnverifiedExceptions, 0, SWT.BOTTOM);
 		dateTimeByReviewUnverifiedExceptions.setLayoutData(fd_dateTimeByReviewUnverifiedExceptions);
 
-		Button btnMaxTaskNumberButtonReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.CHECK);
+		btnMaxTaskNumberButtonReviewUnverifiedExceptions = new Button(grp_ReviewUnverifiedExceptions, SWT.CHECK);
 		btnMaxTaskNumberButtonReviewUnverifiedExceptions.setText("Max tasks to recommend:");
 		FormData fd_btnMaxTaskNumberButtonReviewUnverifiedExceptions = new FormData();
 		fd_btnMaxTaskNumberButtonReviewUnverifiedExceptions.left = new FormAttachment(btnNoMoreThanReviewUnverifiedExceptions, 0, SWT.LEFT);
@@ -176,20 +197,20 @@ public class ExecutionInGoalsTab {
 		fd_grp_ReviewUnverifiedFailures.left = new FormAttachment(0, 5);
 		grp_ReviewUnverifiedFailures.setLayoutData(fd_grp_ReviewUnverifiedFailures);
 
-		Button btnPerformAllTasksReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
+		btnPerformAllTasksReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
 		FormData fd_btnPerformAllTasksReviewUnverifiedFailures = new FormData();
 		fd_btnPerformAllTasksReviewUnverifiedFailures.left = new FormAttachment(0, 5);
 		btnPerformAllTasksReviewUnverifiedFailures.setLayoutData(fd_btnPerformAllTasksReviewUnverifiedFailures);
 		btnPerformAllTasksReviewUnverifiedFailures.setText("Perform all tasks");
 
-		Button btnPerformNoneTaskReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
+		btnPerformNoneTaskReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
 		FormData fd_btnPerformNoneTaskReviewUnverifiedFailures = new FormData();
 		fd_btnPerformNoneTaskReviewUnverifiedFailures.top = new FormAttachment(btnPerformAllTasksReviewUnverifiedFailures, 10, SWT.BOTTOM);
 		fd_btnPerformNoneTaskReviewUnverifiedFailures.left = new FormAttachment(btnPerformAllTasksReviewUnverifiedFailures, 0, SWT.LEFT);
 		btnPerformNoneTaskReviewUnverifiedFailures.setLayoutData(fd_btnPerformNoneTaskReviewUnverifiedFailures);
 		btnPerformNoneTaskReviewUnverifiedFailures.setText("Don't perform tasks");
 
-		Button btnNoMoreThanReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
+		btnNoMoreThanReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.RADIO);
 		FormData fd_btnNoMoreThanReviewUnverifiedFailures = new FormData();
 		fd_btnNoMoreThanReviewUnverifiedFailures.top = new FormAttachment(btnPerformNoneTaskReviewUnverifiedFailures, 10, SWT.BOTTOM);
 		fd_btnNoMoreThanReviewUnverifiedFailures.left = new FormAttachment(btnPerformNoneTaskReviewUnverifiedFailures, 0, SWT.LEFT);
@@ -216,7 +237,7 @@ public class ExecutionInGoalsTab {
 		fd_dateTimeByReviewUnverifiedFailures.bottom = new FormAttachment(lblTasksPerDeveloperReviewUnverifiedFailures, 0, SWT.BOTTOM);
 		dateTimeByReviewUnverifiedFailures.setLayoutData(fd_dateTimeByReviewUnverifiedFailures);
 
-		Button btnMaxTaskNumberButtonReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.CHECK);
+		btnMaxTaskNumberButtonReviewUnverifiedFailures = new Button(grp_ReviewUnverifiedFailures, SWT.CHECK);
 		btnMaxTaskNumberButtonReviewUnverifiedFailures.setText("Max tasks to recommend:");
 		FormData fd_btnMaxTaskNumberButtonReviewUnverifiedFailures = new FormData();
 		fd_btnMaxTaskNumberButtonReviewUnverifiedFailures.left = new FormAttachment(btnNoMoreThanReviewUnverifiedFailures, 0, SWT.LEFT);
@@ -239,20 +260,20 @@ public class ExecutionInGoalsTab {
 		fd_grp_ReviewUnverifiedOutcomes.left = new FormAttachment(0, 5);
 		grp_ReviewUnverifiedOutcomes.setLayoutData(fd_grp_ReviewUnverifiedOutcomes);
 
-		Button btnPerformAllTasksReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
+		btnPerformAllTasksReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
 		FormData fd_btnPerformAllTasksReviewUnverifiedOutcomes = new FormData();
 		fd_btnPerformAllTasksReviewUnverifiedOutcomes.left = new FormAttachment(0, 5);
 		btnPerformAllTasksReviewUnverifiedOutcomes.setLayoutData(fd_btnPerformAllTasksReviewUnverifiedOutcomes);
 		btnPerformAllTasksReviewUnverifiedOutcomes.setText("Perform all tasks");
 
-		Button btnPerformNoneTaskReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
+		btnPerformNoneTaskReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
 		FormData fd_btnPerformNoneTaskReviewUnverifiedOutcomes = new FormData();
 		fd_btnPerformNoneTaskReviewUnverifiedOutcomes.top = new FormAttachment(btnPerformAllTasksReviewUnverifiedOutcomes, 10, SWT.BOTTOM);
 		fd_btnPerformNoneTaskReviewUnverifiedOutcomes.left = new FormAttachment(btnPerformAllTasksReviewUnverifiedOutcomes, 0, SWT.LEFT);
 		btnPerformNoneTaskReviewUnverifiedOutcomes.setLayoutData(fd_btnPerformNoneTaskReviewUnverifiedOutcomes);
 		btnPerformNoneTaskReviewUnverifiedOutcomes.setText("Don't perform tasks");
 
-		Button btnNoMoreThanReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
+		btnNoMoreThanReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.RADIO);
 		FormData fd_btnNoMoreThanReviewUnverifiedOutcomes = new FormData();
 		fd_btnNoMoreThanReviewUnverifiedOutcomes.top = new FormAttachment(btnPerformNoneTaskReviewUnverifiedOutcomes, 10, SWT.BOTTOM);
 		fd_btnNoMoreThanReviewUnverifiedOutcomes.left = new FormAttachment(btnPerformNoneTaskReviewUnverifiedOutcomes, 0, SWT.LEFT);
@@ -279,7 +300,7 @@ public class ExecutionInGoalsTab {
 		fd_dateTimeByReviewUnverifiedOutcomes.bottom = new FormAttachment(lblTasksPerDeveloperReviewUnverifiedOutcomes, 0, SWT.BOTTOM);
 		dateTimeByReviewUnverifiedOutcomes.setLayoutData(fd_dateTimeByReviewUnverifiedOutcomes);
 
-		Button btnMaxTaskNumberButtonReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.CHECK);
+		btnMaxTaskNumberButtonReviewUnverifiedOutcomes = new Button(grp_ReviewUnverifiedOutcomes, SWT.CHECK);
 		btnMaxTaskNumberButtonReviewUnverifiedOutcomes.setText("Max tasks to recommend:");
 		FormData fd_btnMaxTaskNumberButtonReviewUnverifiedOutcomes = new FormData();
 		fd_btnMaxTaskNumberButtonReviewUnverifiedOutcomes.left = new FormAttachment(btnNoMoreThanReviewUnverifiedOutcomes, 0, SWT.LEFT);
@@ -296,4 +317,55 @@ public class ExecutionInGoalsTab {
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
+	//executionInGoalEntity
+//	private Text text_numberOfTasksFixUnitTestingProblems;
+//	private DateTime dateTimeByFixUnitTestingProblems;
+//	private Text text_maxTaskFixUnitTestingProblems;
+//	private Text text_numberOfTasksReviewUnverifiedExceptions;
+//	private DateTime dateTimeByReviewUnverifiedExceptions;
+//	private Text text_maxTaskReviewUnverifiedExceptions;
+//	private Text text_numberOfTasksReviewUnverifiedFailures;
+//	private DateTime dateTimeByReviewUnverifiedFailures;
+//	private Text text_maxTaskReviewUnverifiedFailures;
+//	private Text text_numberOfTasksReviewUnverifiedOutcomes;
+//	private DateTime dateTimeByReviewUnverifiedOutcomes;
+//	private Text text_maxTaskReviewUnverifiedOutcomes;
+//	public Button btnPerformAllTasksFixUnitTestingProblems;
+//	public Button btnPerformNoneTaskFixUnitTestingProblems;
+//	public Button btnNoMoreThanFixUnitTestingProblems;
+//	public Button btnMaxTaskNumberButtonFixUnitTestingProblems;
+//	public Button btnPerformAllTasksReviewUnverifiedExceptions;
+//	public Button btnPerformNoneTaskReviewUnverifiedExceptions;
+//	public Button btnNoMoreThanReviewUnverifiedExceptions;
+//	public Button btnMaxTaskNumberButtonReviewUnverifiedExceptions;
+//	public Button btnPerformAllTasksReviewUnverifiedFailures;
+//	public Button btnPerformNoneTaskReviewUnverifiedFailures;
+//	public Button btnNoMoreThanReviewUnverifiedFailures;
+//	public Button btnMaxTaskNumberButtonReviewUnverifiedFailures;
+//	public Button btnPerformAllTasksReviewUnverifiedOutcomes;
+//	public Button btnPerformNoneTaskReviewUnverifiedOutcomes;
+//	public Button btnNoMoreThanReviewUnverifiedOutcomes;
+//	public Button btnMaxTaskNumberButtonReviewUnverifiedOutcomes;
+	/**public StaticGoalEntity getStatic4Goal(){
+		StaticGoalEntity fixUnitTest= new StaticGoalEntity();
+		if(btnPerformAllTasksFixUnitTestingProblems.getSelection()){
+			fixUnitTest.performTasks = 1;
+		}
+		if(btnPerformAllTasksFixUnitTestingProblems.getSelection()){
+			fixUnitTest.performTasks =2;
+		}
+		if(btnPerformAllTasksFixUnitTestingProblems.getSelection()){
+			fixUnitTest.performTasks =3;
+			fixUnitTest.developerTasks = Integer.parseInt(text_numberOfTasksFixUnitTestingProblems.getText());
+			fixUnitTest.datetime.set(dateTimeBy.getYear(),dateTimeBy.getMonth(),dateTimeBy.getDay());
+			//fixUnitTest.startDate.getYear();
+			//timeFilter.setStartDate(new Date(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay()));
+		}
+		if(btnPerformAllTasksFixUnitTestingProblems.getSelection()){
+			fixUnitTest.isMaxRecommandTasks = true;
+			fixUnitTest.maxRecommandTasks = Integer.parseInt(text_maxTaskFixUnitTestingProblems.getText());
+		}
+		return fixUnitTest;
+		
+	}*/
 }

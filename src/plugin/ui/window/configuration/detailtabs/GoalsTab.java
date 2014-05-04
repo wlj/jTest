@@ -22,7 +22,7 @@ public class GoalsTab {
 	StaticInGoalsTab staticTabItem;
 	ExecutionInGoalsTab executionTabItem;
 
-	public GoalsTab(TabFolder tabFolder, int style) {
+	public GoalsTab(TabFolder tabFolder, int style, GoalEntity entity) {
 		tbtmGoals = new TabItem(tabFolder, SWT.NONE);
 		tbtmGoals.setImage(SWTResourceManager.getImage(Const.GOALS_ICON_PATH));
 		tbtmGoals.setText("Goals");
@@ -41,11 +41,19 @@ public class GoalsTab {
 		fd_subTabFolder.top = new FormAttachment(0,5);
 		fd_subTabFolder.bottom = new FormAttachment(100,-5);
 		subTabFolder.setLayoutData(fd_subTabFolder);
-		staticTabItem = new StaticInGoalsTab(subTabFolder);
-		executionTabItem = new ExecutionInGoalsTab(subTabFolder);
+		if(entity==null){
+			staticTabItem = new StaticInGoalsTab(subTabFolder,null);
+			executionTabItem = new ExecutionInGoalsTab(subTabFolder);
+		}else{
+			staticTabItem = new StaticInGoalsTab(subTabFolder,entity.static4Goal.staticGoalEntity);
+			executionTabItem = new ExecutionInGoalsTab(subTabFolder);
+		}
+		
 		
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		
+		
 	}
 	/**
 	 * 获取Goal选项
@@ -53,6 +61,7 @@ public class GoalsTab {
 	 */
 	public GoalEntity getGoal(){
 		GoalEntity goal= new GoalEntity();
+		
 		return goal;
 		
 	}

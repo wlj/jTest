@@ -24,7 +24,7 @@ public class ExecutionTab {
 	public OptionsInExecutionTab optionsInExecutionTab;
 	public SeveritiesInExecutionTab severitiesInExecutionTab;
 
-	public ExecutionTab(TabFolder tabFolder, int style) {
+	public ExecutionTab(TabFolder tabFolder, int style, ExecutionEntity entity) {
 		tbtmExecution = new TabItem(tabFolder, SWT.NONE);
 		tbtmExecution.setImage(SWTResourceManager.getImage(Const.EXECUTION_ICON_PATH));
 		tbtmExecution.setText("Execution");

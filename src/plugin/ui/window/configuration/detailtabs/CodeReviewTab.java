@@ -33,7 +33,7 @@ public class CodeReviewTab {
 	public Button btnGenerateComprehensiveReport;
 	public Button btnAutoPublishReviews;
 	
-	public CodeReviewTab(TabFolder tabFolder, int style) {
+	public CodeReviewTab(TabFolder tabFolder, int style, CodeReviewEntity entity) {
 		tbtmCodeReview = new TabItem(tabFolder, SWT.NONE);
 		tbtmCodeReview.setImage(SWTResourceManager.getImage(Const.CODEREVIEW_ICON_PATH));
 		tbtmCodeReview.setText("Code Review");

@@ -37,7 +37,7 @@ public class CommonTab {
 	public Button btnGenerateAndExecute;
 	public Button btnRecordTestCoverage;
 
-	public CommonTab(TabFolder tabFolder, int style) {
+	public CommonTab(TabFolder tabFolder, int style, CommonEntity entity) {
 		tbtmCommon = new TabItem(tabFolder, SWT.NONE);
 		tbtmCommon.setImage(SWTResourceManager.getImage(Const.COMMON_ICON_PATH));
 		tbtmCommon.setText("Common");

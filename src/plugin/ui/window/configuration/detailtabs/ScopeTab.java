@@ -560,13 +560,14 @@ public class ScopeTab {
 			scrolledCompositeScope.setContent(compositeInScrolledCompositeScope);
 			scrolledCompositeScope.setMinSize(compositeInScrolledCompositeScope.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		}
-		Init( entity);
+		fileFilterInit(entity);
+		codeFilterInit(entity);
 	}
     /**
      * 设置选中的值
      * @param fileFiler
      */
-	private void Init(ScopeEntity entity){
+	private void fileFilterInit(ScopeEntity entity){
 		if(entity==null){
 			sinceDateTime.setEnabled(false);
 			tileDateTime.setEnabled(false);
@@ -605,6 +606,9 @@ public class ScopeTab {
 			text_authorNameInFileFilter.setEnabled(entity.fileFilters.authorFilter.authorOption==2);
 			text_authorNameInFileFilter.setText(entity.fileFilters.authorFilter.authorNames==null?"":entity.fileFilters.authorFilter.authorNames);
 			
+			//
+			
+			
 			btnSkipMethedByPattern.setSelection(entity.methodFilters.isEnabled);
 			btnSkipMethedByPattern.setEnabled(entity.methodFilters.isEnabled);
 			btnRemoveMethodPattern.setEnabled(entity.methodFilters.isEnabled);
@@ -615,6 +619,66 @@ public class ScopeTab {
 				}
 				
 			}
+		}
+		
+		
+	}
+	
+	//
+//	public Button btnNoTimeFiltersInLineFilter;
+//	public Button btnSinceDateInLineFilter;
+//	public Button btnTestFilesInLastInLineFilter;
+//	public Button btnTestLocalFileInLineFilter;
+//	public Button btnNoAuthorFiltersInLineFilter;
+//	public Button btnFilesAuthoredByUserInLineFilter;
+//	private Text text_lastDaysInLineFilter;
+//	private Text text_authorNameInLineFilter;
+	private void codeFilterInit(ScopeEntity entity){
+		if(entity==null){
+			sinceDateTimeInLineFilter.setEnabled(false);
+			//tileDateTime.setEnabled(false);
+			text_lastDaysInLineFilter.setEnabled(false);
+			text_authorNameInLineFilter.setEnabled(false);
+			
+			//btnAddMethodPattern.setEnabled(false);
+			//btnRemoveMethodPattern.setEnabled(false);
+		}else {
+			sinceDateTimeInLineFilter.setYear(entity.codeFilter.timeFilter.getStartDate().getYear());
+			sinceDateTimeInLineFilter.setMonth(entity.codeFilter.timeFilter.getStartDate().getMonth());
+			sinceDateTimeInLineFilter.setDay(entity.codeFilter.timeFilter.getStartDate().getDay());
+			//tileDateTime.setYear(entity.fileFilters.timeFilter.endDate.getYear());
+			//tileDateTime.setMonth(entity.fileFilters.timeFilter.endDate.getMonth());
+			//tileDateTime.setDay(entity.fileFilters.timeFilter.endDate.getDay());
+			//text_lastDaysInLineFilter.setText(String.valueOf(entity.codeFilter.timeFilter.nearestDays));
+			//btnTestFilesInLastInLineFilter.setEnabled(entity.codeFilter.timeFilter.timeOption==2);
+			//this.tileDateTime.setEnabled(entity.fileFilters.timeFilter.isEnabledEndDate);
+			//text_lastDaysInLineFilter.setEnabled(entity.codeFilter.timeFilter.timeOption==3);
+			if(entity.codeFilter.timeFilter.timeOption==1){
+				btnNoTimeFiltersInLineFilter.setSelection(true);
+			}else if(entity.codeFilter.timeFilter.timeOption==2){
+				btnSinceDateInLineFilter.setSelection(true);
+				sinceDateTimeInLineFilter.setEnabled(true);
+				//if(entity.codeFilter.timeFilter.isEnabledEndDate){
+					//btnTestFilesInLast.setSelection(true);
+				//}else{
+					//btnTestFilesInLast.setSelection(false);
+				//}
+			}else if(entity.codeFilter.timeFilter.timeOption==3){
+			    text_lastDaysInLineFilter.setEnabled(true);
+			    text_lastDaysInLineFilter.setText(String.valueOf(entity.codeFilter.timeFilter.nearestDays));
+				btnTestFilesInLastInLineFilter.setSelection(true);
+				
+			}else if(entity.codeFilter.timeFilter.timeOption==4){
+				btnTestLocalFileInLineFilter.setSelection(true);
+			}
+			
+			
+			btnNoAuthorFiltersInLineFilter.setSelection(entity.codeFilter.authorFilter.authorOption==1);
+			btnFilesAuthoredByUserInLineFilter.setSelection(entity.codeFilter.authorFilter.authorOption==2);
+			text_authorNameInLineFilter.setEnabled(entity.codeFilter.authorFilter.authorOption==2);
+			text_authorNameInLineFilter.setText(entity.codeFilter.authorFilter.authorNames==null?"":entity.codeFilter.authorFilter.authorNames);
+			
+			
 		}
 		
 		
@@ -662,7 +726,6 @@ public class ScopeTab {
 		
 		if(btnLimitSimpleMethods.getSelection()){
 			scope.testMethodsCyclomatic = true;
-			text_minMethodNum.setEnabled(true);
 			String cyclomaticComplexity = text_minMethodNum.getText();
 			if(cyclomaticComplexity != null){
 				scope.cyclomaticComplexity = Integer.parseInt(cyclomaticComplexity);
@@ -678,14 +741,15 @@ public class ScopeTab {
 		if(this.btnNoTimeFiltersInLineFilter.getSelection()){
 			timeFilterInLineFilter.timeOption=1;
 		}
+		timeFilterInLineFilter.setStartDate(new Date(sinceDateTime.getYear()+1900, sinceDateTime.getMonth(), sinceDateTime.getDay()));
 		if(this.btnSinceDateInLineFilter.getSelection()){
 			timeFilterInLineFilter.timeOption=2;
-			timeFilterInLineFilter.setStartDate(new Date(sinceDateTime.getYear()+1900, sinceDateTime.getMonth(), sinceDateTime.getDay()));
+			
 		}
+		timeFilterInLineFilter.nearestDays=Integer.parseInt(this.text_lastDaysInLineFilter.getText());
 		if(btnTestFilesInLastInLineFilter.getSelection()){
-			text_lastDaysInLineFilter.setEnabled(true);
 			timeFilterInLineFilter.timeOption=3;
-			timeFilterInLineFilter.nearestDays=Integer.parseInt(this.text_lastDaysInLineFilter.getText());
+			
 		}
 		if(btnTestLocalFileInLineFilter.getSelection()){
 			timeFilterInLineFilter.timeOption=4;
@@ -719,6 +783,8 @@ public class ScopeTab {
 		if(btnLimitsDeprecatedClassMethod.getSelection()){
 			scope.deprecatedClassesOrMethods = true;
 		}
+		
+		//methodfilters4Scope
 		MethodFilters4Scope methodfilters4Scope =  new MethodFilters4Scope();
 		methodfilters4Scope.isEnabled=btnSkipMethedByPattern.getSelection();
 		String[] patterns=new String[tableMethodsPattern.getItemCount()];

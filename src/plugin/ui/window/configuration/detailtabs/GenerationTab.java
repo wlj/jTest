@@ -28,7 +28,7 @@ public class GenerationTab {
 	public GenerationTestClassTab testClassTab;
 	public Button btnEnableUnitTestGeneration;
 
-	public GenerationTab(TabFolder tabFolder, int style) {
+	public GenerationTab(TabFolder tabFolder, int style, GenerationEntity entity) {
 		// add Generation tab into right part of sashForm
 		tbtmGeneration = new TabItem(tabFolder, SWT.NONE);
 		tbtmGeneration.setImage(SWTResourceManager.getImage(Const.GENERATION_ICON_PATH));

@@ -2,6 +2,8 @@ package plugin.ui.window.configuration.detailtabs;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -13,6 +15,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import plugin.ui.window.configuration.entity.GenerationEntity;
+import plugin.ui.window.configuration.entity.StaticEntity;
 import plugin.ui.window.configuration.entity.StaticGeneral;
 
 public class GeneralInOptionsTab {
@@ -30,7 +34,7 @@ public class GeneralInOptionsTab {
 	public Button btnIncludeUserdefinedTest;
 	public Button btnIgnoreCodeDuplication;
 	
-	public GeneralInOptionsTab(TabFolder tabFolder){
+	public GeneralInOptionsTab(TabFolder tabFolder, StaticGeneral entity){
 		tabItem = new TabItem(tabFolder, SWT.None);
 		tabItem.setText("General");
 
@@ -54,6 +58,20 @@ public class GeneralInOptionsTab {
 		fd_btnExcludeVeryLarge.left = new FormAttachment(btnSkipJspFiles, 0, SWT.LEFT);
 		btnExcludeVeryLarge.setLayoutData(fd_btnExcludeVeryLarge);
 		btnExcludeVeryLarge.setText("Exclude very large files that are longer than");
+		btnExcludeVeryLarge.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				text_1.setEnabled(btnExcludeVeryLarge.getSelection());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		text_1 = new Text(compositeInScrolledComposite, SWT.BORDER);
 		FormData fd_text_1 = new FormData();
@@ -88,6 +106,21 @@ public class GeneralInOptionsTab {
 		fd_btnUseCustomBeginend.left = new FormAttachment(btnSkipJspFiles, 0, SWT.LEFT);
 		btnUseCustomBeginend.setLayoutData(fd_btnUseCustomBeginend);
 		btnUseCustomBeginend.setText("Use custom begin/end comments to mark the code to be checked");
+		btnUseCustomBeginend.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				text_2.setEnabled(btnUseCustomBeginend.getSelection());
+				text_3.setEnabled(btnUseCustomBeginend.getSelection());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		Label lblNewLabel = new Label(compositeInScrolledComposite, SWT.NONE);
 		FormData fd_lblNewLabel = new FormData();
@@ -165,6 +198,55 @@ public class GeneralInOptionsTab {
 
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		generalInOptionInit(entity);
+	}
+	
+	/**
+	 * generalInOptionInit
+	 * @param entity
+	 */
+	public void generalInOptionInit(StaticGeneral entity){
+		if(entity==null){
+			//btnExcludeVeryLarge.setEnabled(false);
+			text_1.setEnabled(false);
+			//btnUseCustomBeginend.setEnabled(false);
+			text_2.setEnabled(false);
+			text_3.setEnabled(false);
+			return;
+		}
+		if(entity.isExcludeLargeFile){
+			btnExcludeVeryLarge.setEnabled(true);
+			text_1.setEnabled(true);
+			text_1.setText(String.valueOf(entity.largeFileSize));
+		}
+		if(entity.isUseCustomBeginEnd){
+			btnUseCustomBeginend.setEnabled(true);
+			text_2.setEnabled(true);
+			text_3.setEnabled(true);
+			text_3.setText(entity.customBegin);
+			text_3.setText(entity.customEnd);
+		}
+		if(entity.isSkipJSP){
+			btnSkipJspFiles.setSelection(true);
+		}
+		if(entity.isCheckFileWithCompileError){
+			btnCheckFilesWith.setSelection(true);
+		}
+		if(entity.isOnlyReportError){
+			btnOnlyReportEGNTFP.setSelection(true);
+		}
+		if(entity.isIgnoreGlobalRules){
+			btnIgnoreGlobalAnalysis.setSelection(true);
+		}
+		if(entity.isAllowCompileError){
+			btnAllowCompilationErrors.setSelection(true);
+		}
+		if(entity.isIncludeUserTestClass){
+			btnIncludeUserdefinedTest.setSelection(true);
+		}
+		if(entity.isIgnoreRepeat){
+			btnIgnoreCodeDuplication.setSelection(true);
+		}
 	}
 	/**
 	 * 获取StaticGeneral选项
@@ -203,7 +285,6 @@ public class GeneralInOptionsTab {
 		if(btnIgnoreCodeDuplication.getSelection()){
 			staticGeneral.isIgnoreRepeat = true;
 		}
-		
 		return staticGeneral;
 		
 	}

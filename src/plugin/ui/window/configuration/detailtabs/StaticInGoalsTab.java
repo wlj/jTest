@@ -1,7 +1,11 @@
 package plugin.ui.window.configuration.detailtabs;
 
+import java.util.Date;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -28,7 +32,7 @@ public class StaticInGoalsTab {
 	public Button btnMaxTaskNumberButton;
 	
 
-	public StaticInGoalsTab(TabFolder tabFolder) {
+	public StaticInGoalsTab(TabFolder tabFolder,StaticGoalEntity entity) {
 		tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Static");
 
@@ -53,7 +57,7 @@ public class StaticInGoalsTab {
 		fd_btnPerformAllTasks.left = new FormAttachment(0, 5);
 		btnPerformAllTasks.setLayoutData(fd_btnPerformAllTasks);
 		btnPerformAllTasks.setText("Perform all tasks");
-
+		
 		btnNotPerformAllTasks = new Button(grpStatic, SWT.RADIO);
 		FormData fd_btnRadioButton = new FormData();
 		fd_btnRadioButton.top = new FormAttachment(btnPerformAllTasks, 10, SWT.BOTTOM);
@@ -67,6 +71,22 @@ public class StaticInGoalsTab {
 		fd_btnNoMoreThan.left = new FormAttachment(btnNotPerformAllTasks, 0, SWT.LEFT);
 		btnNoMoreThan.setLayoutData(fd_btnNoMoreThan);
 		btnNoMoreThan.setText("No more than");
+		btnNoMoreThan.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				text_numberOfTasks.setEnabled(btnNoMoreThan.getSelection());
+				dateTimeBy.setEnabled(btnNoMoreThan.getSelection());
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		text_numberOfTasks = new Text(grpStatic, SWT.BORDER);
 		FormData fd_text_numberOfTasks = new FormData();
@@ -94,6 +114,20 @@ public class StaticInGoalsTab {
 		fd_btnMaxTaskNumberButton.left = new FormAttachment(btnNoMoreThan, 0, SWT.LEFT);
 		fd_btnMaxTaskNumberButton.top = new FormAttachment(btnNoMoreThan, 10, SWT.BOTTOM);
 		btnMaxTaskNumberButton.setLayoutData(fd_btnMaxTaskNumberButton);
+		btnMaxTaskNumberButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				text_maxTask.setEnabled(btnMaxTaskNumberButton.getSelection());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		text_maxTask = new Text(grpStatic, SWT.BORDER);
 		FormData fd_text_maxTask = new FormData();
@@ -172,7 +206,58 @@ public class StaticInGoalsTab {
 
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		staticInGoInit(entity);
 	}
+	
+	/**
+	 * staticInGo
+	 */
+
+//	private Text text_numberOfTasks;
+//	private Text text_maxTask;
+//	private DateTime dateTimeBy;
+//	public Button btnPerformAllTasks;
+//	public Button btnNotPerformAllTasks;
+//	public Button btnNoMoreThan;
+//	public Button btnMaxTaskNumbe;
+	public void staticInGoInit(StaticGoalEntity entity){
+		if(entity==null){
+			//btnNoMoreThan.setEnabled(false);
+			//btnMaxTaskNumberButton.setEnabled(false);
+			text_numberOfTasks.setEnabled(false);
+			text_maxTask.setEnabled(false);
+			dateTimeBy.setEnabled(false);
+			return;
+		   }
+		if(entity.performTasks==1){
+		    btnPerformAllTasks.setSelection(true);
+		  }
+        if(entity.performTasks==2){
+            btnNotPerformAllTasks.setSelection(true);
+		  }
+		if(entity.performTasks==3){
+			btnNoMoreThan.setSelection(true);
+			text_numberOfTasks.setEnabled(true);
+			text_numberOfTasks.setText(String.valueOf(entity.developerTasks));
+			dateTimeBy.setEnabled(true);
+			dateTimeBy.setYear(entity.startDate.getYear());
+			dateTimeBy.setMonth(entity.startDate.getMonth());
+			dateTimeBy.setDay(entity.startDate.getDay()); 
+		}else{
+			text_numberOfTasks.setEnabled(false);
+			dateTimeBy.setEnabled(false);
+		}
+		if(entity.isMaxRecommandTasks){
+		    btnMaxTaskNumberButton.setSelection(true);
+		    text_maxTask.setEnabled(true);
+			text_maxTask.setText(String.valueOf(entity.maxRecommandTasks));
+		}else{
+			btnMaxTaskNumberButton.setSelection(false);
+		    text_maxTask.setEnabled(false);
+		}
+	}
+
+	
 	/**
 	 * 获取Static4Goal选项
 	 * @return
@@ -188,7 +273,8 @@ public class StaticInGoalsTab {
 		if(btnNoMoreThan.getSelection()){
 			static4Goal.performTasks =3;
 			static4Goal.developerTasks = Integer.parseInt(text_numberOfTasks.getText());
-			static4Goal.datetime.set(dateTimeBy.getYear(),dateTimeBy.getMonth(),dateTimeBy.getDay());
+			static4Goal.startDate = new Date(dateTimeBy.getYear(),dateTimeBy.getMonth(),dateTimeBy.getDay());
+			//timeFilter.setStartDate(new Date(sinceDateTime.getYear(), sinceDateTime.getMonth(), sinceDateTime.getDay()));
 		}
 		if(btnMaxTaskNumberButton.getSelection()){
 			static4Goal.isMaxRecommandTasks = true;

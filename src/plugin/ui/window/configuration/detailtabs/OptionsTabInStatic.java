@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import plugin.ui.window.configuration.entity.BugDetectionEntity;
 import plugin.ui.window.configuration.entity.StaticGeneral;
 
 public class OptionsTabInStatic {
@@ -22,7 +23,7 @@ public class OptionsTabInStatic {
 	GeneralInOptionsTab generalInOptionsTab;
 	BugDetectiveInOptionsTab bugDetectiveInOptionsTab;
 
-	public OptionsTabInStatic(TabFolder tabFolder) {
+	public OptionsTabInStatic(TabFolder tabFolder, StaticGeneral entity1, BugDetectionEntity entity2) {
 		// add components into tabItem
 		tabItem = new TabItem(tabFolder, SWT.None);
 		tabItem.setText("Options");
@@ -44,8 +45,8 @@ public class OptionsTabInStatic {
 		fd_tabFolderData.bottom = new FormAttachment(100, -5);
 		subTabFolder.setLayoutData(fd_tabFolderData);
 
-		generalInOptionsTab = new GeneralInOptionsTab(subTabFolder);
-		bugDetectiveInOptionsTab = new BugDetectiveInOptionsTab(subTabFolder);
+		generalInOptionsTab = new GeneralInOptionsTab(subTabFolder, entity1);
+		bugDetectiveInOptionsTab = new BugDetectiveInOptionsTab(subTabFolder, entity2);
 
 		scrolledComposite.setContent(compositeInScrolledComposite);
 		scrolledComposite.setMinSize(compositeInScrolledComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
