@@ -1,5 +1,7 @@
 package plugin.ui.window.configuration.detailtabs;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
@@ -85,9 +87,8 @@ public class ReviewersTab {
 	 */
 	public void addReviewItem(String reviewer,String author,String reviewPath){
 		TableItem[] items = this.table.getItems();
-		if(items!=null){
+		if(items!=null||items.length>0){
 			for(TableItem tItem :items){
-				System.out.println(tItem.getText(0));
 				if(tItem.getText(0).equals(reviewer)){
 					tItem.setText(1, tItem.getText(1)+","+author);
 					return;
@@ -99,5 +100,37 @@ public class ReviewersTab {
 		item.setText(0, reviewer);
 		item.setText(1, author);
 		item.setText(2, reviewPath);
+	}
+	
+	public void removeAuthor(String reviewer,String author){
+		TableItem[] items = this.table.getItems();
+		int index =0;
+		if(items!=null||items.length>0){
+			for(TableItem tItem :items){
+				
+				if(tItem.getText(0).equals(reviewer)){
+					String[] authors=tItem.getText(1).split(",");
+					if(authors.length==1){
+						this.table.remove(index);
+						return;
+					}
+					ArrayList<String> list=new ArrayList<String>();
+					for(String author1:authors){
+						list.add(author1);
+					}
+					list.remove(author);
+					author="";
+					while(list.iterator().hasNext()){
+						if(!author.equals("")){
+							author+=",";
+						}
+						author=list.iterator().next();
+					}
+					tItem.setText(1,author);
+					index++;
+					return;
+				}
+			}
+		}
 	}
 }

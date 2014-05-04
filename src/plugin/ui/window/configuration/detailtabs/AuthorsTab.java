@@ -85,7 +85,10 @@ public class AuthorsTab {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				int index=table.getSelectionIndex();
+				if(index>=0){
+					table.remove(index);
+				}
 			}
 			
 			@Override
@@ -124,6 +127,9 @@ public class AuthorsTab {
 				}
 				TableItem item = tEditorForName.getItem();
 				Text text=(Text) tEditorForName.getEditor();
+				if(text==null){
+					return;
+				}
 				String name=text.getText();
 				item.setText(0,name);
 				text.dispose();
